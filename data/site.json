@@ -1,0 +1,208 @@
+{
+  "practice": {
+    "name": "The GI Guy",
+    "doctor": "Kurt Vernon, MD, PA",
+    "tagline": "Colon, Rectal, Liver & Digestive Disorders",
+    "phone": "(919) 577-0085",
+    "portalUrl": "https://giguy.mygportal.com/",
+    "portalLabel": "Patient Portal",
+    "hours": "Monday – Thursday: 9:00 am – 5:00 pm\nFriday: 9:00 am – 12:00 pm\nSaturday – Sunday: Closed",
+    "emergencyNote": "If this is a medical emergency, call 911 or go to your nearest emergency room. Please don't use the website, patient portal or social media for urgent medical questions.",
+    "disclaimer": "This site is for educational use only. Nothing on it is a substitute for medical advice, diagnosis or treatment.",
+    "footerTagline": "Your partner in personalized, compassionate digestive care."
+  },
+  "banners": [
+    {
+      "id": "example-closed",
+      "message": "Our offices will be closed Thursday, November 26 for Thanksgiving.",
+      "style": "closed",
+      "start": "2026-11-20T05:00:00.000Z",
+      "end": "2026-11-27T05:00:00.000Z",
+      "linkLabel": "",
+      "linkUrl": "",
+      "hidden": true
+    }
+  ],
+  "home": {
+    "eyebrow": "Gastroenterology · Fuquay-Varina & Dunn, NC",
+    "title": "Compassionate care for your digestive health",
+    "text": "From colon cancer screening to heartburn, liver disease and IBS, Dr. Kurt Vernon, \"The GI Guy,\" has cared for patients across the Greater Raleigh area for more than 20 years.",
+    "highlights": [
+      { "title": "Board-certified expertise", "text": "Board-certified in gastroenterology and internal medicine, and a Fellow of the American College of Gastroenterology." },
+      { "title": "Advanced technology", "text": "FUSE™ full-spectrum endoscopy for some of the highest available detection rates for colon cancer." },
+      { "title": "Personal, unhurried care", "text": "We explain everything we do and take time with every patient. Over 90% of our patients come from referrals." }
+    ],
+    "recognition": "Recognized with a Tier 1 Designation by Blue Cross Blue Shield of North Carolina for high-quality, cost-efficient care.",
+    "recognitionLink": "article.html?id=bcbs-tier-1"
+  },
+  "about": {
+    "title": "About our practice",
+    "text": "At The GI Guy, we are dedicated to expert gastroenterology care with a compassionate, holistic approach. Led by Dr. Kurt Vernon, our practice has served the Greater Raleigh area for over 20 years from two offices in Fuquay-Varina and Dunn, NC.\n\nWe use the most advanced technology available, including FUSE™ endoscopy, which gives some of the highest available detection rates for colon cancer, and we create a unique atmosphere where patients come first.\n\nOur approach looks at your health as a whole: we provide education, incorporate nutrition and lifestyle, and recommend only the best quality products.",
+    "values": [
+      { "title": "Personalized care", "text": "We take the time to understand each patient's needs and build a treatment plan around your goals." },
+      { "title": "Advanced technology", "text": "State-of-the-art equipment like FUSE™ endoscopy for accurate, minimally invasive procedures." },
+      { "title": "Education and support", "text": "We want you to leave informed, with the knowledge to make good decisions about your health." }
+    ],
+    "insurance": "We accept Medicare, Blue Cross Blue Shield, Cigna, Aetna, UnitedHealthcare, Wellpath and many other plans. Please call us to confirm your coverage.",
+    "wellnessTitle": "Full spectrum wellness",
+    "wellnessText": "Your digestive system is tied to your health as a whole, so we take an integrated wellness approach. Browse the doctor-approved wellness products in our [GI Guy Metagenics store](https://giguy.metagenics.com/), and ask Dr. Vernon or our staff about questions and recommendations."
+  },
+  "doctor": {
+    "name": "Kurt Vernon, MD, FACG",
+    "role": "Gastroenterologist",
+    "photo": "img/team/dr-vernon.jpg",
+    "quote": "The secret to successful treatment is personalized care. I always take the time to work one-on-one with patients during their program. My patients know that I am always available for them. I explain everything I do and encourage patients to ask questions. In the end, they aren't just healed, they're educated, too.",
+    "bio": "Kurt Vernon, MD is a board-certified gastroenterologist and a Fellow of the American College of Gastroenterology, the American College of Physicians and the American Anti-Aging Academy, with over 20 years of experience.\n\nDr. Vernon has the expertise and advanced technology to accurately diagnose and treat a wide range of colon, liver, digestive and rectal conditions, including cancer screening, abdominal pain, ulcers, irritable bowel syndrome and heartburn/reflux. Add in his bedside manner and caring personality, and it's easy to see why over 90% of his patients come from referrals. Many of our patients are physicians and medical professionals themselves.\n\nDr. Vernon is board-certified in internal medicine and gastroenterology by the American Board of Internal Medicine, and he continually works to refine his skills and use the latest medical techniques.",
+    "credentials": [
+      { "label": "Medical school", "value": "MD, Howard University College of Medicine, Washington, D.C." },
+      { "label": "Residency", "value": "Internal Medicine, Howard University Hospital, Washington, D.C." },
+      { "label": "Fellowship", "value": "Gastroenterology, Howard University Hospital, Washington, D.C." },
+      { "label": "Board-certified", "value": "Gastroenterology, Internal Medicine, Anti-Aging and Regenerative Medicine" },
+      { "label": "Fellow", "value": "American College of Gastroenterology, American College of Physicians, American Anti-Aging Academy" },
+      { "label": "Memberships", "value": "American College of Gastroenterology, American Medical Association, American Gastroenterological Association, National Medical Association, A4M, North Carolina Medical Society" }
+    ]
+  },
+  "team": [
+    {
+      "id": "ashley-webb",
+      "name": "Ashley Webb, PA-C",
+      "role": "Physician Assistant",
+      "photo": "img/team/ashley-webb.jpg",
+      "education": "Master of Physician Assistant Practice, Campbell University, 2019\nBachelor of Science in Mathematics, minor in Biology, Campbell University, 2015",
+      "memberships": "North Carolina Academy of Physician Assistants (NCAPA)\nAmerican Academy of Physician Associates (AAPA)",
+      "bio": "Ashley has worked as a physician assistant in gastroenterology with Dr. Vernon for 5 years. She began her healthcare journey as a CNA with geriatric patients and later served as a medical assistant and endoscopy technician, which fueled her interest in gastroenterology. Outside of work, she enjoys traveling and spending time with her family, friends and pets.",
+      "statement": "I am committed to providing my patients with the highest quality, patient-centered care. I strive to create a collaborative environment where each patient feels heard, understood, and empowered to participate in his or her own healthcare journey. My goal is to work with each patient to both educate and reach treatment goals together.",
+      "hidden": false
+    },
+    {
+      "id": "leah-brockmeyer",
+      "name": "Leah Brockmeyer, MSN, RN, FNP-C",
+      "role": "Family Nurse Practitioner",
+      "photo": "img/team/leah-brockmeyer.jpg",
+      "education": "Master of Science in Nursing (MSN), Western Governors University\nBachelor of Science in Nursing (BSN), Fayetteville State University",
+      "memberships": "Registered Nurse (RN)\nFamily Nurse Practitioner, Board Certified (FNP-C)",
+      "bio": "Leah has experience in school nursing, inpatient care and rehabilitation settings. She provides comprehensive, patient-centered care across the lifespan, with a strong focus on preventive health, nutrition and lifestyle-based wellness. Her experience managing her son's wheat allergy inspired her to specialize in gluten-free nutrition and individualized care planning.",
+      "statement": "I am committed to providing compassionate, evidence-based care by listening closely to my patients and partnering with them to create individualized, realistic care plans that support long-term health and overall well-being.",
+      "hidden": false
+    },
+    {
+      "id": "sofia-gonzalez-bertello",
+      "name": "Sofia Gonzalez Bertello, PA",
+      "role": "Physician Assistant",
+      "photo": "img/team/sofia-gonzalez-bertello.jpg",
+      "education": "Master of Physician Assistant, Radford University, 2025\nBachelor of Science in Nutrition Science, North Carolina State University, 2022",
+      "memberships": "",
+      "bio": "Sofia's healthcare journey began as a certified nursing assistant working with seniors and in an emergency room. She is bilingual in English and Spanish and has worked as a medical interpreter. Outside of work, she loves spending time with her family and crocheting.",
+      "statement": "My approach to patient care is grounded in compassion, teamwork, and evidence-based medicine. I aim to create a respectful and supportive environment where patients feel heard and informed. I am committed to patient safety and quality of care.",
+      "hidden": false
+    }
+  ],
+  "services": [
+    { "id": "colonoscopy", "title": "Colonoscopy", "summary": "Early detection and prevention of colon cancer.", "points": "Finds and removes precancerous polyps before they become cancer\nPerformed with FUSE™ full-spectrum technology for better accuracy\nHelps diagnose abdominal pain, rectal bleeding and changes in bowel habits", "hidden": false },
+    { "id": "egd", "title": "EGD (upper endoscopy)", "summary": "Diagnosis and treatment of upper digestive problems.", "points": "Examines the esophagus, stomach and upper small intestine\nDiagnoses acid reflux, ulcers and upper GI bleeding\nAllows biopsy or treatment during the same procedure", "hidden": false },
+    { "id": "capsule-endoscopy", "title": "Capsule endoscopy", "summary": "A detailed look at the small intestine, no scope needed.", "points": "You swallow a small camera capsule\nCaptures detailed images of the small intestine\nUseful for finding bleeding, polyps and inflammation", "hidden": false },
+    { "id": "flexible-sigmoidoscopy", "title": "Flexible sigmoidoscopy", "summary": "Quick screening of the lower colon and rectum.", "points": "Screens the lower colon for polyps and other problems\nTypically takes less than 30 minutes with minimal preparation", "hidden": false },
+    { "id": "esophageal-dilation", "title": "Esophageal dilation", "summary": "Relief for trouble swallowing.", "points": "Gently widens narrowed areas of the esophagus\nTreats strictures caused by reflux (GERD) or injury\nOften brings immediate relief", "hidden": false },
+    { "id": "hemorrhoid-treatment", "title": "Hemorrhoid treatment", "summary": "Minimally invasive relief with the CRH O'Regan System.", "points": "Quick, in-office banding with little to no downtime for most patients\nLasting relief from pain, bleeding and discomfort", "hidden": false },
+    { "id": "cologuard", "title": "Cologuard® screening", "summary": "A no-prep, at-home stool DNA test for colon cancer.", "points": "An option for average-risk patients who don't want a colonoscopy\nA positive result needs a follow-up colonoscopy", "hidden": false },
+    { "id": "consultations", "title": "GI consultations", "summary": "Evaluation and ongoing care for digestive conditions.", "points": "Heartburn, IBS, IBD, liver disease, abdominal pain and more\nNutrition, lifestyle and wellness guidance as part of your plan", "hidden": false }
+  ],
+  "conditions": [
+    "Heartburn / acid reflux", "Colon cancer", "Colon cancer screening", "Obesity", "Fatty liver", "Ulcers / gallstones",
+    "Abdominal pain", "Intestinal bleeding", "Difficulty swallowing", "Irritable bowel syndrome", "Inflammatory bowel disease",
+    "Liver disease", "Hemorrhoids", "Rectal bleeding", "Constipation", "Hepatitis", "Diverticulosis", "Helicobacter pylori", "Unexplained weight loss"
+  ],
+  "faqs": [
+    { "q": "What is a colonoscopy, and why is it important?", "a": "A colonoscopy examines the inside of your colon for polyps, abnormalities or signs of colon cancer. It is the only test that can both detect and prevent colon cancer, because polyps can be removed during the procedure." },
+    { "q": "Is Cologuard effective?", "a": "In a study of 10,000 average-risk people, Cologuard found 92% of colon cancers. It is non-invasive and needs no prep, but it does not reliably find precancerous polyps, and a positive result needs a follow-up colonoscopy. [Read more about Cologuard](article.html?id=cologuard)." },
+    { "q": "What should I expect during a flexible sigmoidoscopy?", "a": "It is a quick, minimally invasive screening of the lower colon. It typically takes less than 30 minutes and needs minimal preparation." },
+    { "q": "Are endoscopy procedures risky?", "a": "Endoscopy is very safe when performed by experienced specialists. Risks are small; some patients have minor discomfort afterward. Our team looks after your safety throughout." },
+    { "q": "How do I prepare for my procedure?", "a": "It depends on the procedure. A colonoscopy requires a clear-liquid diet and bowel prep. We'll give you instructions for your procedure, and you can download the [colonoscopy prep instructions](patients.html#prep) here." },
+    { "q": "Which insurance do you accept?", "a": "We accept Medicare, Blue Cross Blue Shield, Cigna, Aetna, UnitedHealthcare, Wellpath and many others. Please call (919) 577-0085 to confirm your coverage." }
+  ],
+  "locations": [
+    {
+      "id": "fuquay-varina",
+      "name": "Fuquay-Varina",
+      "address": "1004 Procure St\nFuquay-Varina, NC 27526",
+      "phone": "(919) 577-0085",
+      "fax": "(919) 577-0013",
+      "mapQuery": "1004 Procure St, Fuquay-Varina, NC 27526",
+      "hidden": false
+    },
+    {
+      "id": "dunn",
+      "name": "Dunn",
+      "address": "904 D West Broad St\nDunn, NC 28334",
+      "phone": "(910) 891-5808",
+      "fax": "(910) 891-5323",
+      "mapQuery": "904 W Broad St, Dunn, NC 28334",
+      "hidden": false
+    }
+  ],
+  "forms": [
+    { "id": "patient-forms", "title": "New patient forms", "text": "Fill these out before your visit to save time at check-in.", "file": "files/patient-forms.pdf", "anchor": "forms", "hidden": false },
+    { "id": "colonoscopy-prep", "title": "Colonoscopy prep (magnesium citrate, split dose)", "text": "What to buy, what to eat and when to take each dose. Keep these instructions handy.", "file": "files/colonoscopy-prep-magnesium-citrate.pdf", "anchor": "prep", "hidden": false }
+  ],
+  "organs": [
+    { "name": "Stomach", "text": "A J-shaped organ just left of center, between the esophagus and the small intestine. Protein digestion begins here." },
+    { "name": "Small intestine", "text": "Folded into much of the abdomen, it does most of the digestion and absorption of nutrients. Enzymes and bile break food into small building blocks that pass into the bloodstream. The duodenum is its first, C-shaped section." },
+    { "name": "Colon", "text": "The large intestine wraps around the small intestine like a frame. It absorbs water from what's left of digested food and moves waste out of the body." },
+    { "name": "Rectum", "text": "The last 6–8 inches of the large intestine. It holds stool until it leaves the body." },
+    { "name": "Liver", "text": "The largest internal organ. It stores vitamins, sugars and fats and releases them as needed; builds the proteins that clot blood and make new cells; filters waste from the blood; and breaks down harmful substances like alcohol." },
+    { "name": "Gallbladder", "text": "A small organ under the liver on the right side. It stores bile made by the liver and releases it into the intestine to help digest fats." },
+    { "name": "Pancreas", "text": "A fish-shaped organ behind the stomach. It makes hormones like insulin and glucagon, and digestive enzymes that it sends to the small intestine." }
+  ],
+  "quiz": {
+    "title": "Are you at risk for colon cancer?",
+    "intro": "Gastrointestinal problems account for more hospitalizations in the U.S. than any other group of disorders. Answer these quick questions to see whether you should talk with us about screening. Your answers stay on your device.",
+    "questions": [
+      "Are you 45 or older?",
+      "Have you had colon polyps or colon cancer before?",
+      "Has a parent, sibling or child had colon polyps or colon cancer?",
+      "Have you had diarrhea or constipation for more than 3 weeks?",
+      "Do you have a family history of pancreatic, breast or uterine cancer?",
+      "Have you seen any blood in or on your stool?",
+      "Have you had unexplained weight loss?",
+      "Do you have familial polyposis syndrome?",
+      "Do you have unexplained abdominal pain?"
+    ],
+    "yesResult": "Based on your answers, you may benefit from colon cancer screening or an evaluation. Please call us to schedule a visit with Dr. Vernon.",
+    "noResult": "You answered no to every question. Keep up with routine checkups, and call us if anything changes. Any screening is better than none."
+  },
+  "articles": [
+    {
+      "id": "cologuard",
+      "title": "Cologuard technology",
+      "date": "",
+      "summary": "A no-prep, no-sedation screening option for colon cancer, and how it compares to colonoscopy.",
+      "body": "Testing for colon cancer just got easier. Cologuard is a colon cancer screening test that is simple to use. It involves no prep, no sedation, and most importantly, it's effective.\n\n## What exactly is Cologuard?\nCologuard tests for genetic changes in stool that are associated with colon cancer. It correctly identifies 92% of people who have colon cancer. It will not, however, lower your risk of developing cancer, because it cannot reliably detect precancerous polyps. If a Cologuard test comes back positive, a follow-up colonoscopy will be recommended.\n\n## How does it work?\nDNA is continuously shed from cells in the intestinal lining into stool. If cancer or precancer is present, abnormal cells are shed along with normal ones. Cologuard looks for altered DNA and/or blood in the stool that may signal cancer or precancer.\n\n## How effective is it?\nIn a study of 10,000 people at average risk for colon cancer, Cologuard found 92% of cancers. It was negative in 87% of people without the disease.\n\n## Should colonoscopy be used as well?\nCologuard is a screening test. Any positive result should be discussed with your doctor and followed by a diagnostic colonoscopy.\n\n## The bottom line\nColon cancer is common. Colonoscopy is the only test proven to both detect and prevent colon cancer, because precancerous polyps are removed during the procedure. About one in three patients has polyps removed during a colonoscopy. For people who don't want a colonoscopy, Cologuard is one alternative.\n\nRemember: any colon cancer screening test is better than none. Learn more at [cologuard.com](https://www.cologuard.com/).",
+      "hidden": false
+    },
+    {
+      "id": "what-is-an-endoscopy",
+      "title": "What is an endoscopy?",
+      "date": "",
+      "summary": "How an endoscope lets your doctor see inside your digestive tract, and why it might be recommended.",
+      "body": "An endoscopy is a nonsurgical procedure that lets your doctor look inside your digestive tract with a thin camera called an endoscope. In an upper endoscopy, the endoscope passes through the mouth and throat to view the esophagus, stomach and first part of the small intestine. It is usually a quick outpatient procedure.\n\nAn endoscope can also view the large intestine (the colon) through the rectum. Your physician may recommend an endoscopy to evaluate:\n\n- Stomach problems or pain\n- Bowel pain or diarrhea\n- Other digestive tract problems\n- Ulcers\n- Polyps, growths or other colon findings\n\nSometimes your physician will take a small tissue sample (a biopsy) during the procedure to check for disease. Ask your doctor to explain as much as possible beforehand so you're prepared.\n\nIf you have questions about an endoscopy or a related procedure, please call our office.",
+      "hidden": false
+    },
+    {
+      "id": "bcbs-tier-1",
+      "title": "Dr. Vernon receives BCBSNC Tier 1 recognition",
+      "date": "",
+      "summary": "Our practice received a Tier 1 Designation from Blue Cross Blue Shield of North Carolina for high quality and cost efficiency.",
+      "body": "The practice of Kurt Vernon, MD, The GI Guy, is proud to announce that we have received a Tier 1 Designation, a high-quality recognition from one of the nation's largest health insurers, [Blue Cross Blue Shield of North Carolina](https://www.bluecrossnc.com/).\n\nThe BCBSNC Tiered Network uses claims data to identify high-quality, low-cost providers and help consumers make more informed choices about their care. Our practice was scored on gastroenterology quality measures, including colonoscopy and GERD care.\n\n\"It is a pleasure to be recognized by BCBSNC as a Tier 1 North Carolina gastroenterologist. We will continue to improve upon our quality measures to provide the best care for our patients,\" said Dr. Vernon.\n\nThe designation compares physician performance with peers on nationally accepted quality measures and local cost-efficiency benchmarks, within the same region and specialty. Practices that exceed both the quality and cost thresholds are designated Tier 1.",
+      "hidden": false
+    }
+  ],
+  "partners": [
+    { "name": "Accreditation Association for Ambulatory Health Care", "logo": "img/logos/accreditation-logo.png" },
+    { "name": "American Board of Internal Medicine", "logo": "img/logos/abim.png" }
+  ],
+  "social": [
+    { "label": "Facebook", "url": "https://www.facebook.com/thegiguy/" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/company/giguy-gastroenterologist-raleigh-nc" },
+    { "label": "X", "url": "https://x.com/giguy_gig" }
+  ]
+}
