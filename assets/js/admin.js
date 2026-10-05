@@ -329,6 +329,7 @@
     $('#root').innerHTML =
       '<div class="shell"><aside class="side">' +
         '<a class="brand" href="../" target="_blank" rel="noopener"><img src="../img/logos/logo.png" alt="" width="70"><span class="brand-sym">Admin</span></a>' +
+        '<div class="gsearch"><input id="gq" type="search" placeholder="Search the whole site…" autocomplete="off" aria-label="Search the whole site" value="' + esc(S.gq || '') + '"><kbd>/</kbd></div>' +
         '<nav id="sidenav">' + NAV.map(n => '<a href="#' + n[0] + '" data-view="' + n[0] + '">' + n[1] + '<span class="n" data-count="' + n[0] + '"></span></a>').join('') + '</nav>' +
         '<div class="who">' + (S.mode === 'github'
           ? '<span class="mode-pill gh">GITHUB</span><br>' + esc(S.login ? '@' + S.login : '') + '<br>' + esc(S.repo) + ' @ ' + esc(S.branch)
@@ -338,6 +339,19 @@
     $('#signout').addEventListener('click', () => {
       if (dirty() && !confirm('You have unpublished changes. They stay saved as a draft on this device. Continue?')) return;
       forget(); location.hash = ''; location.reload();
+    });
+    const gq = $('#gq');
+    gq.addEventListener('input', () => {
+      S.gq = gq.value;
+      if (S.view !== 'search') { location.hash = 'search'; return; }
+      renderView();
+    });
+    gq.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { const r = $('#results [data-hit]'); if (r) r.click(); }
+      if (e.key === 'Escape') { gq.value = ''; S.gq = ''; if (S.view === 'search') renderView(); }
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === '/' && !e.target.closest('input, textarea, select, [contenteditable]') && !$('#modal').open) { e.preventDefault(); gq.focus(); gq.select(); }
     });
     renderSideCounts();
   }
@@ -351,7 +365,7 @@
   }
   function renderTopbar() {
     const tb = $('#topbar'); if (!tb) return;
-    const title = (NAV.find(n => n[0] === S.view) || [, ''])[1];
+    const title = S.view === 'search' ? 'Search' : (NAV.find(n => n[0] === S.view) || [, ''])[1];
     const d = dirty();
     tb.innerHTML = '<h1>' + esc(title) + '</h1>' +
       (d ? '<span class="dirty">● unpublished changes</span>' : '<span class="clean">✓ in sync</span>') +
@@ -369,20 +383,21 @@
 
   function go() {
     const [view, id] = decodeURIComponent(location.hash.slice(1)).split('/');
-    S.view = NAV.some(n => n[0] === view) ? view : 'banners';
+    S.view = view === 'search' || NAV.some(n => n[0] === view) ? view : 'banners';
     $$('#sidenav a').forEach(a => { if (a.dataset.view === S.view) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     renderTopbar();
     renderView();
     if (id && COLLECTIONS[S.view]) {
       const item = (S.data[S.view] || []).find(x => x.id === id);
       if (item) editItem(S.view, item);
-    }
+    } else focusPending($('#view'));
   }
 
   function renderView() {
     const v = $('#view');
     if (COLLECTIONS[S.view]) return renderList(v, S.view);
     if (S.view === 'raw') return renderRaw(v);
+    if (S.view === 'search') return renderSearch(v);
     const hints = {
       practice: 'Phone, Patient Portal link, hours and footer text used across the whole site.',
       home: 'The top of the home page, the three highlights and the recognition strip.',
@@ -392,6 +407,86 @@
     };
     v.innerHTML = '<p class="hint">' + (hints[S.view] || '') + '</p><div class="formcard" id="form">' + formHtml(SCHEMA[S.view], S.data) + '</div>';
     bindForm($('#form'), S.data, () => { changed(); }, () => renderView());
+  }
+
+  /* ---------------- site-wide search ---------------- */
+  // Every editable value on the site, one entry per field (and per row of a repeater).
+  function searchIndex() {
+    const out = [];
+    NAV.forEach(([view, navLabel]) => {
+      if (!SCHEMA[view]) return;
+      const fields = SCHEMA[view].flatMap(f => f.row || [f]).filter(f => f.type !== 'check');
+      const C = COLLECTIONS[view];
+      const each = (obj, ctx) => fields.forEach(f => {
+        const v = getPath(obj, f.k);
+        const base = Object.assign({ view, navLabel, k: f.k, label: f.label }, ctx);
+        if (f.type === 'pairs') {
+          (v || []).forEach((row, i) => f.fields.forEach(fd => out.push(Object.assign({}, base, { li: i, lf: fd[0], text: String(row[fd[0]] || '') }))));
+        } else if (f.type === 'lines') out.push(Object.assign(base, { text: (v || []).join('\n') }));
+        else if (f.type === 'select') out.push(Object.assign(base, { text: ((f.opts.find(o => o[0] === v) || [, v || ''])[1]) }));
+        else if (f.type === 'datetime') out.push(Object.assign(base, { text: fmtWhen(v) }));
+        else out.push(Object.assign(base, { text: v == null ? '' : String(v) }));
+      });
+      if (C) (S.data[view] || []).forEach(item => each(item, { id: item.id, where: C.title(item), hidden: !!item.hidden }));
+      else each(S.data, {});
+    });
+    return out;
+  }
+  const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  function snippet(text, terms) {
+    const low = text.toLowerCase();
+    let at = -1; terms.some(t => (at = low.indexOf(t)) >= 0);
+    const from = Math.max(0, at - 50), to = Math.min(text.length, (at < 0 ? 0 : at) + 110);
+    let s = esc((from ? '…' : '') + text.slice(from, to).replace(/\s+/g, ' ') + (to < text.length ? '…' : ''));
+    terms.forEach(t => { s = s.replace(new RegExp('(' + reEsc(esc(t)) + ')', 'gi'), '<mark>$1</mark>'); });
+    return s;
+  }
+  function renderSearch(v) {
+    const q = (S.gq || '').trim().toLowerCase();
+    const terms = q.split(/\s+/).filter(Boolean);
+    if (!terms.length) {
+      v.innerHTML = '<p class="hint">Type in the search box to find any text on the site: a phone number, a provider, a service, a word in an article. Click a result to edit it. Tip: press <kbd>/</kbd> anywhere to jump to search.</p>';
+      return;
+    }
+    const hits = searchIndex().map(h => {
+      const text = h.text.toLowerCase();
+      const hay = text + ' ' + h.label.toLowerCase() + ' ' + String(h.where || '').toLowerCase() + ' ' + h.navLabel.toLowerCase();
+      if (!terms.every(t => hay.includes(t))) return null;
+      h.score = terms.filter(t => text.includes(t)).length * 10 - (h.hidden ? 1 : 0);
+      return h;
+    }).filter(Boolean).sort((a, b) => b.score - a.score);
+    S.hits = hits.slice(0, 100);
+    v.innerHTML = '<p class="hint">' + hits.length + ' match' + (hits.length === 1 ? '' : 'es') + ' for “' + esc(S.gq.trim()) + '”' + (hits.length > 100 ? ' (showing the first 100)' : '') + '. Click one to edit it.</p>' +
+      (hits.length ? '<div class="list" id="results">' + S.hits.map((h, i) =>
+        '<button type="button" class="hit' + (h.hidden ? ' is-hidden' : '') + '" data-hit="' + i + '">' +
+          '<span class="hit-where">' + esc(h.navLabel) + (h.where ? ' › ' + esc(short(h.where, 60)) : '') + ' › ' + esc(h.label) + (h.li != null ? ' #' + (h.li + 1) : '') + (h.hidden ? ' <em>(hidden)</em>' : '') + '</span>' +
+          '<span class="hit-text">' + (h.text ? snippet(h.text, terms) : '<i>empty</i>') + '</span>' +
+        '</button>').join('') + '</div>'
+      : '<div class="list"><div class="empty">No matches. Try a shorter word.</div></div>');
+    if (!hits.length) return;
+    $('#results').onclick = e => {
+      const b = e.target.closest('[data-hit]'); if (!b) return;
+      const h = S.hits[Number(b.dataset.hit)];
+      S.focus = { k: h.k, li: h.li, lf: h.lf, terms };
+      const hash = '#' + h.view + (h.id ? '/' + encodeURIComponent(h.id) : '');
+      if (location.hash === hash) go(); else location.hash = hash;
+    };
+  }
+  // After jumping from a search result: scroll to the field, focus it and select the matched text.
+  function focusPending(root) {
+    const f = S.focus; if (!f || !root) return false;
+    S.focus = null;
+    const sel = f.li != null ? '[data-lk="' + f.k + '"][data-li="' + f.li + '"][data-lf="' + f.lf + '"]' : '[data-k="' + f.k + '"]';
+    const el = root.querySelector(sel); if (!el) return false;
+    el.scrollIntoView({ block: 'center' });
+    el.focus({ preventScroll: true });
+    if (typeof el.setSelectionRange === 'function' && /^(text|search|url|tel|)$/.test(el.type || '') || el.tagName === 'TEXTAREA') {
+      const low = el.value.toLowerCase(); const t = f.terms.find(x => low.includes(x));
+      if (t) { const at = low.indexOf(t); try { el.setSelectionRange(at, at + t.length); } catch (e) { /* not selectable */ } }
+    }
+    const box = el.closest('.field, .rep-row') || el;
+    box.classList.remove('flash'); void box.offsetWidth; box.classList.add('flash');
+    return true;
   }
 
   /* ---------------- collection list ---------------- */
@@ -484,7 +579,7 @@
     draw();
     m.onclose = () => { if (location.hash.split('/').length > 1) history.replaceState(null, '', '#' + key); };
     m.showModal();
-    const first = $('#mbody input, #mbody textarea'); if (first) first.focus();
+    if (!focusPending($('#mbody'))) { const first = $('#mbody input, #mbody textarea'); if (first) first.focus(); }
   }
 
   /* ---------------- raw ---------------- */
