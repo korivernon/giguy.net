@@ -183,6 +183,23 @@
       { k: 'body', label: 'Article', type: 'textarea', rows: 16, hint: 'Blank line = new paragraph. "## " starts a heading. Lines starting with "- " make a list. [link](https://…) works.' },
       { k: 'hidden', label: 'Hidden from the site', type: 'check' },
     ],
+    fasttrack: [
+      { k: 'fasttrack.enabled', label: 'Show Fast-Track on the live site (menu item, page, home band and promos)', type: 'check' },
+      { row: [{ k: 'fasttrack.navLabel', label: 'Menu label' }, { k: 'fasttrack.eyebrow', label: 'Small line above the headline' }] },
+      { k: 'fasttrack.title', label: 'Headline', hint: 'Keep the 7–14 day wording consistent with what the office can deliver.' },
+      { k: 'fasttrack.intro', label: 'Intro', type: 'textarea', rows: 4 },
+      { k: 'fasttrack.noVisit', label: '"No office visit" line', type: 'textarea', rows: 2 },
+      { k: 'fasttrack.homeBand', label: 'Home page band', type: 'textarea', rows: 2, hint: '**bold** shows in peach. Blank = hide the band.' },
+      { k: 'fasttrack.steps', label: 'How it works (steps)', type: 'pairs', fields: TF, long: 1 },
+      { k: 'fasttrack.fit', label: '"Fast-Track is for you if" (one per line)', type: 'textarea', rows: 4 },
+      { k: 'fasttrack.notFit', label: '"We may need to see you first if you" (one per line)', type: 'textarea', rows: 4 },
+      { k: 'fasttrack.notFitNote', label: 'Note under that list', type: 'textarea', rows: 2 },
+      { k: 'fasttrack.bring', label: '"Have these ready" (one per line)', type: 'textarea', rows: 4 },
+      { k: 'fasttrack.insurance', label: 'Insurance', type: 'textarea', rows: 3 },
+      { k: 'fasttrack.faqs', label: 'Questions', type: 'pairs', fields: [['q', 'Question'], ['a', 'Answer']], long: 1 },
+      { k: 'fasttrack.providersTitle', label: 'Referring doctors heading' },
+      { k: 'fasttrack.providers', label: 'Referring doctors text', type: 'textarea', rows: 4, hint: 'Blank = hide this section.' },
+    ],
     learn: [
       { k: 'quiz.title', label: 'Quiz title' },
       { k: 'quiz.intro', label: 'Quiz intro', type: 'textarea', rows: 3 },
@@ -218,7 +235,7 @@
 
   const NAV = [
     ['banners', 'Banners'], ['practice', 'Practice info & hours'], ['locations', 'Locations'], ['home', 'Home page'], ['about', 'About & conditions'],
-    ['doctor', 'Dr. Vernon'], ['team', 'Team'], ['services', 'Services'], ['faqs', 'FAQs'], ['forms', 'Forms & PDFs'],
+    ['fasttrack', 'Fast-Track colonoscopy'], ['doctor', 'Dr. Vernon'], ['team', 'Team'], ['services', 'Services'], ['faqs', 'FAQs'], ['forms', 'Forms & PDFs'],
     ['articles', 'Articles'], ['learn', 'Quiz & digestive system'], ['raw', 'Raw JSON'],
   ];
 
@@ -403,6 +420,7 @@
       home: 'The top of the home page, the three highlights and the recognition strip.',
       about: 'The About page and the "Conditions we treat" list (also on Services).',
       doctor: 'Dr. Vernon\'s section on the Our Team page and the home page.',
+      fasttrack: '<b>Off by default until counsel signs off.</b> While the box below is unticked, nothing about Fast-Track shows on the site and its page redirects to the home page. Use Preview to see it before turning it on. The Fast-Track Colonoscopy page (fast-track-colonoscopy.html) for patients with a positive stool test, plus the band on the home page.',
       learn: 'The colon cancer risk quiz and the digestive system guide on the Learn page.',
     };
     v.innerHTML = '<p class="hint">' + (hints[S.view] || '') + '</p><div class="formcard" id="form">' + formHtml(SCHEMA[S.view], S.data) + '</div>';
@@ -658,7 +676,7 @@
       d[k] = d[k] || [];
       d[k].forEach(x => { if (!x.id) x.id = uniqueId(d[k], COLLECTIONS[k].idFrom(x) || 'item'); });
     });
-    ['practice', 'home', 'about', 'doctor', 'quiz'].forEach(k => { d[k] = d[k] || {}; });
+    ['practice', 'home', 'about', 'doctor', 'quiz', 'fasttrack'].forEach(k => { d[k] = d[k] || {}; });
     d.social = d.social || []; d.conditions = d.conditions || []; d.organs = d.organs || [];
   }
 

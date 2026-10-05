@@ -28,9 +28,18 @@
     "title": "Compassionate care for your digestive health",
     "text": "From colon cancer screening to heartburn, liver disease and IBS, Dr. Kurt Vernon, \"The GI Guy,\" has cared for patients across the Greater Raleigh area for more than 20 years.",
     "highlights": [
-      { "title": "Board-certified expertise", "text": "Board-certified in gastroenterology and internal medicine, and a Fellow of the American College of Gastroenterology." },
-      { "title": "Advanced technology", "text": "FUSE™ full-spectrum endoscopy for some of the highest available detection rates for colon cancer." },
-      { "title": "Personal, unhurried care", "text": "We explain everything we do and take time with every patient. Over 90% of our patients come from referrals." }
+      {
+        "title": "Board-certified expertise",
+        "text": "Board-certified in gastroenterology and internal medicine, and a Fellow of the American College of Gastroenterology."
+      },
+      {
+        "title": "Advanced technology",
+        "text": "FUSE™ full-spectrum endoscopy for some of the highest available detection rates for colon cancer."
+      },
+      {
+        "title": "Personal, unhurried care",
+        "text": "We explain everything we do and take time with every patient. Over 90% of our patients come from referrals."
+      }
     ],
     "recognition": "Recognized with a Tier 1 Designation by Blue Cross Blue Shield of North Carolina for high-quality, cost-efficient care.",
     "recognitionLink": "article.html?id=bcbs-tier-1"
@@ -39,9 +48,18 @@
     "title": "About our practice",
     "text": "At The GI Guy, we are dedicated to expert gastroenterology care with a compassionate, holistic approach. Led by Dr. Kurt Vernon, our practice has served the Greater Raleigh area for over 20 years from two offices in Fuquay-Varina and Dunn, NC.\n\nWe use the most advanced technology available, including FUSE™ endoscopy, which gives some of the highest available detection rates for colon cancer, and we create a unique atmosphere where patients come first.\n\nOur approach looks at your health as a whole: we provide education, incorporate nutrition and lifestyle, and recommend only the best quality products.",
     "values": [
-      { "title": "Personalized care", "text": "We take the time to understand each patient's needs and build a treatment plan around your goals." },
-      { "title": "Advanced technology", "text": "State-of-the-art equipment like FUSE™ endoscopy for accurate, minimally invasive procedures." },
-      { "title": "Education and support", "text": "We want you to leave informed, with the knowledge to make good decisions about your health." }
+      {
+        "title": "Personalized care",
+        "text": "We take the time to understand each patient's needs and build a treatment plan around your goals."
+      },
+      {
+        "title": "Advanced technology",
+        "text": "State-of-the-art equipment like FUSE™ endoscopy for accurate, minimally invasive procedures."
+      },
+      {
+        "title": "Education and support",
+        "text": "We want you to leave informed, with the knowledge to make good decisions about your health."
+      }
     ],
     "insurance": "We accept Medicare, Blue Cross Blue Shield, Cigna, Aetna, UnitedHealthcare, Wellpath and many other plans. Please call us to confirm your coverage.",
     "wellnessTitle": "Full spectrum wellness",
@@ -54,12 +72,30 @@
     "quote": "The secret to successful treatment is personalized care. I always take the time to work one-on-one with patients during their program. My patients know that I am always available for them. I explain everything I do and encourage patients to ask questions. In the end, they aren't just healed, they're educated, too.",
     "bio": "Kurt Vernon, MD is a board-certified gastroenterologist and a Fellow of the American College of Gastroenterology, the American College of Physicians and the American Anti-Aging Academy, with over 20 years of experience.\n\nDr. Vernon has the expertise and advanced technology to accurately diagnose and treat a wide range of colon, liver, digestive and rectal conditions, including cancer screening, abdominal pain, ulcers, irritable bowel syndrome and heartburn/reflux. Add in his bedside manner and caring personality, and it's easy to see why over 90% of his patients come from referrals. Many of our patients are physicians and medical professionals themselves.\n\nDr. Vernon is board-certified in internal medicine and gastroenterology by the American Board of Internal Medicine, and he continually works to refine his skills and use the latest medical techniques.",
     "credentials": [
-      { "label": "Medical school", "value": "MD, Howard University College of Medicine, Washington, D.C." },
-      { "label": "Residency", "value": "Internal Medicine, Howard University Hospital, Washington, D.C." },
-      { "label": "Fellowship", "value": "Gastroenterology, Howard University Hospital, Washington, D.C." },
-      { "label": "Board-certified", "value": "Gastroenterology, Internal Medicine, Anti-Aging and Regenerative Medicine" },
-      { "label": "Fellow", "value": "American College of Gastroenterology, American College of Physicians, American Anti-Aging Academy" },
-      { "label": "Memberships", "value": "American College of Gastroenterology, American Medical Association, American Gastroenterological Association, National Medical Association, A4M, North Carolina Medical Society" }
+      {
+        "label": "Medical school",
+        "value": "MD, Howard University College of Medicine, Washington, D.C."
+      },
+      {
+        "label": "Residency",
+        "value": "Internal Medicine, Howard University Hospital, Washington, D.C."
+      },
+      {
+        "label": "Fellowship",
+        "value": "Gastroenterology, Howard University Hospital, Washington, D.C."
+      },
+      {
+        "label": "Board-certified",
+        "value": "Gastroenterology, Internal Medicine, Anti-Aging and Regenerative Medicine"
+      },
+      {
+        "label": "Fellow",
+        "value": "American College of Gastroenterology, American College of Physicians, American Anti-Aging Academy"
+      },
+      {
+        "label": "Memberships",
+        "value": "American College of Gastroenterology, American Medical Association, American Gastroenterological Association, National Medical Association, A4M, North Carolina Medical Society"
+      }
     ]
   },
   "team": [
@@ -98,27 +134,109 @@
     }
   ],
   "services": [
-    { "id": "colonoscopy", "title": "Colonoscopy", "summary": "Early detection and prevention of colon cancer.", "points": "Finds and removes precancerous polyps before they become cancer\nPerformed with FUSE™ full-spectrum technology for better accuracy\nHelps diagnose abdominal pain, rectal bleeding and changes in bowel habits", "hidden": false },
-    { "id": "egd", "title": "EGD (upper endoscopy)", "summary": "Diagnosis and treatment of upper digestive problems.", "points": "Examines the esophagus, stomach and upper small intestine\nDiagnoses acid reflux, ulcers and upper GI bleeding\nAllows biopsy or treatment during the same procedure", "hidden": false },
-    { "id": "capsule-endoscopy", "title": "Capsule endoscopy", "summary": "A detailed look at the small intestine, no scope needed.", "points": "You swallow a small camera capsule\nCaptures detailed images of the small intestine\nUseful for finding bleeding, polyps and inflammation", "hidden": false },
-    { "id": "flexible-sigmoidoscopy", "title": "Flexible sigmoidoscopy", "summary": "Quick screening of the lower colon and rectum.", "points": "Screens the lower colon for polyps and other problems\nTypically takes less than 30 minutes with minimal preparation", "hidden": false },
-    { "id": "esophageal-dilation", "title": "Esophageal dilation", "summary": "Relief for trouble swallowing.", "points": "Gently widens narrowed areas of the esophagus\nTreats strictures caused by reflux (GERD) or injury\nOften brings immediate relief", "hidden": false },
-    { "id": "hemorrhoid-treatment", "title": "Hemorrhoid treatment", "summary": "Minimally invasive relief with the CRH O'Regan System.", "points": "Quick, in-office banding with little to no downtime for most patients\nLasting relief from pain, bleeding and discomfort", "hidden": false },
-    { "id": "cologuard", "title": "Cologuard® screening", "summary": "A no-prep, at-home stool DNA test for colon cancer.", "points": "An option for average-risk patients who don't want a colonoscopy\nA positive result needs a follow-up colonoscopy", "hidden": false },
-    { "id": "consultations", "title": "GI consultations", "summary": "Evaluation and ongoing care for digestive conditions.", "points": "Heartburn, IBS, IBD, liver disease, abdominal pain and more\nNutrition, lifestyle and wellness guidance as part of your plan", "hidden": false }
+    {
+      "id": "colonoscopy",
+      "title": "Colonoscopy",
+      "summary": "Early detection and prevention of colon cancer.",
+      "points": "Finds and removes precancerous polyps before they become cancer\nPerformed with FUSE™ full-spectrum technology for better accuracy\nHelps diagnose abdominal pain, rectal bleeding and changes in bowel habits",
+      "hidden": false
+    },
+    {
+      "id": "egd",
+      "title": "EGD (upper endoscopy)",
+      "summary": "Diagnosis and treatment of upper digestive problems.",
+      "points": "Examines the esophagus, stomach and upper small intestine\nDiagnoses acid reflux, ulcers and upper GI bleeding\nAllows biopsy or treatment during the same procedure",
+      "hidden": false
+    },
+    {
+      "id": "capsule-endoscopy",
+      "title": "Capsule endoscopy",
+      "summary": "A detailed look at the small intestine, no scope needed.",
+      "points": "You swallow a small camera capsule\nCaptures detailed images of the small intestine\nUseful for finding bleeding, polyps and inflammation",
+      "hidden": false
+    },
+    {
+      "id": "flexible-sigmoidoscopy",
+      "title": "Flexible sigmoidoscopy",
+      "summary": "Quick screening of the lower colon and rectum.",
+      "points": "Screens the lower colon for polyps and other problems\nTypically takes less than 30 minutes with minimal preparation",
+      "hidden": false
+    },
+    {
+      "id": "esophageal-dilation",
+      "title": "Esophageal dilation",
+      "summary": "Relief for trouble swallowing.",
+      "points": "Gently widens narrowed areas of the esophagus\nTreats strictures caused by reflux (GERD) or injury\nOften brings immediate relief",
+      "hidden": false
+    },
+    {
+      "id": "hemorrhoid-treatment",
+      "title": "Hemorrhoid treatment",
+      "summary": "Minimally invasive relief with the CRH O'Regan System.",
+      "points": "Quick, in-office banding with little to no downtime for most patients\nLasting relief from pain, bleeding and discomfort",
+      "hidden": false
+    },
+    {
+      "id": "cologuard",
+      "title": "Cologuard® screening",
+      "summary": "A no-prep, at-home stool DNA test for colon cancer.",
+      "points": "An option for average-risk patients who don't want a colonoscopy\nA positive result needs a follow-up colonoscopy",
+      "hidden": false
+    },
+    {
+      "id": "consultations",
+      "title": "GI consultations",
+      "summary": "Evaluation and ongoing care for digestive conditions.",
+      "points": "Heartburn, IBS, IBD, liver disease, abdominal pain and more\nNutrition, lifestyle and wellness guidance as part of your plan",
+      "hidden": false
+    }
   ],
   "conditions": [
-    "Heartburn / acid reflux", "Colon cancer", "Colon cancer screening", "Obesity", "Fatty liver", "Ulcers / gallstones",
-    "Abdominal pain", "Intestinal bleeding", "Difficulty swallowing", "Irritable bowel syndrome", "Inflammatory bowel disease",
-    "Liver disease", "Hemorrhoids", "Rectal bleeding", "Constipation", "Hepatitis", "Diverticulosis", "Helicobacter pylori", "Unexplained weight loss"
+    "Heartburn / acid reflux",
+    "Colon cancer",
+    "Colon cancer screening",
+    "Obesity",
+    "Fatty liver",
+    "Ulcers / gallstones",
+    "Abdominal pain",
+    "Intestinal bleeding",
+    "Difficulty swallowing",
+    "Irritable bowel syndrome",
+    "Inflammatory bowel disease",
+    "Liver disease",
+    "Hemorrhoids",
+    "Rectal bleeding",
+    "Constipation",
+    "Hepatitis",
+    "Diverticulosis",
+    "Helicobacter pylori",
+    "Unexplained weight loss"
   ],
   "faqs": [
-    { "q": "What is a colonoscopy, and why is it important?", "a": "A colonoscopy examines the inside of your colon for polyps, abnormalities or signs of colon cancer. It is the only test that can both detect and prevent colon cancer, because polyps can be removed during the procedure." },
-    { "q": "Is Cologuard effective?", "a": "In a study of 10,000 average-risk people, Cologuard found 92% of colon cancers. It is non-invasive and needs no prep, but it does not reliably find precancerous polyps, and a positive result needs a follow-up colonoscopy. [Read more about Cologuard](article.html?id=cologuard)." },
-    { "q": "What should I expect during a flexible sigmoidoscopy?", "a": "It is a quick, minimally invasive screening of the lower colon. It typically takes less than 30 minutes and needs minimal preparation." },
-    { "q": "Are endoscopy procedures risky?", "a": "Endoscopy is very safe when performed by experienced specialists. Risks are small; some patients have minor discomfort afterward. Our team looks after your safety throughout." },
-    { "q": "How do I prepare for my procedure?", "a": "It depends on the procedure. A colonoscopy requires a clear-liquid diet and bowel prep. We'll give you instructions for your procedure, and you can download the [colonoscopy prep instructions](patients.html#prep) here." },
-    { "q": "Which insurance do you accept?", "a": "We accept Medicare, Blue Cross Blue Shield, Cigna, Aetna, UnitedHealthcare, Wellpath and many others. Please call (919) 577-0085 to confirm your coverage." }
+    {
+      "q": "What is a colonoscopy, and why is it important?",
+      "a": "A colonoscopy examines the inside of your colon for polyps, abnormalities or signs of colon cancer. It is the only test that can both detect and prevent colon cancer, because polyps can be removed during the procedure."
+    },
+    {
+      "q": "Is Cologuard effective?",
+      "a": "In a study of 10,000 average-risk people, Cologuard found 92% of colon cancers. It is non-invasive and needs no prep, but it does not reliably find precancerous polyps, and a positive result needs a follow-up colonoscopy. [Read more about Cologuard](article.html?id=cologuard)."
+    },
+    {
+      "q": "What should I expect during a flexible sigmoidoscopy?",
+      "a": "It is a quick, minimally invasive screening of the lower colon. It typically takes less than 30 minutes and needs minimal preparation."
+    },
+    {
+      "q": "Are endoscopy procedures risky?",
+      "a": "Endoscopy is very safe when performed by experienced specialists. Risks are small; some patients have minor discomfort afterward. Our team looks after your safety throughout."
+    },
+    {
+      "q": "How do I prepare for my procedure?",
+      "a": "It depends on the procedure. A colonoscopy requires a clear-liquid diet and bowel prep. We'll give you instructions for your procedure, and you can download the [colonoscopy prep instructions](patients.html#prep) here."
+    },
+    {
+      "q": "Which insurance do you accept?",
+      "a": "We accept Medicare, Blue Cross Blue Shield, Cigna, Aetna, UnitedHealthcare, Wellpath and many others. Please call (919) 577-0085 to confirm your coverage."
+    }
   ],
   "locations": [
     {
@@ -141,17 +259,52 @@
     }
   ],
   "forms": [
-    { "id": "patient-forms", "title": "New patient forms", "text": "Fill these out before your visit to save time at check-in.", "file": "files/patient-forms.pdf", "anchor": "forms", "hidden": false },
-    { "id": "colonoscopy-prep", "title": "Colonoscopy prep (magnesium citrate, split dose)", "text": "What to buy, what to eat and when to take each dose. Keep these instructions handy.", "file": "files/colonoscopy-prep-magnesium-citrate.pdf", "anchor": "prep", "hidden": false }
+    {
+      "id": "patient-forms",
+      "title": "New patient forms",
+      "text": "Fill these out before your visit to save time at check-in.",
+      "file": "files/patient-forms.pdf",
+      "anchor": "forms",
+      "hidden": false
+    },
+    {
+      "id": "colonoscopy-prep",
+      "title": "Colonoscopy prep (magnesium citrate, split dose)",
+      "text": "What to buy, what to eat and when to take each dose. Keep these instructions handy.",
+      "file": "files/colonoscopy-prep-magnesium-citrate.pdf",
+      "anchor": "prep",
+      "hidden": false
+    }
   ],
   "organs": [
-    { "name": "Stomach", "text": "A J-shaped organ just left of center, between the esophagus and the small intestine. Protein digestion begins here." },
-    { "name": "Small intestine", "text": "Folded into much of the abdomen, it does most of the digestion and absorption of nutrients. Enzymes and bile break food into small building blocks that pass into the bloodstream. The duodenum is its first, C-shaped section." },
-    { "name": "Colon", "text": "The large intestine wraps around the small intestine like a frame. It absorbs water from what's left of digested food and moves waste out of the body." },
-    { "name": "Rectum", "text": "The last 6–8 inches of the large intestine. It holds stool until it leaves the body." },
-    { "name": "Liver", "text": "The largest internal organ. It stores vitamins, sugars and fats and releases them as needed; builds the proteins that clot blood and make new cells; filters waste from the blood; and breaks down harmful substances like alcohol." },
-    { "name": "Gallbladder", "text": "A small organ under the liver on the right side. It stores bile made by the liver and releases it into the intestine to help digest fats." },
-    { "name": "Pancreas", "text": "A fish-shaped organ behind the stomach. It makes hormones like insulin and glucagon, and digestive enzymes that it sends to the small intestine." }
+    {
+      "name": "Stomach",
+      "text": "A J-shaped organ just left of center, between the esophagus and the small intestine. Protein digestion begins here."
+    },
+    {
+      "name": "Small intestine",
+      "text": "Folded into much of the abdomen, it does most of the digestion and absorption of nutrients. Enzymes and bile break food into small building blocks that pass into the bloodstream. The duodenum is its first, C-shaped section."
+    },
+    {
+      "name": "Colon",
+      "text": "The large intestine wraps around the small intestine like a frame. It absorbs water from what's left of digested food and moves waste out of the body."
+    },
+    {
+      "name": "Rectum",
+      "text": "The last 6–8 inches of the large intestine. It holds stool until it leaves the body."
+    },
+    {
+      "name": "Liver",
+      "text": "The largest internal organ. It stores vitamins, sugars and fats and releases them as needed; builds the proteins that clot blood and make new cells; filters waste from the blood; and breaks down harmful substances like alcohol."
+    },
+    {
+      "name": "Gallbladder",
+      "text": "A small organ under the liver on the right side. It stores bile made by the liver and releases it into the intestine to help digest fats."
+    },
+    {
+      "name": "Pancreas",
+      "text": "A fish-shaped organ behind the stomach. It makes hormones like insulin and glucagon, and digestive enzymes that it sends to the small intestine."
+    }
   ],
   "quiz": {
     "title": "Are you at risk for colon cancer?",
@@ -197,12 +350,83 @@
     }
   ],
   "partners": [
-    { "name": "Accreditation Association for Ambulatory Health Care", "logo": "img/logos/accreditation-logo.png" },
-    { "name": "American Board of Internal Medicine", "logo": "img/logos/abim.png" }
+    {
+      "name": "Accreditation Association for Ambulatory Health Care",
+      "logo": "img/logos/accreditation-logo.png"
+    },
+    {
+      "name": "American Board of Internal Medicine",
+      "logo": "img/logos/abim.png"
+    }
   ],
   "social": [
-    { "label": "Facebook", "url": "https://www.facebook.com/thegiguy/" },
-    { "label": "LinkedIn", "url": "https://www.linkedin.com/company/giguy-gastroenterologist-raleigh-nc" },
-    { "label": "X", "url": "https://x.com/giguy_gig" }
-  ]
+    {
+      "label": "Facebook",
+      "url": "https://www.facebook.com/thegiguy/"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/company/giguy-gastroenterologist-raleigh-nc"
+    },
+    {
+      "label": "X",
+      "url": "https://x.com/giguy_gig"
+    }
+  ],
+  "fasttrack": {
+    "enabled": false,
+    "navLabel": "Fast-Track",
+    "eyebrow": "Fast-Track Colonoscopy",
+    "title": "Positive Cologuard® or stool test? Get your colonoscopy in 7–14 days.",
+    "intro": "A positive stool test doesn't mean you have cancer, but the only way to know is a colonoscopy. In many places that means waiting months, and the waiting is the hardest part. With Fast-Track, we usually schedule your colonoscopy within 7–14 days of your phone screening.",
+    "noVisit": "No office visit needed first. If you're generally healthy, we screen you by phone, send your prep instructions and schedule your procedure.",
+    "steps": [
+      {
+        "title": "Call us",
+        "text": "Tell us you had a positive Cologuard®, FIT or other stool test. Have your result, insurance card and medication list handy."
+      },
+      {
+        "title": "Phone screening",
+        "text": "Our staff asks a short list of health questions. If you're healthy enough for a direct colonoscopy, you skip the separate office visit."
+      },
+      {
+        "title": "Prep instructions",
+        "text": "We send your bowel prep instructions: exactly what to buy, eat and drink before your procedure."
+      },
+      {
+        "title": "Your colonoscopy",
+        "text": "Dr. Vernon performs your colonoscopy, usually within 7–14 days, and goes over the results with you."
+      }
+    ],
+    "fit": "You had a positive (abnormal) Cologuard®, FIT or other stool-based colon cancer test\nYou're generally healthy\nYou'd rather not wait months to find out",
+    "notFit": "Take blood thinners such as warfarin, Eliquis, Xarelto or Plavix\nHave serious heart, lung or kidney disease\nHave had problems with anesthesia or sedation\nHave symptoms like heavy bleeding or severe abdominal pain",
+    "notFitNote": "That doesn't rule you out. It just means Dr. Vernon reviews your history first. Our staff will tell you on the call.",
+    "bring": "Your positive test result (or the name of the doctor who ordered it)\nYour insurance card\nA list of your medications\nA driver for the day of your procedure",
+    "insurance": "Many insurance plans, including Medicare, now treat a colonoscopy after a positive stool test as part of screening, which can mean little or no out-of-pocket cost. Coverage varies, so our staff will check your plan when you call.",
+    "faqs": [
+      {
+        "q": "Does a positive stool test mean I have cancer?",
+        "a": "No. Most people with a positive stool test do not have cancer. The test can be positive because of polyps, hemorrhoids or other causes. A colonoscopy is the only way to know, and polyps found during it can be removed on the spot."
+      },
+      {
+        "q": "Why do I need a colonoscopy if I already did a stool test?",
+        "a": "A stool test only tells us something may be there. A colonoscopy lets Dr. Vernon see the whole colon and remove polyps before they can turn into cancer."
+      },
+      {
+        "q": "Do I need a referral?",
+        "a": "Some insurance plans require one. If yours does, we can request it from the doctor who ordered your stool test."
+      },
+      {
+        "q": "I don't live near Fuquay-Varina or Dunn. Can I still come?",
+        "a": "Yes. Patients come to us from across North Carolina so they don't have to wait. Most people only make one trip, on the day of the procedure."
+      },
+      {
+        "q": "How fast can I be seen?",
+        "a": "We usually schedule your colonoscopy within 7–14 days of your phone screening, depending on your health history, your insurance and your prep."
+      }
+    ],
+    "providersTitle": "For doctors and clinics",
+    "providers": "If your patient has a positive stool test and is facing a long wait, send them our way. Fax the referral and the stool test result to our Fuquay-Varina office at (919) 577-0013 or our Dunn office at (910) 891-5323, and we'll call your patient to complete the phone screening. We send the colonoscopy and pathology reports back to you.",
+    "homeBand": "**Positive Cologuard® or stool test?** Get your colonoscopy in 7–14 days. No office visit needed first."
+  }
 }

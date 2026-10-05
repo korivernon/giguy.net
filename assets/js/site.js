@@ -11,6 +11,7 @@
     ['about', 'about.html', 'About'],
     ['team', 'team.html', 'Our Team'],
     ['services', 'services.html', 'Services'],
+    ['fasttrack', 'fast-track-colonoscopy.html', 'Fast-Track', 'nav-ft'],
     ['patients', 'patients.html', 'Patients'],
     ['learn', 'learn.html', 'Learn'],
     ['contact', 'contact.html', 'Contact'],
@@ -35,6 +36,8 @@
   const HL_ICONS = ['scope', 'check', 'heart'];
 
   let D;
+  const ftOn = () => !!(D && D.fasttrack && D.fasttrack.enabled === true);
+  const navItems = () => NAV.filter(n => n[0] !== 'fasttrack' || ftOn());
 
   /* ---------------- shared chrome ---------------- */
   function bannerHtml() {
@@ -64,7 +67,7 @@
         '<a class="logo" href="index.html" aria-label="' + esc(P.name) + ', home"><img src="img/logos/logo.png" alt="The GI Guy" width="180" height="72">' +
           '<span class="logo-text"><b>' + esc(P.doctor) + '</b><small>' + esc(P.tagline) + '</small></span></a>' +
         '<nav class="nav" id="nav" aria-label="Main">' +
-          NAV.map(n => '<a href="' + n[1] + '"' + (n[0] === navKey ? ' aria-current="page"' : '') + '>' + n[2] + '</a>').join('') +
+          navItems().map(n => '<a href="' + n[1] + '"' + (n[3] ? ' class="' + n[3] + '"' : '') + (n[0] === navKey ? ' aria-current="page"' : '') + '>' + n[2] + '</a>').join('') +
           '<a class="btn btn-accent nav-portal" href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + ICON.lock + esc(P.portalLabel || 'Patient Portal') + '</a>' +
           '<a class="btn btn-outline nav-call" href="' + tel(P.phone) + '">' + ICON.phone + 'Call ' + esc(P.phone) + '</a>' +
         '</nav>' +
@@ -97,7 +100,7 @@
           '<p><b>' + esc(l.name) + '</b><br>' + esc(l.address).replace(/\n/g, '<br>') + '<br><a href="' + tel(l.phone) + '">' + esc(l.phone) + '</a> · Fax ' + esc(l.fax) + '</p>').join('') + '</div>' +
         '<div><h4>Hours</h4><p>' + lines(P.hours).map(esc).join('<br>') + '</p>' +
           '<h4>Patients</h4><p><a href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + esc(P.portalLabel || 'Patient Portal') + '</a><br><a href="patients.html#forms">Patient forms</a><br><a href="patients.html#prep">Colonoscopy prep</a></p></div>' +
-        '<div><h4>Explore</h4><p>' + NAV.slice(1).map(n => '<a href="' + n[1] + '">' + n[2] + '</a>').join('<br>') + '<br><a href="risk-quiz.html">Colon cancer risk quiz</a></p></div>' +
+        '<div><h4>Explore</h4><p>' + navItems().slice(1).map(n => '<a href="' + n[1] + '">' + n[2] + '</a>').join('<br>') + '<br><a href="risk-quiz.html">Colon cancer risk quiz</a></p></div>' +
       '</div>' +
       (D.partners && D.partners.length ? '<div class="partners">' + D.partners.map(p => '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '" loading="lazy">').join('') + '</div>' : '') +
       '<p class="fine">' + esc(P.emergencyNote) + ' ' + esc(P.disclaimer) + '</p>' +
@@ -159,6 +162,7 @@
           '<blockquote>“' + esc(Dr.quote) + '”</blockquote>' +
           '<a class="btn btn-primary btn-sm" href="team.html">Meet our team ' + ICON.arrow + '</a></figcaption></figure>' +
       '</div></section>' +
+      (ftOn() && D.fasttrack.homeBand ? '<section class="ft-band"><div class="container ft-band-in"><p>' + inline(D.fasttrack.homeBand) + '</p><a class="btn btn-accent" href="fast-track-colonoscopy.html">How Fast-Track works ' + ICON.arrow + '</a></div></section>' : '') +
       '<section class="quick"><div class="container quick-grid">' +
         '<a class="qcard" href="contact.html">' + ICON.pin + '<span><b>Locations & hours</b><small>Fuquay-Varina and Dunn</small></span></a>' +
         (forms[0] ? '<a class="qcard" href="patients.html#' + esc(forms[0].anchor || forms[0].id) + '">' + ICON.doc + '<span><b>Patient forms</b><small>Fill out before your visit</small></span></a>' : '') +
@@ -215,15 +219,50 @@
 
   PAGES.services = function () {
     return pageHead('Services', 'Expert diagnosis and treatment for digestive conditions, using the latest technology, including FUSE™ full-spectrum endoscopy.', 'Services') +
+      ftPromo() +
       '<section class="section"><div class="container">' + serviceCards(shown(D.services)) + '</div></section>' +
       '<section class="section alt"><div class="container"><h2>Conditions we treat</h2><ul class="chips big">' + (D.conditions || []).map(c => '<li>' + esc(c) + '</li>').join('') + '</ul>' +
       '<p class="muted" style="margin-top:20px">Has Dr. Vernon recommended a procedure? See <a href="patients.html#prep">preparation instructions</a> or call us with any questions.</p></div></section>' +
       callBand();
   };
 
+  function ftPromo() {
+    const F = D.fasttrack; if (!ftOn()) return '';
+    return '<section class="section ft-promo-wrap"><div class="container"><a class="card quiz-promo ft-promo" href="fast-track-colonoscopy.html">' + ICON.clock +
+      '<span><b>' + esc(F.title) + '</b><small>' + esc(F.noVisit) + '</small></span>' + ICON.arrow + '</a></div></section>';
+  }
+
+  PAGES.fasttrack = function () {
+    // Switched off in the admin: send visitors (and any old links or ads) to the home page.
+    if (!ftOn()) { location.replace('index.html' + location.search); return ''; }
+    const F = D.fasttrack || {}, P = D.practice || {};
+    const callBtns = shown(D.locations).map(l => '<a class="btn btn-light" href="' + tel(l.phone) + '">' + ICON.phone + esc(l.name) + ' ' + esc(l.phone) + '</a>').join('');
+    const tickList = t => '<ul class="ticks">' + lines(t).map(x => '<li>' + ICON.check + '<span>' + inline(x) + '</span></li>').join('') + '</ul>';
+    return '<section class="ft-hero"><div class="container">' +
+        '<p class="crumb"><a href="index.html">Home</a> / ' + esc(F.navLabel || 'Fast-Track') + '</p>' +
+        '<p class="eyebrow">' + esc(F.eyebrow) + '</p><h1>' + esc(F.title) + '</h1><p class="lead">' + inline(F.intro) + '</p>' +
+        '<p class="ft-novisit">' + ICON.check + '<span>' + inline(F.noVisit) + '</span></p>' +
+        '<div class="cta-acts">' + callBtns + '</div>' +
+      '</div></section>' +
+      '<section class="section"><div class="container"><h2>How it works</h2><ol class="steps">' + (F.steps || []).map((st, i) =>
+        '<li class="card"><span class="step-n">' + (i + 1) + '</span><h3>' + esc(st.title) + '</h3><p>' + inline(st.text) + '</p></li>').join('') + '</ol></div></section>' +
+      '<section class="section alt"><div class="container two-col">' +
+        '<div class="card"><h2>Fast-Track is for you if</h2>' + tickList(F.fit) + '</div>' +
+        '<div class="card note"><h2>We may need to see you first if you</h2>' + tickList(F.notFit) + '<p class="muted small">' + inline(F.notFitNote) + '</p></div>' +
+      '</div></section>' +
+      '<section class="section"><div class="container two-col">' +
+        '<div class="card"><h2>Have these ready</h2>' + tickList(F.bring) + '</div>' +
+        '<div class="card"><h2>Insurance</h2><p>' + inline(F.insurance) + '</p><a class="btn btn-primary btn-sm" href="' + tel(P.phone) + '">' + ICON.phone + 'Call ' + esc(P.phone) + '</a></div>' +
+      '</div></section>' +
+      '<section class="section alt"><div class="container narrow"><h2>Questions</h2>' + faqHtml(F.faqs) + '</div></section>' +
+      (F.providers ? '<section class="section" id="referrals"><div class="container narrow"><div class="card"><h2>' + esc(F.providersTitle) + '</h2><p>' + inline(F.providers) + '</p></div></div></section>' : '') +
+      '<section class="cta"><div class="container cta-in"><div><h2>Don\'t wait months to find out.</h2><p>Call either office and ask for Fast-Track.</p></div><div class="cta-acts">' + callBtns + '</div></div></section>';
+  };
+
   PAGES.patients = function () {
     const P = D.practice || {};
     return pageHead('For patients', 'Everything you need before and after your visit.', 'Patients') +
+      ftPromo() +
       '<section class="section"><div class="container two-col">' +
         '<div class="card portal-card"><span class="hl-ico">' + ICON.lock + '</span><h2>Patient Portal</h2><p>View your health information, message the office, and manage your care online. The portal opens on our secure partner site.</p>' +
           '<a class="btn btn-accent" href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">Open the Patient Portal ' + ICON.arrow + '</a></div>' +
@@ -318,9 +357,10 @@
 
   /* ---------------- boot ---------------- */
   async function boot() {
+    let draft = false;
     try {
       const res = await G.loadSite();
-      D = res.data;
+      D = res.data; draft = res.draft;
     } catch (err) {
       $('#app').innerHTML = '<p class="container loading">Sorry, the page didn\'t load. Please refresh, or call <a href="tel:+19195770085">(919) 577-0085</a>.</p>';
       return;
@@ -329,6 +369,11 @@
     const render = PAGES[PAGE] || PAGES.home;
     $('#app').innerHTML = render();
     footer();
+    // Admin preview: keep ?draft=1 on links between pages so the unpublished version follows you.
+    if (draft) document.querySelectorAll('a[href]').forEach(a => {
+      const h = a.getAttribute('href');
+      if (/^[a-z0-9-]+\.html/i.test(h) && !/[?&]draft=/.test(h)) a.setAttribute('href', h.replace(/^([^?#]+)(\?[^#]*)?/, (m, p, q) => p + (q ? q + '&' : '?') + 'draft=1'));
+    });
     if (PAGE === 'learn') afterLearn();
     if (PAGE === 'quiz') afterQuiz();
     if (location.hash) { const t = document.getElementById(location.hash.slice(1)); if (t) setTimeout(() => t.scrollIntoView(), 0); }
