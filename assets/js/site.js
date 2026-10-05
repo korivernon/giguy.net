@@ -154,7 +154,7 @@
         '<div class="hero-copy"><p class="eyebrow">' + esc(H.eyebrow) + '</p><h1>' + esc(H.title) + '</h1><p class="lead">' + inline(H.text) + '</p>' +
           '<div class="hero-acts"><a class="btn btn-primary" href="' + tel(P.phone) + '">' + ICON.phone + 'Call to schedule</a>' +
           '<a class="btn btn-outline" href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + ICON.lock + esc(P.portalLabel || 'Patient Portal') + '</a></div></div>' +
-        '<figure class="hero-photo"><img src="' + esc(Dr.photo) + '" alt="Dr. Kurt Vernon" width="250" height="310"><figcaption><b>Dr. Kurt Vernon</b><span>Board-certified gastroenterologist</span></figcaption></figure>' +
+        '<figure class="hero-photo"><img src="' + esc(Dr.photo) + '" alt="Dr. Kurt Vernon" width="481" height="310"><figcaption><b>Dr. Kurt Vernon</b><span>Board-certified gastroenterologist</span></figcaption></figure>' +
       '</div></section>' +
       '<section class="quick"><div class="container quick-grid">' +
         '<a class="qcard" href="contact.html">' + ICON.pin + '<span><b>Locations & hours</b><small>Fuquay-Varina and Dunn</small></span></a>' +
@@ -169,7 +169,7 @@
         '<div class="tiles">' + shown(D.services).slice(0, 6).map(s => '<a class="tile" href="services.html#' + esc(s.id) + '"><b>' + esc(s.title) + '</b><span>' + esc(s.summary) + '</span></a>').join('') + '</div>' +
       '</div></section>' +
       '<section class="section"><div class="container doc-feature">' +
-        '<img src="' + esc(Dr.photo) + '" alt="Dr. Kurt Vernon" loading="lazy" width="250" height="310">' +
+        '<img src="' + esc(Dr.photo) + '" alt="Dr. Kurt Vernon" loading="lazy" width="481" height="310">' +
         '<div><p class="eyebrow">Meet the GI Guy</p><h2>' + esc(Dr.name) + '</h2><blockquote>“' + esc(Dr.quote) + '”</blockquote>' +
         '<a class="btn btn-primary" href="team.html">Meet our team</a></div>' +
       '</div></section>' +
@@ -200,7 +200,7 @@
     const Dr = D.doctor || {};
     return pageHead('Meet our team', 'Personal care from a team that knows you by name.', 'Our Team') +
       '<section class="section"><div class="container">' +
-        '<article class="doctor"><div class="doctor-photo"><img src="' + esc(Dr.photo) + '" alt="Dr. Kurt Vernon" width="250" height="310"></div>' +
+        '<article class="doctor"><div class="doctor-photo"><img src="' + esc(Dr.photo) + '" alt="Dr. Kurt Vernon" width="481" height="310"></div>' +
         '<div class="doctor-body"><p class="eyebrow">' + esc(Dr.role) + '</p><h2>' + esc(Dr.name) + '</h2><blockquote>“' + esc(Dr.quote) + '”</blockquote>' + md(Dr.bio) + '</div></article>' +
         '<dl class="creds">' + (Dr.credentials || []).map(c => '<div><dt>' + esc(c.label) + '</dt><dd>' + esc(c.value) + '</dd></div>').join('') + '</dl>' +
       '</div></section>' +
