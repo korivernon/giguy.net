@@ -17,7 +17,8 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+/* The page edges (iPhone overscroll above the top bar and below the footer) match the dark green bars. */
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: #0b2b0a; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 var(--font); }
 img { max-width: 100%; height: auto; display: block; }
 a { color: var(--primary); text-underline-offset: 3px; }
@@ -308,9 +309,6 @@ details summary { cursor: pointer; font-weight: 700; color: var(--primary); }
 .footer a { color: #fff; text-decoration: none; }
 .footer a:hover { text-decoration: underline; }
 .footer h4 { color: #fff; font-size: .82rem; text-transform: uppercase; letter-spacing: .12em; margin: 0 0 10px; }
-.foot-grid { display: grid; gap: 28px; grid-template-columns: 1fr; }
-@media (min-width: 640px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1000px) { .foot-grid { grid-template-columns: 1.3fr 1.2fr 1fr 1fr; } }
 .foot-brand img { width: 150px; margin-bottom: 12px; }
 .social { display: flex; gap: 14px; flex-wrap: wrap; }
 .social a { border: 1px solid rgba(255, 255, 255, .25); padding: 6px 12px; border-radius: 999px; font-size: .88rem; }
@@ -397,3 +395,20 @@ a.cond .more { margin-top: 10px; }
 .chips a { color: var(--primary); font-weight: 700; }
 .chips a:hover, .plain a:hover, .icoline a:hover { text-decoration: underline; }
 .plain a, .icoline a { font-weight: 600; }
+
+/* footer: even spacing; phone and fax on their own lines */
+.footer h4 { margin: 0 0 10px; }
+.footer p { margin: 0; line-height: 1.7; }
+.footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.foot-grid { display: grid; gap: 24px 20px; grid-template-columns: 1fr 1fr; }
+.foot-brand, .foot-visit, .foot-hours { grid-column: 1 / -1; }
+.footer { padding-top: 40px; }
+.foot-brand p { margin: 0 0 14px; }
+.foot-locs { display: grid; gap: 18px 20px; grid-template-columns: 1fr 1fr; }
+.foot-locs b { display: block; color: #fff; }
+.foot-locs a, .foot-locs span { display: block; }
+@media (min-width: 1000px) {
+  .foot-grid { grid-template-columns: 1.2fr 1.6fr 1fr .9fr .9fr; gap: 32px; }
+  .foot-brand, .foot-visit, .foot-hours { grid-column: auto; }
+  .footer { padding-top: 52px; }
+}

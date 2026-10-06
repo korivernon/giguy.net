@@ -94,11 +94,11 @@
         '<div class="foot-brand"><img src="img/logos/footer-logo.png" alt="The GI Guy" width="150" height="60" loading="lazy">' +
           '<p>' + esc(P.footerTagline) + '</p>' +
           '<div class="social">' + (D.social || []).filter(s => s.url).map(s => '<a href="' + esc(safeUrl(s.url)) + '" target="_blank" rel="noopener">' + esc(s.label) + '</a>').join('') + '</div></div>' +
-        '<div><h4>Visit</h4>' + shown(D.locations).map(l =>
-          '<p><b>' + esc(l.name) + '</b><br>' + esc(l.address).replace(/\n/g, '<br>') + '<br><a href="' + tel(l.phone) + '">' + esc(l.phone) + '</a> · Fax ' + esc(l.fax) + '</p>').join('') + '</div>' +
-        '<div><h4>Hours</h4><p>' + lines(P.hours).map(esc).join('<br>') + '</p>' +
-          '<h4>Patients</h4><p><a href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + esc(P.portalLabel || 'Patient Portal') + '</a><br><a href="patients.html#forms">Patient Forms</a><br><a href="patients.html#prep">Colonoscopy Prep</a></p></div>' +
-        '<div><h4>Explore</h4><p>' + navItems().slice(1).map(n => '<a href="' + n[1] + '">' + n[2] + '</a>').join('<br>') + '<br><a href="risk-quiz.html">Colon Cancer Risk Quiz</a></p></div>' +
+        '<div class="foot-visit"><h4>Visit</h4><div class="foot-locs">' + shown(D.locations).map(l =>
+          '<p><b>' + esc(l.name) + '</b>' + esc(l.address).replace(/\n/g, '<br>') + '<br><a href="' + tel(l.phone) + '">Phone ' + esc(l.phone) + '</a><span>Fax ' + esc(l.fax) + '</span></p>').join('') + '</div></div>' +
+        '<div class="foot-hours"><h4>Hours</h4><p>' + lines(P.hours).map(esc).join('<br>') + '</p></div>' +
+        '<div class="foot-patients"><h4>Patients</h4><ul><li><a href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + esc(P.portalLabel || 'Patient Portal') + '</a></li><li><a href="patients.html#forms">Patient Forms</a></li><li><a href="patients.html#prep">Colonoscopy Prep</a></li><li><a href="risk-quiz.html">Colon Cancer Risk Quiz</a></li></ul></div>' +
+        '<div class="foot-explore"><h4>Explore</h4><ul>' + navItems().slice(1).map(n => '<li><a href="' + n[1] + '">' + n[2] + '</a></li>').join('') + '</ul></div>' +
       '</div>' +
       (D.partners && D.partners.length ? '<div class="partners">' + D.partners.map(p => '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '" loading="lazy">').join('') + '</div>' : '') +
       '<p class="fine">' + esc(P.emergencyNote) + ' ' + esc(P.disclaimer) + '</p>' +
@@ -292,10 +292,6 @@
     const key = kind === 'Condition' ? 'conditions' : 'services';
     return pageHead(kind + ' not found', 'It may have moved. [See all ' + navLabel(key) + '](' + NAV.find(n => n[0] === key)[1] + ').', crumbLink(key));
   }
-  function sideCall() {
-    return '<div class="card"><h3>Talk to us</h3><p>Call the office nearest you to schedule.</p>' +
-      shown(D.locations).map(l => '<p class="icoline">' + ICON.phone + '<span><b>' + esc(l.name) + ':</b> <a href="' + tel(l.phone) + '">' + esc(l.phone) + '</a></span></p>').join('') + '</div>';
-  }
 
   PAGES.condition = function () {
     const id = new URLSearchParams(location.search).get('id');
@@ -313,7 +309,6 @@
         (c.when ? '<div class="card note"><h3>When to call us</h3>' + md(c.when) + '</div>' : '') +
       '</article><aside class="detail-side">' +
         (procs.length ? '<div class="card"><h3>Related services</h3><div class="cp-list">' + procs.map(s => rowLink(procUrl(s), s.title, s.summary)).join('') + '</div></div>' : '') +
-        sideCall() +
         '<div class="card"><h3>Other conditions</h3><ul class="plain">' + others.slice(0, 8).map(o => '<li><a href="' + condUrl(o) + '">' + esc(o.name) + '</a></li>').join('') + '<li><a href="conditions.html">All ' + navLabel('conditions') + ' ' + ICON.arrow + '</a></li></ul></div>' +
       '</aside></div></section>' + callBand();
   };
@@ -337,7 +332,6 @@
         (ft ? '<a class="card quiz-promo ft-promo" href="fast-track-colonoscopy.html">' + ICON.clock + '<span><b>Positive stool test?</b><small>Fast-Track: colonoscopy usually in 7–14 days.</small></span>' + ICON.arrow + '</a>' : '') +
         (form ? '<a class="card doc" href="' + esc(safeUrl(form.file)) + '" target="_blank" rel="noopener">' + ICON.doc + '<span><b>' + esc(form.title) + '</b><em>Open PDF ' + ICON.arrow + '</em></span></a>' : '') +
         (conds.length ? '<div class="card"><h3>Conditions it helps with</h3><ul class="plain">' + conds.map(c => '<li><a href="' + condUrl(c) + '">' + esc(c.name) + '</a></li>').join('') + '</ul></div>' : '') +
-        sideCall() +
       '</aside></div></section>' + callBand();
   };
 
@@ -451,11 +445,11 @@
         if (SMALL.has(core) && i !== first && i !== last && !afterBreak) out = w.toLowerCase();
         else out = w.replace(/[A-Za-z]+/g, (m, off) => (off === 0 || /[-–(\/"“]/.test(w[off - 1])) ? m[0].toUpperCase() + m.slice(1) : m);
       }
-      afterBreak = /[:?!—–]$/.test(w);
+      afterBreak = /[:?!—–·|]$/.test(w);
       return out;
     }).join('');
   }
-  const TC_SEL = 'h1, h2, h3, .cp-row b, .qcard b, .doc b, .quiz-promo b, .tile b';
+  const TC_SEL = 'h1, h2, h3, .crumb, .cp-row b, .qcard b, .doc b, .quiz-promo b, .tile b';
   function applyTitleCase(root) {
     root.querySelectorAll(TC_SEL).forEach(el => {
       if (el.closest('.faq, blockquote, .hero-meet blockquote')) return;
@@ -479,6 +473,7 @@
     $('#app').innerHTML = render();
     footer();
     applyTitleCase(document.body);
+    document.title = titleCase(document.title);
     // Admin preview: keep ?draft=1 on links between pages so the unpublished version follows you.
     if (draft) document.querySelectorAll('a[href]').forEach(a => {
       const h = a.getAttribute('href');
