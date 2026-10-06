@@ -17,7 +17,7 @@
     ['contact', 'contact.html', 'Contact'],
   ];
   const PAGE = document.body.dataset.page;
-  const navKey = PAGE === 'article' || PAGE === 'quiz' ? 'learn' : PAGE;
+  const navKey = PAGE === 'article' || PAGE === 'quiz' ? 'learn' : ['conditions', 'condition', 'procedure'].includes(PAGE) ? 'services' : PAGE;
 
   const ICON = {
     phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>',
@@ -100,7 +100,7 @@
           '<p><b>' + esc(l.name) + '</b><br>' + esc(l.address).replace(/\n/g, '<br>') + '<br><a href="' + tel(l.phone) + '">' + esc(l.phone) + '</a> · Fax ' + esc(l.fax) + '</p>').join('') + '</div>' +
         '<div><h4>Hours</h4><p>' + lines(P.hours).map(esc).join('<br>') + '</p>' +
           '<h4>Patients</h4><p><a href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + esc(P.portalLabel || 'Patient Portal') + '</a><br><a href="patients.html#forms">Patient forms</a><br><a href="patients.html#prep">Colonoscopy prep</a></p></div>' +
-        '<div><h4>Explore</h4><p>' + navItems().slice(1).map(n => '<a href="' + n[1] + '">' + n[2] + '</a>').join('<br>') + '<br><a href="risk-quiz.html">Colon cancer risk quiz</a></p></div>' +
+        '<div><h4>Explore</h4><p>' + navItems().slice(1).map(n => '<a href="' + n[1] + '">' + n[2] + '</a>').join('<br>') + '<br><a href="conditions.html">Conditions & procedures</a><br><a href="risk-quiz.html">Colon cancer risk quiz</a></p></div>' +
       '</div>' +
       (D.partners && D.partners.length ? '<div class="partners">' + D.partners.map(p => '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '" loading="lazy">').join('') + '</div>' : '') +
       '<p class="fine">' + esc(P.emergencyNote) + ' ' + esc(P.disclaimer) + '</p>' +
@@ -129,9 +129,9 @@
 
   function serviceCards(list) {
     return '<div class="cards">' + list.map(s =>
-      '<article class="card svc" id="' + esc(s.id) + '"><h3>' + esc(s.title) + '</h3><p class="muted">' + esc(s.summary) + '</p>' +
+      '<article class="card svc" id="' + esc(s.id) + '"><h3><a href="' + procUrl(s) + '">' + esc(s.title) + '</a></h3><p class="muted">' + esc(s.summary) + '</p>' +
       (s.points ? '<ul class="ticks">' + lines(s.points).map(p => '<li>' + ICON.check + '<span>' + inline(p) + '</span></li>').join('') + '</ul>' : '') +
-      '</article>').join('') + '</div>';
+      '<a class="more" href="' + procUrl(s) + '">Learn more ' + ICON.arrow + '</a></article>').join('') + '</div>';
   }
 
   function mapUrl(l) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(l.mapQuery || l.address.replace(/\n/g, ', ')); }
@@ -175,6 +175,7 @@
         '<div class="sec-head"><div><p class="eyebrow">Services</p><h2>How we can help</h2></div><a class="more" href="services.html">All services ' + ICON.arrow + '</a></div>' +
         '<div class="tiles">' + shown(D.services).slice(0, 6).map(s => '<a class="tile" href="services.html#' + esc(s.id) + '"><b>' + esc(s.title) + '</b><span>' + esc(s.summary) + '</span></a>').join('') + '</div>' +
       '</div></section>' +
+      condProcBlock() +
       (H.recognition ? '<section class="recog"><div class="container recog-in">' + ICON.check + '<p>' + inline(H.recognition) + (H.recognitionLink ? ' <a href="' + esc(safeUrl(H.recognitionLink)) + '">Read more</a>' : '') + '</p></div></section>' : '') +
       '<section class="section"><div class="container two-col">' +
         '<div><p class="eyebrow">FAQs</p><h2>Your questions, answered</h2>' + faqHtml(D.faqs) + '</div>' +
@@ -188,7 +189,7 @@
     return pageHead(A.title, '', 'About') +
       '<section class="section"><div class="container two-col wide-left">' +
         '<div class="prose">' + md(A.text) + '</div>' +
-        '<aside class="card treats"><h3>Conditions we treat</h3><ul class="chips">' + (D.conditions || []).map(c => '<li>' + esc(c) + '</li>').join('') + '</ul></aside>' +
+        '<aside class="card treats"><h3>Conditions we treat</h3><ul class="chips">' + shown(D.conditions).map(c => '<li><a href="' + condUrl(c) + '">' + esc(c.name || c) + '</a></li>').join('') + '</ul></aside>' +
       '</div></section>' +
       '<section class="section alt"><div class="container"><div class="hl-grid">' + (A.values || []).map((v, i) =>
         '<div class="hl"><span class="hl-ico">' + ICON[HL_ICONS[i % 3]] + '</span><h3>' + esc(v.title) + '</h3><p>' + inline(v.text) + '</p></div>').join('') + '</div></div></section>' +
@@ -221,7 +222,7 @@
     return pageHead('Services', 'Expert diagnosis and treatment for digestive conditions, using the latest technology, including FUSE™ full-spectrum endoscopy.', 'Services') +
       ftPromo() +
       '<section class="section"><div class="container">' + serviceCards(shown(D.services)) + '</div></section>' +
-      '<section class="section alt"><div class="container"><h2>Conditions we treat</h2><ul class="chips big">' + (D.conditions || []).map(c => '<li>' + esc(c) + '</li>').join('') + '</ul>' +
+      '<section class="section alt"><div class="container"><h2>Conditions we treat</h2><ul class="chips big">' + shown(D.conditions).map(c => '<li><a href="' + condUrl(c) + '">' + esc(c.name || c) + '</a></li>').join('') + '</ul>' +
       '<p class="muted" style="margin-top:20px">Has Dr. Vernon recommended a procedure? See <a href="patients.html#prep">preparation instructions</a> or call us with any questions.</p></div></section>' +
       callBand();
   };
@@ -257,6 +258,91 @@
       '<section class="section alt"><div class="container narrow"><h2>Questions</h2>' + faqHtml(F.faqs) + '</div></section>' +
       (F.providers ? '<section class="section" id="referrals"><div class="container narrow"><div class="card"><h2>' + esc(F.providersTitle) + '</h2><p>' + inline(F.providers) + '</p></div></div></section>' : '') +
       '<section class="cta"><div class="container cta-in"><div><h2>Don\'t wait months to find out.</h2><p>Call either office and ask for Fast-Track.</p></div><div class="cta-acts">' + callBtns + '</div></div></section>';
+  };
+
+  /* ---------------- conditions & procedures ---------------- */
+  // A sentence ends at . ! or ? followed by a space, but not after a lone initial like "H. pylori".
+  const firstSentence = t => { const m = String(t || '').match(/^.*?[^A-Z\s][.!?](\s|$)/); return m ? m[0].trim() : String(t || ''); };
+  const condUrl = c => 'condition.html?id=' + encodeURIComponent(c.id);
+  const procUrl = s => 'procedure.html?id=' + encodeURIComponent(s.id);
+  const rowLink = (url, name, sub) => '<a class="cp-row" href="' + url + '"><span><b>' + esc(name) + '</b><small>' + inline(sub) + '</small></span>' + ICON.arrow + '</a>';
+
+  // Home page: two columns like a care-center page, every condition with what it is, and every procedure.
+  function condProcBlock() {
+    const H = D.home || {}, conds = shown(D.conditions), procs = shown(D.services);
+    if (!conds.length && !procs.length) return '';
+    return '<section class="section" id="conditions"><div class="container">' +
+      '<div class="sec-head"><div><p class="eyebrow">Get the right care</p><h2>' + esc(H.conditionsTitle || 'Conditions & procedures') + '</h2>' +
+        (H.conditionsIntro ? '<p class="muted sec-intro">' + inline(H.conditionsIntro) + '</p>' : '') + '</div>' +
+        '<a class="more" href="conditions.html">Browse all ' + ICON.arrow + '</a></div>' +
+      '<div class="cp">' +
+        '<div class="cp-col cp-conds"><h3>Conditions we treat</h3><div class="cp-list" id="cp-conds">' + conds.map(c => rowLink(condUrl(c), c.name, firstSentence(c.text))).join('') + '</div>' +
+          (conds.length > 8 ? '<button class="btn btn-outline btn-sm cp-more" type="button" data-expand="cp-conds">Show all ' + conds.length + ' conditions</button>' : '') + '</div>' +
+        '<div class="cp-col"><h3>Procedures & treatments</h3><div class="cp-list">' + procs.map(s => rowLink(procUrl(s), s.title, s.summary)).join('') + '</div></div>' +
+      '</div></div></section>';
+  }
+
+  PAGES.conditions = function () {
+    return pageHead('Conditions & procedures', 'What we treat and how. Choose a condition or procedure to learn more.', 'Conditions & procedures') +
+      '<section class="section"><div class="container"><h2>Conditions we treat</h2><div class="conds">' + shown(D.conditions).map(c =>
+        '<a class="cond" href="' + condUrl(c) + '" id="' + esc(c.id) + '"><h3>' + esc(c.name) + '</h3><p>' + inline(c.text) + '</p><span class="more">Learn more ' + ICON.arrow + '</span></a>').join('') + '</div></div></section>' +
+      '<section class="section alt" id="procedures"><div class="container"><h2>Procedures & treatments</h2><div class="conds">' + shown(D.services).map(s =>
+        '<a class="cond" href="' + procUrl(s) + '"><h3>' + esc(s.title) + '</h3><p>' + inline(s.summary) + '</p><span class="more">Learn more ' + ICON.arrow + '</span></a>').join('') + '</div></div></section>' +
+      callBand();
+  };
+
+  const tickList = t => '<ul class="ticks">' + lines(t).map(x => '<li>' + ICON.check + '<span>' + inline(x) + '</span></li>').join('') + '</ul>';
+  const block = (title, html) => html ? '<section class="detail-block"><h2>' + esc(title) + '</h2>' + html + '</section>' : '';
+  function notFound(kind) {
+    return pageHead(kind + ' not found', 'It may have moved. [See all conditions and procedures](conditions.html).', '<a href="conditions.html">Conditions & procedures</a>');
+  }
+  function sideCall() {
+    return '<div class="card"><h3>Talk to us</h3><p>Call the office nearest you to schedule.</p>' +
+      shown(D.locations).map(l => '<p class="icoline">' + ICON.phone + '<span><b>' + esc(l.name) + ':</b> <a href="' + tel(l.phone) + '">' + esc(l.phone) + '</a></span></p>').join('') + '</div>';
+  }
+
+  PAGES.condition = function () {
+    const id = new URLSearchParams(location.search).get('id');
+    const c = shown(D.conditions).find(x => x.id === id);
+    if (!c) return notFound('Condition');
+    document.title = c.name + ' · The GI Guy';
+    const procs = (c.procedures || []).map(pid => shown(D.services).find(s => s.id === pid)).filter(Boolean);
+    const others = shown(D.conditions).filter(x => x !== c);
+    return pageHead(c.name, c.text, '<a href="conditions.html">Conditions</a>') +
+      '<section class="section"><div class="container two-col wide-left"><article class="prose detail">' +
+        block('What is it?', c.what ? md(c.what) : '') +
+        block(c.causesTitle || 'Common causes', c.causes ? tickList(c.causes) : '') +
+        block(c.symptomsTitle || 'Symptoms', c.symptoms ? tickList(c.symptoms) : '') +
+        block('Diagnosis & treatment', c.treatment ? md(c.treatment) : '') +
+        (c.when ? '<div class="card note"><h3>When to call us</h3>' + md(c.when) + '</div>' : '') +
+      '</article><aside class="detail-side">' +
+        (procs.length ? '<div class="card"><h3>Related procedures</h3><div class="cp-list">' + procs.map(s => rowLink(procUrl(s), s.title, s.summary)).join('') + '</div></div>' : '') +
+        sideCall() +
+        '<div class="card"><h3>Other conditions</h3><ul class="plain">' + others.slice(0, 8).map(o => '<li><a href="' + condUrl(o) + '">' + esc(o.name) + '</a></li>').join('') + '<li><a href="conditions.html">All conditions ' + ICON.arrow + '</a></li></ul></div>' +
+      '</aside></div></section>' + callBand();
+  };
+
+  PAGES.procedure = function () {
+    const id = new URLSearchParams(location.search).get('id');
+    const s = shown(D.services).find(x => x.id === id);
+    if (!s) return notFound('Procedure');
+    document.title = s.title + ' · The GI Guy';
+    const conds = shown(D.conditions).filter(c => (c.procedures || []).includes(s.id));
+    const form = /colonoscopy|sigmoid/.test(s.id) ? shown(D.forms).find(f => /prep/.test(f.id)) : null;
+    const ft = s.id === 'colonoscopy' && ftOn();
+    return pageHead(s.title, s.summary, '<a href="conditions.html#procedures">Procedures</a>') +
+      '<section class="section"><div class="container two-col wide-left"><article class="prose detail">' +
+        block('What is it?', s.what ? md(s.what) : '') +
+        block('Why it\'s done', s.why ? tickList(s.why) : (s.points ? tickList(s.points) : '')) +
+        block('How to prepare', s.prep ? md(s.prep) : '') +
+        block('What to expect', s.expect ? md(s.expect) : '') +
+        block('Afterward', s.after ? md(s.after) : '') +
+      '</article><aside class="detail-side">' +
+        (ft ? '<a class="card quiz-promo ft-promo" href="fast-track-colonoscopy.html">' + ICON.clock + '<span><b>Positive stool test?</b><small>Fast-Track: colonoscopy usually in 7–14 days.</small></span>' + ICON.arrow + '</a>' : '') +
+        (form ? '<a class="card doc" href="' + esc(safeUrl(form.file)) + '" target="_blank" rel="noopener">' + ICON.doc + '<span><b>' + esc(form.title) + '</b><em>Open PDF ' + ICON.arrow + '</em></span></a>' : '') +
+        (conds.length ? '<div class="card"><h3>Conditions it helps with</h3><ul class="plain">' + conds.map(c => '<li><a href="' + condUrl(c) + '">' + esc(c.name) + '</a></li>').join('') + '</ul></div>' : '') +
+        sideCall() +
+      '</aside></div></section>' + callBand();
   };
 
   PAGES.patients = function () {
@@ -374,6 +460,7 @@
       const h = a.getAttribute('href');
       if (/^[a-z0-9-]+\.html/i.test(h) && !/[?&]draft=/.test(h)) a.setAttribute('href', h.replace(/^([^?#]+)(\?[^#]*)?/, (m, p, q) => p + (q ? q + '&' : '?') + 'draft=1'));
     });
+    document.querySelectorAll('[data-expand]').forEach(b => b.onclick = () => { document.getElementById(b.dataset.expand).classList.add('open'); b.remove(); });
     if (PAGE === 'learn') afterLearn();
     if (PAGE === 'quiz') afterQuiz();
     if (location.hash) { const t = document.getElementById(location.hash.slice(1)); if (t) setTimeout(() => t.scrollIntoView(), 0); }
