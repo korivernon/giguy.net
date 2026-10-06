@@ -95,7 +95,7 @@
           '<p>' + esc(P.footerTagline) + '</p>' +
           '<div class="social">' + (D.social || []).filter(s => s.url).map(s => '<a href="' + esc(safeUrl(s.url)) + '" target="_blank" rel="noopener">' + esc(s.label) + '</a>').join('') + '</div></div>' +
         '<div class="foot-visit"><h4>Visit</h4><div class="foot-locs">' + shown(D.locations).map(l =>
-          '<p><b>' + esc(l.name) + '</b>' + esc(l.address).replace(/\n/g, '<br>') + '<br><a href="' + tel(l.phone) + '">Phone ' + esc(l.phone) + '</a><span>Fax ' + esc(l.fax) + '</span></p>').join('') + '</div></div>' +
+          '<p><b>' + esc(l.name) + '</b><a class="foot-addr" href="' + mapUrl(l) + '" target="_blank" rel="noopener">' + esc(l.address).replace(/\n/g, '<br>') + '</a><a href="' + tel(l.phone) + '">Phone ' + esc(l.phone) + '</a><span>Fax ' + esc(l.fax) + '</span></p>').join('') + '</div></div>' +
         '<div class="foot-hours"><h4>Hours</h4><p>' + lines(P.hours).map(esc).join('<br>') + '</p></div>' +
         '<div class="foot-patients"><h4>Patients</h4><ul><li><a href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + esc(P.portalLabel || 'Patient Portal') + '</a></li><li><a href="patients.html#forms">Patient Forms</a></li><li><a href="patients.html#prep">Colonoscopy Prep</a></li><li><a href="risk-quiz.html">Colon Cancer Risk Quiz</a></li></ul></div>' +
         '<div class="foot-explore"><h4>Explore</h4><ul>' + navItems().slice(1).map(n => '<li><a href="' + n[1] + '">' + n[2] + '</a></li>').join('') + '</ul></div>' +
@@ -119,7 +119,7 @@
   function callBand() {
     return '<section class="cta"><div class="container cta-in">' +
       '<div><h2>Ready to schedule?</h2><p>Call either office and our staff will find a time that works for you.</p></div>' +
-      '<div class="cta-acts">' + shown(D.locations).map(l => '<a class="btn btn-light" href="' + tel(l.phone) + '">' + ICON.phone + esc(l.name) + ' ' + esc(l.phone) + '</a>').join('') + '</div>' +
+      callOpts() +
     '</div></section>';
   }
 
@@ -134,6 +134,9 @@
       '<a class="more" href="' + procUrl(s) + '">Learn more ' + ICON.arrow + '</a></article>').join('') + '</div>';
   }
 
+  // Office name on one line, number on the next; outlined so it reads as a choice, not a white slab.
+  const callOpts = (cls) => '<div class="call-opts' + (cls ? ' ' + cls : '') + '">' + shown(D.locations).map(l =>
+    '<a class="call-opt" href="' + tel(l.phone) + '"><small>' + esc(l.name) + '</small><b>' + ICON.phone + esc(l.phone) + '</b></a>').join('') + '</div>';
   function mapUrl(l) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(l.mapQuery || l.address.replace(/\n/g, ', ')); }
 
   function locationCards(withMap) {
@@ -233,13 +236,13 @@
     // Switched off in the admin: send visitors (and any old links or ads) to the home page.
     if (!ftOn()) { location.replace('index.html' + location.search); return ''; }
     const F = D.fasttrack || {}, P = D.practice || {};
-    const callBtns = shown(D.locations).map(l => '<a class="btn btn-light" href="' + tel(l.phone) + '">' + ICON.phone + esc(l.name) + ' ' + esc(l.phone) + '</a>').join('');
+    const callBtns = callOpts();
     const tickList = t => '<ul class="ticks">' + lines(t).map(x => '<li>' + ICON.check + '<span>' + inline(x) + '</span></li>').join('') + '</ul>';
     return '<section class="ft-hero"><div class="container">' +
         '<p class="crumb"><a href="index.html">Home</a> / ' + esc(F.navLabel || 'Fast-Track') + '</p>' +
         '<p class="eyebrow">' + esc(F.eyebrow) + '</p><h1>' + esc(F.title) + '</h1><p class="lead">' + inline(F.intro) + '</p>' +
         '<p class="ft-novisit">' + ICON.check + '<span>' + inline(F.noVisit) + '</span></p>' +
-        '<div class="cta-acts">' + callBtns + '</div>' +
+        callBtns +
       '</div></section>' +
       '<section class="section"><div class="container"><h2>How it works</h2><ol class="steps">' + (F.steps || []).map((st, i) =>
         '<li class="card"><span class="step-n">' + (i + 1) + '</span><h3>' + esc(st.title) + '</h3><p>' + inline(st.text) + '</p></li>').join('') + '</ol></div></section>' +
@@ -414,7 +417,7 @@
       r.hidden = false;
       r.className = 'quiz-result ' + (yes ? 'warn' : 'ok');
       r.innerHTML = '<h3>' + (yes ? 'Talk with us about screening' : 'Good news') + '</h3><p>' + inline(yes ? Q.yesResult : Q.noResult) + '</p>' +
-        '<p>' + shown(D.locations).map(l => '<a class="btn btn-primary btn-sm" href="' + tel(l.phone) + '">' + ICON.phone + esc(l.name) + ' ' + esc(l.phone) + '</a>').join(' ') + '</p>';
+        callOpts('on-light');
       r.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
   }
