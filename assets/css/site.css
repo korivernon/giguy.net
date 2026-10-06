@@ -311,7 +311,10 @@ details summary { cursor: pointer; font-weight: 700; color: var(--primary); }
 .footer h4 { color: #fff; font-size: .82rem; text-transform: uppercase; letter-spacing: .12em; margin: 0 0 10px; }
 .foot-brand img { width: 150px; margin-bottom: 12px; }
 .social { display: flex; gap: 14px; flex-wrap: wrap; }
-.social a { border: 1px solid rgba(255, 255, 255, .25); padding: 6px 12px; border-radius: 999px; font-size: .88rem; }
+.social { gap: 10px; }
+.social a { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; height: 40px; padding: 0 10px; border: 1px solid rgba(255, 255, 255, .25); border-radius: 999px; font-size: .88rem; }
+.social a:hover { background: rgba(255, 255, 255, .1); border-color: #fff; text-decoration: none; }
+.social svg { width: 18px; height: 18px; }
 .partners { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; margin: 32px 0 20px; }
 .partners img { height: 64px; width: auto; background: #fff; border-radius: 10px; padding: 8px 12px; }
 .fine { font-size: .82rem; color: #9fb39a; margin: 0 0 8px; }
@@ -416,11 +419,13 @@ a.cond .more { margin-top: 10px; }
 }
 
 /* call options: office name above the number, outlined */
-.call-opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; max-width: 520px; width: 100%; }
-.call-opt { display: block; padding: 12px 16px; border: 1.5px solid rgba(255, 255, 255, .35); border-radius: 12px; color: #fff; text-decoration: none; transition: background .15s, border-color .15s; }
+.call-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 520px; width: 100%; }
+@media (max-width: 340px) { .call-opts { grid-template-columns: 1fr; } }
+.call-opt { display: block; min-width: 0; padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, .35); border-radius: 12px; color: #fff; text-decoration: none; transition: background .15s, border-color .15s; }
 .call-opt:hover { background: rgba(255, 255, 255, .08); border-color: #fff; color: #fff; }
 .call-opt small { display: block; font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; color: var(--accent); }
-.call-opt b { display: inline-flex; align-items: center; gap: 8px; font-size: 1.15rem; margin-top: 2px; }
+.call-opt b { display: flex; align-items: center; gap: 6px; font-size: clamp(.98rem, 4.2vw, 1.15rem); margin-top: 2px; white-space: nowrap; }
+.call-opt b svg { width: 1em; height: 1em; }
 .call-opts.on-light .call-opt { border-color: var(--line); background: #fff; color: var(--deep); }
 .call-opts.on-light .call-opt:hover { border-color: var(--primary); }
 .call-opts.on-light .call-opt small { color: var(--primary); }
