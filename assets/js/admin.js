@@ -115,7 +115,7 @@
       { k: 'practice.tagline', label: 'Tagline under the logo' },
       { row: [{ k: 'practice.phone', label: 'Main phone (Call buttons)' }, { k: 'practice.portalLabel', label: 'Portal button text' }] },
       { k: 'practice.portalUrl', label: 'Patient Portal address', hint: 'Every Patient Portal button sends patients here.' },
-      { k: 'practice.hours', label: 'Office hours', type: 'textarea', rows: 3, hint: 'One line per row. The first two lines also show in the bar at the top of the site.' },
+      { k: 'practice.hours', label: 'Office hours', type: 'textarea', rows: 3, hint: 'One line per row; each shows on its own line.' },
       { k: 'practice.emergencyNote', label: 'Emergency note', type: 'textarea', rows: 2 },
       { k: 'practice.disclaimer', label: 'Footer disclaimer', type: 'textarea', rows: 2 },
       { k: 'practice.footerTagline', label: 'Footer tagline' },

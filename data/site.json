@@ -43,11 +43,11 @@
     ],
     "recognition": "Recognized with a Tier 1 Designation by Blue Cross Blue Shield of North Carolina for high-quality, cost-efficient care.",
     "recognitionLink": "article.html?id=bcbs-tier-1",
-    "conditionsTitle": "Conditions & procedures",
+    "conditionsTitle": "Conditions & Services",
     "conditionsIntro": "Dr. Vernon and our team diagnose and treat the full range of digestive, liver and colon conditions. Choose one to learn what it is and how we treat it."
   },
   "about": {
-    "title": "About our practice",
+    "title": "About Us",
     "text": "At The GI Guy, we are dedicated to expert gastroenterology care with a compassionate, holistic approach. Led by Dr. Kurt Vernon, our practice has served the Greater Raleigh area for over 20 years from two offices in Fuquay-Varina and Dunn, NC.\n\nWe use the most advanced technology available, including FUSE™ endoscopy, which gives some of the highest available detection rates for colon cancer, and we create a unique atmosphere where patients come first.\n\nOur approach looks at your health as a whole: we provide education, incorporate nutrition and lifestyle, and recommend only the best quality products.",
     "values": [
       {
@@ -624,8 +624,8 @@
     }
   ],
   "quiz": {
-    "title": "Are you at risk for colon cancer?",
-    "intro": "Gastrointestinal problems account for more hospitalizations in the U.S. than any other group of disorders. Answer these quick questions to see whether you should talk with us about screening. Your answers stay on your device.",
+    "title": "Colon Cancer Risk Quiz",
+    "intro": "Are you at risk for colon cancer? Gastrointestinal problems account for more hospitalizations in the U.S. than any other group of disorders. Answer these quick questions to see whether you should talk with us about screening. Your answers stay on your device.",
     "questions": [
       "Are you 45 or older?",
       "Have you had colon polyps or colon cancer before?",
