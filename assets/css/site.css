@@ -362,9 +362,11 @@ details summary { cursor: pointer; font-weight: 700; color: var(--primary); }
 .cp-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
 .cp-head h3 { font-size: 1.15rem; padding-bottom: 10px; border-bottom: 3px solid var(--accent); display: inline-block; }
 .cp-head .more { font-size: .92rem; }
-.cp-list { display: grid; }
-.cp-row { display: flex; align-items: center; gap: 12px; justify-content: space-between; padding: 12px 2px; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink); }
-.cp-row:hover { color: var(--ink); background: var(--alt); }
+/* Rows keep their text aligned with the card; the hover highlight is a rounded pill that reaches slightly past it. */
+.cp-list { display: grid; margin: 0 -12px; }
+.cp-row { display: flex; align-items: center; gap: 12px; justify-content: space-between; padding: 12px; border-radius: 12px; text-decoration: none; color: var(--ink);
+  background: linear-gradient(var(--line), var(--line)) center bottom / calc(100% - 24px) 1px no-repeat; transition: background-color .15s; }
+.cp-row:hover, .cp-row:focus-visible { color: var(--ink); background: var(--alt); }
 .cp-row b { display: block; color: var(--deep); }
 .cp-row small { display: block; color: var(--muted); font-size: .88rem; line-height: 1.45; margin-top: 2px; }
 .cp-row > svg { color: var(--primary); }
@@ -380,7 +382,7 @@ a.cond .more { margin-top: 10px; }
 .detail-block h2 { font-size: 1.35rem; }
 .detail .ticks li { font-size: 1rem; }
 .detail-side { display: grid; gap: 16px; }
-.detail-side .cp-list .cp-row:last-child { border-bottom: 0; }
+.detail-side .cp-list .cp-row:last-child { background-image: none; }
 
 /* small Patient Portal link (upper right) */
 .portal-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: .92rem; color: var(--primary); text-decoration: none; padding: 8px 12px; border: 1.5px solid var(--line); border-radius: 999px; white-space: nowrap; margin-left: 8px; }
