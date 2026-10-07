@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="format-detection" content="telephone=no, address=no, email=no">
   <title>Page not found · The GI Guy</title>
+  <script>var GG_ROOT = location.pathname.indexOf('/giguy.net/') === 0 ? '/giguy.net/' : '/'; document.write('<base href="' + GG_ROOT + '">');</script>
   <script>
     // Old giguy.net .php links land here: send them to the matching new page.
     (function () {
@@ -21,15 +22,15 @@
         'images/patient-forms/patient_forms.pdf': 'files/patient-forms.pdf',
         'images/procedures-treatments/procedures-treatments.pdf': 'files/colonoscopy-prep-magnesium-citrate.pdf'
       };
-      var path = location.pathname.replace(/^\/+/, '');
+      var path = location.pathname.slice(GG_ROOT.length);
       var to = map[path] || map[path.split('/').pop()];
-      if (to) location.replace('/' + to);
+      if (to) location.replace(GG_ROOT + to);
     })();
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/site.css?v=202610052232">
+  <link rel="stylesheet" href="assets/css/site.css?v=202610052232">
 </head>
 <body>
-  <section class="page-head"><div class="container"><h1>Page not found</h1><p class="lead">That page may have moved. <a href="/">Go to the home page</a> or call (919) 577-0085.</p></div></section>
+  <section class="page-head"><div class="container"><h1>Page not found</h1><p class="lead">That page may have moved. <a href="./">Go to the home page</a> or call (919) 577-0085.</p></div></section>
 </body>
 </html>
