@@ -28,6 +28,7 @@
     doc: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm-1 7V3.5L18.5 9zM8 13h8v2H8zm0 4h8v2H8z"/></svg>',
     check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>',
     arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l-1.4 1.4 5.6 5.6H4v2h12.2l-5.6 5.6L12 20l8-8z"/></svg>',
+    chat: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2zm3 5v2h10V9zm0 4v2h7v-2z"/></svg>',
     menu: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>',
     close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z"/></svg>',
     scope: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 8a3 3 0 0 0-1 5.83V15a5 5 0 0 1-10 0v-.1A6 6 0 0 0 13 9V3h-3v2h1v4a4 4 0 0 1-8 0V5h1V3H1v6a6 6 0 0 0 5 5.9V15a7 7 0 0 0 14 0v-1.17A3 3 0 0 0 19 8zm0 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>',
@@ -110,9 +111,9 @@
           '<p>' + esc(P.footerTagline) + '</p>' +
           '<div class="social">' + (D.social || []).filter(s => s.url).map(s => '<a href="' + esc(safeUrl(s.url)) + '" target="_blank" rel="noopener" aria-label="' + esc(s.label) + '" title="' + esc(s.label) + '">' + socialIcon(s) + '</a>').join('') + '</div></div>' +
         '<div class="foot-visit"><h4>Visit</h4><div class="foot-locs">' + shown(D.locations).map(l =>
-          '<p><b>' + esc(l.name) + '</b><a class="foot-addr" href="' + mapUrl(l) + '" target="_blank" rel="noopener">' + esc(l.address).replace(/\n/g, '<br>') + '</a><a href="' + tel(l.phone) + '">Phone ' + esc(l.phone) + '</a><span>Fax ' + esc(l.fax) + '</span></p>').join('') + '</div></div>' +
-        '<div class="foot-hours"><h4>Hours</h4><p>' + lines(P.hours).map(esc).join('<br>') + '</p></div>' +
-        '<div class="foot-patients"><h4>Patients</h4><ul><li><a href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + esc(P.portalLabel || 'Patient Portal') + '</a></li><li><a href="patients.html#forms">Patient Forms</a></li><li><a href="patients.html#prep">Colonoscopy Prep</a></li><li><a href="risk-quiz.html">Colon Cancer Risk Quiz</a></li></ul></div>' +
+          '<p><b>' + esc(l.name) + '</b><a class="foot-addr" href="' + mapUrl(l) + '" target="_blank" rel="noopener">' + esc(l.address).replace(/\n/g, '<br>') + '</a><a href="' + tel(l.phone) + '">Phone ' + esc(l.phone) + '</a>' + (l.fax ? '<span>Fax ' + esc(l.fax) + '</span>' : '') + '</p>').join('') + '</div></div>' +
+        '<div class="foot-hours">' + hoursHtml(P, 'h4') + '</div>' +
+        '<div class="foot-patients"><h4>Patients</h4><ul><li><a href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + esc(P.portalLabel || 'Patient Portal') + '</a></li>' + (P.klaraUrl ? '<li><a href="' + esc(safeUrl(P.klaraUrl)) + '" target="_blank" rel="noopener">' + esc(P.klaraLabel || 'Message us on Klara') + '</a></li>' : '') + (shown(D.videos).length ? '<li><a href="patients.html#videos">Instruction Videos</a></li>' : '') + '<li><a href="patients.html#forms">Patient Forms</a></li><li><a href="patients.html#prep">Colonoscopy Prep</a></li><li><a href="risk-quiz.html">Colon Cancer Risk Quiz</a></li></ul></div>' +
         '<div class="foot-explore"><h4>Explore</h4><ul>' + navItems().slice(1).map(n => '<li><a href="' + n[1] + '">' + n[2] + '</a></li>').join('') + '</ul></div>' +
       '</div>' +
       (D.partners && D.partners.length ? '<div class="partners">' + D.partners.map(p => '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '" loading="lazy">').join('') + '</div>' : '') +
@@ -152,6 +153,22 @@
   // Office name on one line, number on the next; outlined so it reads as a choice, not a white slab.
   const callOpts = (cls) => '<div class="call-opts' + (cls ? ' ' + cls : '') + '">' + shown(D.locations).map(l =>
     '<a class="call-opt" href="' + tel(l.phone) + '"><small>' + esc(l.name) + '</small><b>' + ICON.phone + esc(l.phone) + '</b></a>').join('') + '</div>';
+  // Office hours, then endoscopy hours when set; one time block per line.
+  function hoursHtml(P, hTag) {
+    const block = (title, txt) => txt ? '<' + hTag + ' class="hours-title">' + title + '</' + hTag + '><p class="hours-lines">' + lines(txt).map(esc).join('<br>') + '</p>' : '';
+    return block('Office Hours', P.hours) + block('Endoscopy Hours', P.endoscopyHours);
+  }
+  const klaraLink = (P, cls) => P.klaraUrl ? '<a class="' + cls + '" href="' + esc(safeUrl(P.klaraUrl)) + '" target="_blank" rel="noopener">' + ICON.chat + esc(P.klaraLabel || 'Message us on Klara') + ' ' + ICON.arrow + '</a>' : '';
+  const ytId = u => { const m = String(u || '').match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/); return m ? m[1] : ''; };
+  // Click-to-play: YouTube's thumbnail first; the player (privacy-enhanced domain) loads only when tapped.
+  function videoCards(list) {
+    return '<div class="videos">' + list.filter(v => ytId(v.youtube)).map(v => {
+      const id = ytId(v.youtube);
+      return '<article class="card video"><button class="video-frame" type="button" data-yt="' + id + '" aria-label="Play: ' + esc(v.title) + '">' +
+        '<img src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg" alt="" loading="lazy"><span class="video-play" aria-hidden="true"></span></button>' +
+        '<h3>' + esc(v.title) + '</h3>' + (v.text ? '<p class="muted">' + inline(v.text) + '</p>' : '') + '</article>';
+    }).join('') + '</div>';
+  }
   function mapUrl(l) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(l.mapQuery || l.address.replace(/\n/g, ', ')); }
 
   function locationCards(withMap) {
@@ -160,7 +177,7 @@
         (withMap ? '<iframe class="map" title="Map of the ' + esc(l.name) + ' office" src="https://maps.google.com/maps?q=' + encodeURIComponent(l.mapQuery || l.address) + '&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' : '') +
         '<div class="loc-body"><h3>' + esc(l.name) + ' office</h3>' +
         '<p class="icoline">' + ICON.pin + '<span>' + esc(l.address).replace(/\n/g, '<br>') + '</span></p>' +
-        '<p class="icoline">' + ICON.phone + '<span><a href="' + tel(l.phone) + '">' + esc(l.phone) + '</a> · Fax ' + esc(l.fax) + '</span></p>' +
+        '<p class="icoline">' + ICON.phone + '<span><a href="' + tel(l.phone) + '">' + esc(l.phone) + '</a>' + (l.fax ? ' · Fax ' + esc(l.fax) : '') + '</span></p>' +
         '<div class="loc-acts"><a class="btn btn-primary btn-sm" href="' + tel(l.phone) + '">Call</a><a class="btn btn-outline btn-sm" href="' + mapUrl(l) + '" target="_blank" rel="noopener">Directions</a></div></div>' +
       '</article>').join('') + '</div>';
   }
@@ -194,7 +211,7 @@
       '<section class="section"><div class="container two-col">' +
         '<div><p class="eyebrow">FAQs</p><h2>Your questions, answered</h2>' + faqHtml(D.faqs) + '</div>' +
         '<div><p class="eyebrow">Visit us</p><h2>Two convenient offices</h2>' + locationCards(false) +
-          '<div class="card hours"><h3>' + ICON.clock + 'Office hours</h3><p>' + lines(P.hours).map(esc).join('<br>') + '</p></div></div>' +
+          '<div class="card hours">' + hoursHtml(P, 'h3') + '</div></div>' +
       '</div></section>' + callBand();
   };
 
@@ -233,7 +250,7 @@
   };
 
   PAGES.services = function () {
-    return sectionHead('services', 'Procedures and treatments for digestive conditions, using the latest technology, including FUSE™ full-spectrum endoscopy.') +
+    return sectionHead('services', 'Procedures and treatments for digestive conditions, using modern endoscopy equipment.') +
       ftPromo() +
       '<section class="section"><div class="container">' + serviceCards(shown(D.services)) + '</div></section>' +
       '<section class="section alt"><div class="container"><h2>Conditions we treat</h2><p class="muted">Choose one to learn what it is and how we treat it.</p><ul class="chips big">' + shown(D.conditions).map(c => '<li><a href="' + condUrl(c) + '">' + esc(c.name || c) + '</a></li>').join('') + '</ul>' +
@@ -346,6 +363,7 @@
         block('How to prepare', s.prep ? md(s.prep) : '') +
         block('What to expect', s.expect ? md(s.expect) : '') +
         block('Afterward', s.after ? md(s.after) : '') +
+        (shown(D.videos).some(v => v.service === s.id) ? block('Watch', videoCards(shown(D.videos).filter(v => v.service === s.id))) : '') +
       '</article><aside class="detail-side">' +
         (ft ? '<a class="card quiz-promo ft-promo" href="fast-track-colonoscopy.html">' + ICON.clock + '<span><b>Positive stool test?</b><small>Fast-Track: colonoscopy usually in 7–14 days.</small></span>' + ICON.arrow + '</a>' : '') +
         (form ? '<a class="card doc" href="' + esc(safeUrl(form.file)) + '" target="_blank" rel="noopener">' + ICON.doc + '<span><b>' + esc(form.title) + '</b><em>Open PDF ' + ICON.arrow + '</em></span></a>' : '') +
@@ -356,15 +374,18 @@
   PAGES.patients = function () {
     const P = D.practice || {};
     const portal = '<a class="head-portal" href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + ICON.lock + esc(P.portalLabel || 'Patient Portal') + ' ' + ICON.arrow + '</a>';
-    return sectionHead('patients', 'Forms, colonoscopy prep, insurance and answers to common questions.', portal) +
+    const head = '<div class="head-links">' + portal + klaraLink(P, 'head-portal') + '</div>';
+    const vids = shown(D.videos);
+    return sectionHead('patients', 'Forms, colonoscopy prep, instruction videos, insurance and answers to common questions.', head) +
       ftPromo() +
+      (vids.length ? '<section class="section" id="videos"><div class="container"><h2>Instruction Videos</h2>' + videoCards(vids) + '</div></section>' : '') +
       '<section class="section alt"><div class="container"><h2>Forms & instructions</h2><div class="docs">' + shown(D.forms).map(f =>
         '<a class="card doc" id="' + esc(f.anchor || f.id) + '" href="' + esc(safeUrl(f.file)) + '" target="_blank" rel="noopener">' + ICON.doc +
         '<span><b>' + esc(f.title) + '</b><small>' + esc(f.text) + '</small><em>Open PDF ' + ICON.arrow + '</em></span></a>').join('') + '</div></div></section>' +
       '<section class="section"><div class="container two-col">' +
         '<div class="card"><h2>Appointments</h2><p>To schedule, reschedule or ask a question, call the office nearest you.</p>' +
           shown(D.locations).map(l => '<p class="icoline">' + ICON.phone + '<span><b>' + esc(l.name) + ':</b> <a href="' + tel(l.phone) + '">' + esc(l.phone) + '</a></span></p>').join('') +
-          '<p class="hours-lines">' + lines(P.hours).map(esc).join('<br>') + '</p></div>' +
+          '<div class="hours-in-card">' + hoursHtml(P, 'h3') + '</div></div>' +
         '<div class="card"><h2>Insurance</h2><p>' + inline((D.about || {}).insurance) + '</p></div>' +
       '</div></section>' +
       '<section class="section"><div class="container"><div class="card note"><h2>Before you message us</h2><p>' + esc(P.emergencyNote) + '</p><p class="muted small">Social media pages are for general information only, and we can\'t give medical advice there. For a specific question, please call the office or use the Patient Portal.</p></div></div></section>' +
@@ -441,7 +462,7 @@
     const P = D.practice || {};
     return sectionHead('contact', 'Two offices serving the Greater Raleigh area and surrounding communities.') +
       '<section class="section"><div class="container">' + locationCards(true) +
-        '<div class="two-col" style="margin-top:24px"><div class="card hours"><h3>' + ICON.clock + 'Office hours</h3><p>' + lines(P.hours).map(esc).join('<br>') + '</p></div>' +
+        '<div class="two-col" style="margin-top:24px"><div class="card hours">' + hoursHtml(P, 'h3') + (P.klaraUrl ? '<p style="margin-top:14px">' + klaraLink(P, 'btn btn-outline btn-sm') + '</p>' : '') + '</div>' +
         '<div class="card note"><p><b>In an emergency, call 911.</b> ' + esc(P.emergencyNote) + '</p><p class="muted small">We monitor our website and social media, but social media is for general information only and can\'t be used for medical advice. To protect your privacy, please call the office with questions about your care.</p></div></div>' +
       '</div></section>';
   };
@@ -457,7 +478,7 @@
     return words.map((w, i) => {
       if (!/\S/.test(w)) return w;
       const core = w.replace(/^[^A-Za-z0-9]+|[^A-Za-z0-9]+$/g, '').toLowerCase();
-      const keep = /[A-Z].*[A-Z]|[a-z][A-Z]|\d/.test(w) || /^[A-Z]\.$/.test(w) || KEEP_LOWER.has(core);   // EGD, FUSE™, H., 7–14, pylori
+      const keep = /[A-Z].*[A-Z]|[a-z][A-Z]|\d/.test(w) || /^[A-Z]\.$/.test(w) || KEEP_LOWER.has(core);   // EGD, FACG, H., 7–14, pylori
       let out = w;
       if (!keep) {
         if (SMALL.has(core) && i !== first && i !== last && !afterBreak) out = w.toLowerCase();
@@ -496,6 +517,10 @@
     if (draft) document.querySelectorAll('a[href]').forEach(a => {
       const h = a.getAttribute('href');
       if (/^[a-z0-9-]+\.html/i.test(h) && !/[?&]draft=/.test(h)) a.setAttribute('href', h.replace(/^([^?#]+)(\?[^#]*)?/, (m, p, q) => p + (q ? q + '&' : '?') + 'draft=1'));
+    });
+    document.addEventListener('click', e => {
+      const b = e.target.closest('[data-yt]'); if (!b) return;
+      b.outerHTML = '<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/' + b.dataset.yt + '?autoplay=1&rel=0" title="Video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
     });
     document.querySelectorAll('[data-expand]').forEach(b => b.onclick = () => { document.getElementById(b.dataset.expand).classList.add('open'); b.remove(); });
     if (PAGE === 'learn') afterLearn();

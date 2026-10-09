@@ -115,6 +115,8 @@
       { k: 'practice.tagline', label: 'Tagline under the logo' },
       { row: [{ k: 'practice.phone', label: 'Main phone (Call buttons)' }, { k: 'practice.portalLabel', label: 'Portal button text' }] },
       { k: 'practice.portalUrl', label: 'Patient Portal address', hint: 'Every Patient Portal button sends patients here.' },
+      { k: 'practice.endoscopyHours', label: 'Endoscopy hours', type: 'textarea', rows: 2, hint: 'One line per row. Blank = hide.' },
+      { row: [{ k: 'practice.klaraUrl', label: 'Klara link', hint: 'The practice Klara address. Blank = hide the Klara link.' }, { k: 'practice.klaraLabel', label: 'Klara link text' }] },
       { k: 'practice.hours', label: 'Office hours', type: 'textarea', rows: 3, hint: 'One line per row; each shows on its own line.' },
       { k: 'practice.emergencyNote', label: 'Emergency note', type: 'textarea', rows: 2 },
       { k: 'practice.disclaimer', label: 'Footer disclaimer', type: 'textarea', rows: 2 },
@@ -176,6 +178,13 @@
       { k: 'treatment', label: 'Detail page: Diagnosis & treatment', type: 'textarea', rows: 5 },
       { k: 'when', label: 'Detail page: When to call us', type: 'textarea', rows: 2 },
       { k: 'procedures', label: 'Related procedures', type: 'list', hint: 'Comma-separated service ids: colonoscopy, egd, capsule-endoscopy, flexible-sigmoidoscopy, esophageal-dilation, hemorrhoid-treatment, cologuard, consultations' },
+      { k: 'hidden', label: 'Hidden from the site', type: 'check' },
+    ],
+    videos: [
+      { k: 'title', label: 'Title', req: true },
+      { k: 'youtube', label: 'YouTube link', req: true, hint: 'Paste the video address, e.g. https://www.youtube.com/watch?v=…' },
+      { k: 'text', label: 'Short description', type: 'textarea', rows: 2 },
+      { k: 'service', label: 'Also show on this service page (optional)', type: 'select', opts: [['', 'None'], ['colonoscopy', 'Colonoscopy'], ['egd', 'EGD (upper endoscopy)'], ['capsule-endoscopy', 'Capsule endoscopy'], ['flexible-sigmoidoscopy', 'Flexible sigmoidoscopy'], ['esophageal-dilation', 'Esophageal dilation'], ['hemorrhoid-treatment', 'Hemorrhoid treatment'], ['cologuard', 'Cologuard'], ['consultations', 'GI consultations']] },
       { k: 'hidden', label: 'Hidden from the site', type: 'check' },
     ],
     faqs: [
@@ -246,6 +255,7 @@
     team: { label: 'Team', one: 'provider', sym: () => 'TEAM', title: x => x.name, sub: x => x.role || '', blank: () => ({ id: '', name: '', role: '', photo: '', statement: '', bio: '', education: '', memberships: '', hidden: false }), idFrom: x => slug(x.name) },
     services: { label: 'Services', one: 'service', sym: () => 'SVC', title: x => x.title, sub: x => x.summary || '', blank: () => ({ id: '', title: '', summary: '', points: '', hidden: false }), idFrom: x => slug(x.title) },
     conditions: { label: 'Conditions', one: 'condition', sym: () => 'COND', title: x => x.name, sub: x => short(x.text, 100), blank: () => ({ id: '', name: '', text: '', hidden: false }), idFrom: x => slug(x.name) },
+    videos: { label: 'Videos', one: 'video', sym: () => 'VIDEO', title: x => x.title, sub: x => x.youtube || '', blank: () => ({ id: '', title: '', youtube: '', text: '', service: '', hidden: false }), idFrom: x => slug(x.title) },
     faqs: { label: 'FAQs', one: 'question', sym: () => 'FAQ', title: x => x.q, sub: x => short(x.a, 100), blank: () => ({ id: '', q: '', a: '' }), idFrom: x => slug(x.q) },
     locations: { label: 'Locations', one: 'location', sym: () => 'OFFICE', title: x => x.name, sub: x => (x.address || '').replace(/\n/g, ', ') + ' · ' + (x.phone || ''), blank: () => ({ id: '', name: '', address: '', phone: '', fax: '', mapQuery: '', hidden: false }), idFrom: x => slug(x.name) },
     forms: { label: 'Forms & PDFs', one: 'form', sym: () => 'PDF', title: x => x.title, sub: x => x.file || '', blank: () => ({ id: '', title: '', text: '', file: '', hidden: false }), idFrom: x => slug(x.title) },
@@ -254,7 +264,7 @@
 
   const NAV = [
     ['banners', 'Banners'], ['practice', 'Practice info & hours'], ['locations', 'Locations'], ['home', 'Home page'], ['about', 'About & insurance'], ['conditions', 'Conditions'],
-    ['fasttrack', 'Fast-Track colonoscopy'], ['doctor', 'Dr. Vernon'], ['team', 'Team'], ['services', 'Services'], ['faqs', 'FAQs'], ['forms', 'Forms & PDFs'],
+    ['fasttrack', 'Fast-Track colonoscopy'], ['doctor', 'Dr. Vernon'], ['team', 'Team'], ['services', 'Services'], ['faqs', 'FAQs'], ['forms', 'Forms & PDFs'], ['videos', 'Videos'],
     ['articles', 'Articles'], ['learn', 'Quiz & digestive system'], ['raw', 'Raw JSON'],
   ];
 
@@ -532,6 +542,7 @@
     team: 'Providers on the Our Team page, in this order. Dr. Vernon has his own section.',
     services: 'Services in the order they appear. The first six also show on the home page.',
     conditions: 'Conditions we treat, in this order. Each has its own page (condition.html?id=…) and shows with its first sentence on the home page.',
+    videos: 'Instruction videos on the Patient Resources page. Pick a service to also show a video on that service page.',
     forms: 'PDFs on the Patients page. The first two are linked from the home page (patient forms, then colonoscopy prep).',
   };
   function renderList(v, key) {

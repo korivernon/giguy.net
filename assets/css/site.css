@@ -437,3 +437,28 @@ a.cond .more { margin-top: 10px; }
 /* footer addresses link to Google Maps, styled like the rest of the footer text */
 .foot-locs .foot-addr { display: block; color: #cddbc8; }
 .foot-locs .foot-addr:hover { color: #fff; text-decoration: underline; }
+
+/* hours blocks (office + endoscopy) */
+.hours-title { display: flex; align-items: center; gap: 8px; }
+.card.hours .hours-lines, .hours-in-card .hours-lines { margin: 0 0 14px; }
+.card.hours .hours-lines:last-child, .hours-in-card .hours-lines:last-child { margin-bottom: 0; }
+.hours-in-card h3 { font-size: 1rem; margin: 14px 0 4px; }
+.footer .foot-hours h4 + p { margin-bottom: 16px; }
+.footer .foot-hours p:last-child { margin-bottom: 0; }
+.head-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+.head-links .head-portal { position: static; margin: 0; }
+@media (min-width: 760px) { .head-links { position: absolute; top: 0; right: 28px; margin: 0; } }
+/* instruction videos */
+.videos { display: grid; gap: 20px; grid-template-columns: 1fr; margin-top: 16px; }
+@media (min-width: 700px) { .videos { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1050px) { .videos { grid-template-columns: repeat(3, 1fr); } }
+.video { padding: 0; overflow: hidden; }
+.video h3 { margin: 14px 18px 4px; font-size: 1.05rem; }
+.video p { margin: 0 18px 18px; font-size: .92rem; }
+.video-frame { display: block; position: relative; width: 100%; aspect-ratio: 16 / 9; border: 0; padding: 0; background: #000; cursor: pointer; }
+.video-frame img { width: 100%; height: 100%; object-fit: cover; opacity: .9; }
+.video-play { position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; background: rgba(14, 58, 13, .85); }
+.video-play::after { content: ""; position: absolute; left: 26px; top: 20px; border-left: 18px solid #fff; border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
+.video-frame:hover .video-play { background: var(--primary); }
+.detail .videos { grid-template-columns: 1fr; }
+@media (min-width: 700px) { .detail .videos { grid-template-columns: 1fr 1fr; } }

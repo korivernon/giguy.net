@@ -6,10 +6,13 @@
     "phone": "(919) 577-0085",
     "portalUrl": "https://giguy.mygportal.com/",
     "portalLabel": "Patient Portal",
-    "hours": "Monday – Thursday: 9:00 am – 5:00 pm\nFriday: 9:00 am – 12:00 pm\nSaturday – Sunday: Closed",
+    "hours": "Monday – Thursday: 8:30 am – 5:00 pm\nFriday: 9:00 am – 12:00 pm\nSaturday – Sunday: Closed",
     "emergencyNote": "If this is a medical emergency, call 911 or go to your nearest emergency room. Please don't use the website, patient portal or social media for urgent medical questions.",
     "disclaimer": "This site is for educational use only. Nothing on it is a substitute for medical advice, diagnosis or treatment.",
-    "footerTagline": "Your partner in personalized, compassionate digestive care."
+    "footerTagline": "Your partner in personalized, compassionate digestive care.",
+    "endoscopyHours": "Monday – Thursday: 5:30 am – 3:00 pm\nSecond Saturday of each month",
+    "klaraUrl": "",
+    "klaraLabel": "Message us on Klara"
   },
   "banners": [
     {
@@ -26,7 +29,7 @@
   "home": {
     "eyebrow": "Gastroenterology · Fuquay-Varina & Dunn, NC",
     "title": "Compassionate care for your digestive health",
-    "text": "From colon cancer screening to heartburn, liver disease and IBS, Dr. Kurt Vernon, \"The GI Guy,\" has cared for patients across the Greater Raleigh area for more than 20 years.",
+    "text": "From colon cancer screening to heartburn, liver disease and IBS, Dr. Kurt Vernon, \"The GI Guy,\" has cared for patients across the Greater Raleigh area for more than 30 years.",
     "highlights": [
       {
         "title": "Board-certified expertise",
@@ -34,7 +37,7 @@
       },
       {
         "title": "Advanced technology",
-        "text": "FUSE™ full-spectrum endoscopy for some of the highest available detection rates for colon cancer."
+        "text": "Modern endoscopy equipment for accurate, comfortable, minimally invasive procedures."
       },
       {
         "title": "Personal, unhurried care",
@@ -48,7 +51,7 @@
   },
   "about": {
     "title": "About Us",
-    "text": "At The GI Guy, we are dedicated to expert gastroenterology care with a compassionate, holistic approach. Led by Dr. Kurt Vernon, our practice has served the Greater Raleigh area for over 20 years from two offices in Fuquay-Varina and Dunn, NC.\n\nWe use the most advanced technology available, including FUSE™ endoscopy, which gives some of the highest available detection rates for colon cancer, and we create a unique atmosphere where patients come first.\n\nOur approach looks at your health as a whole: we provide education, incorporate nutrition and lifestyle, and recommend only the best quality products.",
+    "text": "At The GI Guy, we are dedicated to expert gastroenterology care with a compassionate, holistic approach. Led by Dr. Kurt Vernon, our practice has served the Greater Raleigh area for over 30 years from two offices in Fuquay-Varina and Dunn, NC.\n\nWe use modern endoscopy equipment and create a unique atmosphere where patients come first.\n\nOur approach looks at your health as a whole: we provide education, incorporate nutrition and lifestyle, and recommend only the best quality products.",
     "values": [
       {
         "title": "Personalized care",
@@ -56,7 +59,7 @@
       },
       {
         "title": "Advanced technology",
-        "text": "State-of-the-art equipment like FUSE™ endoscopy for accurate, minimally invasive procedures."
+        "text": "Modern equipment for accurate, minimally invasive procedures."
       },
       {
         "title": "Education and support",
@@ -72,7 +75,7 @@
     "role": "Gastroenterologist",
     "photo": "img/dr-vernon-banner.jpg",
     "quote": "The secret to successful treatment is personalized care. I always take the time to work one-on-one with patients during their program. My patients know that I am always available for them. I explain everything I do and encourage patients to ask questions. In the end, they aren't just healed, they're educated, too.",
-    "bio": "Kurt Vernon, MD is a board-certified gastroenterologist and a Fellow of the American College of Gastroenterology, the American College of Physicians and the American Anti-Aging Academy, with over 20 years of experience.\n\nDr. Vernon has the expertise and advanced technology to accurately diagnose and treat a wide range of colon, liver, digestive and rectal conditions, including cancer screening, abdominal pain, ulcers, irritable bowel syndrome and heartburn/reflux. Add in his bedside manner and caring personality, and it's easy to see why over 90% of his patients come from referrals. Many of our patients are physicians and medical professionals themselves.\n\nDr. Vernon is board-certified in internal medicine and gastroenterology by the American Board of Internal Medicine, and he continually works to refine his skills and use the latest medical techniques.",
+    "bio": "Kurt Vernon, MD is a board-certified gastroenterologist and a Fellow of the American College of Gastroenterology, the American College of Physicians and the American Anti-Aging Academy, with more than 30 years of experience.\n\nDr. Vernon has the expertise and advanced technology to accurately diagnose and treat a wide range of colon, liver, digestive and rectal conditions, including cancer screening, abdominal pain, ulcers, irritable bowel syndrome and heartburn/reflux. Add in his bedside manner and caring personality, and it's easy to see why over 90% of his patients come from referrals. Many of our patients are physicians and medical professionals themselves.\n\nDr. Vernon is board-certified in internal medicine and gastroenterology by the American Board of Internal Medicine, and he continually works to refine his skills and use the latest medical techniques.",
     "credentials": [
       {
         "label": "Medical school",
@@ -140,9 +143,9 @@
       "id": "colonoscopy",
       "title": "Colonoscopy",
       "summary": "Early detection and prevention of colon cancer.",
-      "points": "Finds and removes precancerous polyps before they become cancer\nPerformed with FUSE™ full-spectrum technology for better accuracy\nHelps diagnose abdominal pain, rectal bleeding and changes in bowel habits",
+      "points": "Finds and removes precancerous polyps before they become cancer\nHelps diagnose abdominal pain, rectal bleeding and changes in bowel habits",
       "hidden": false,
-      "what": "A colonoscopy is an exam of the inside of the colon and rectum. The doctor uses a long, thin, flexible tube with a camera on the end. Dr. Vernon uses FUSE full-spectrum endoscopy, which gives a wider view of the colon lining than a standard forward-viewing scope. Polyps can be removed and tissue samples can be taken during the same exam.",
+      "what": "A colonoscopy is an exam of the inside of the colon and rectum. The doctor uses a long, thin, flexible tube with a camera on the end. Polyps can be removed and tissue samples can be taken during the same exam.",
       "why": "Screening for colon cancer starting at age 45 for average-risk adults\nFinding and removing polyps before they can become cancer\nChecking the cause of rectal bleeding or black stools\nLooking into changes in bowel habits, diarrhea, or belly pain\nFollow-up after a positive stool test such as Cologuard\nMonitoring inflammatory bowel disease or a history of polyps",
       "prep": "Your colon must be completely clean so the doctor can see the lining clearly. This usually means a clear liquid diet the day before and drinking a bowel prep solution that causes diarrhea. You may need to change or stop some medicines, such as blood thinners or diabetes medicines, but only as directed. The office will give you specific instructions, so follow them closely and call with any questions.",
       "expect": "You will receive sedation through an IV, so most people sleep through the exam or remember very little. You lie on your side while the doctor gently guides the scope through the colon and looks at the lining. Any polyps found can usually be removed during the exam. The procedure itself often takes about 30 to 60 minutes, but plan to be at the center longer for check-in and recovery.",
@@ -258,7 +261,7 @@
       "what": "Colon cancer is cancer that starts in the large intestine (colon) or rectum. It most often begins as a small growth called a polyp. Some polyps can turn into cancer slowly over several years. Finding and removing polyps early is one of the best ways to prevent colon cancer.",
       "causes": "Age, with risk rising over time\nA personal or family history of colon cancer or polyps\nInflammatory bowel disease, such as Crohn's disease or ulcerative colitis\nCertain inherited genetic conditions\nSmoking, heavy alcohol use, and extra body weight\nA diet high in red or processed meat and low in fiber",
       "symptoms": "Often no symptoms in the early stages\nBlood in or on the stool\nA change in bowel habits that lasts, such as diarrhea, constipation, or narrow stools\nBelly pain or cramping that does not go away\nFeeling tired or weak, which can be from anemia\nWeight loss you can't explain",
-      "treatment": "Colon cancer is usually found with a colonoscopy, where polyps can be removed and tissue samples (biopsies) can be taken. Dr. Vernon uses FUSE full-spectrum endoscopy, which gives a wider view of the colon lining during the exam. If cancer is found, more tests help show how far it has spread. Treatment often includes surgery and may include chemotherapy or radiation, so you may need a referral to a surgeon and a cancer specialist. Dr. Vernon can help coordinate your care and follow-up exams.",
+      "treatment": "Colon cancer is usually found with a colonoscopy, where polyps can be removed and tissue samples (biopsies) can be taken. If cancer is found, more tests help show how far it has spread. Treatment often includes surgery and may include chemotherapy or radiation, so you may need a referral to a surgeon and a cancer specialist. Dr. Vernon can help coordinate your care and follow-up exams.",
       "when": "Call the doctor if you see blood in your stool, have a change in bowel habits that lasts more than a few weeks, or have ongoing belly pain or weight loss you can't explain. Do not wait for symptoms to get screened.",
       "procedures": [
         "colonoscopy",
@@ -274,7 +277,7 @@
       "what": "Colon cancer screening means checking for cancer or polyps before you have any symptoms. Screening can find polyps so they can be removed before they turn into cancer. It can also find cancer early, when it is often easier to treat. There are several screening options, and your doctor can help you pick the right one.",
       "causes": "Reaching age 45 or older\nA family history of colon cancer or polyps\nA personal history of polyps or colon cancer\nInflammatory bowel disease\nCertain inherited genetic conditions",
       "symptoms": "Screening is meant for people with no symptoms\nMost polyps and early cancers cause no symptoms\nIf you do have symptoms, such as bleeding or a change in bowel habits, you need a diagnostic exam, not just screening",
-      "treatment": "Colonoscopy is the most complete screening test because it lets the doctor see the whole colon and remove polyps during the same exam. Dr. Vernon performs colonoscopy with FUSE full-spectrum endoscopy for a wider view of the colon. The practice also offers Cologuard, a stool DNA test you do at home, for some average-risk adults. A positive stool test needs a follow-up colonoscopy. How often you need screening depends on your test results and personal risk.",
+      "treatment": "Colonoscopy is the most complete screening test because it lets the doctor see the whole colon and remove polyps during the same exam. The practice also offers Cologuard, a stool DNA test you do at home, for some average-risk adults. A positive stool test needs a follow-up colonoscopy. How often you need screening depends on your test results and personal risk.",
       "when": "Adults at average risk should start screening at age 45. People with a family history, a history of polyps, or inflammatory bowel disease may need to start earlier and be screened more often, so talk with the doctor about your risk.",
       "procedures": [
         "colonoscopy",
@@ -561,7 +564,7 @@
       "name": "Fuquay-Varina",
       "address": "1004 Procure St\nFuquay-Varina, NC 27526",
       "phone": "(919) 577-0085",
-      "fax": "(919) 577-0013",
+      "fax": "",
       "mapQuery": "1004 Procure St, Fuquay-Varina, NC 27526",
       "hidden": false
     },
@@ -743,7 +746,41 @@
       }
     ],
     "providersTitle": "For doctors and clinics",
-    "providers": "If your patient has a positive stool test and is facing a long wait, send them our way. Fax the referral and the stool test result to our Fuquay-Varina office at (919) 577-0013 or our Dunn office at (910) 891-5323, and we'll call your patient to complete the phone screening. We send the colonoscopy and pathology reports back to you.",
+    "providers": "If your patient has a positive stool test and is facing a long wait, send them our way. Fax the referral and the stool test result to (910) 891-5323, and we'll call your patient to complete the phone screening. We send the colonoscopy and pathology reports back to you.",
     "homeBand": "**Positive Cologuard® or stool test?** Get your colonoscopy in 7–14 days. No office visit needed first."
-  }
+  },
+  "videos": [
+    {
+      "id": "colonoscopy-prep",
+      "title": "Preparing for Your Colonoscopy",
+      "youtube": "https://www.youtube.com/watch?v=d5O31vWDol8",
+      "text": "What to expect and how to get ready for your colonoscopy.",
+      "service": "colonoscopy",
+      "hidden": false
+    },
+    {
+      "id": "upper-endoscopy",
+      "title": "Upper GI Endoscopy: The Procedure and Its Risks",
+      "youtube": "https://www.youtube.com/watch?v=OQN41sMcdsU",
+      "text": "How an upper endoscopy (EGD) works and what the risks are.",
+      "service": "egd",
+      "hidden": false
+    },
+    {
+      "id": "hemorrhoid-types",
+      "title": "Treatment for Different Types of Hemorrhoids",
+      "youtube": "https://www.youtube.com/watch?v=WzI-iqU9VKw",
+      "text": "The kinds of hemorrhoids and how each is treated.",
+      "service": "hemorrhoid-treatment",
+      "hidden": false
+    },
+    {
+      "id": "hemorrhoid-banding",
+      "title": "Getting Rid of Hemorrhoids",
+      "youtube": "https://www.youtube.com/watch?v=OHRdnj_8DZU",
+      "text": "How in-office hemorrhoid treatment works.",
+      "service": "hemorrhoid-treatment",
+      "hidden": false
+    }
+  ]
 }
