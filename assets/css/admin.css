@@ -159,3 +159,17 @@ body.admin { padding-left: env(safe-area-inset-left, 0px); padding-right: env(sa
 @keyframes flash { 0%, 40% { background: color-mix(in srgb, var(--accent) 16%, transparent); } 100% { background: transparent; } }
 .flash { animation: flash 1.8s ease-out; border-radius: 8px; }
 @media (max-width: 820px) { .gsearch kbd { display: none; } }
+
+/* suggested edits */
+.sg-list { display: grid; gap: 12px; }
+.sg-item { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px; }
+.sg-thumb { display: flex; align-items: center; justify-content: center; aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; background: var(--bg-2); border: 1px solid var(--line); color: var(--faint); font-size: 12px; }
+.sg-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.sg-meta { font-size: 12px; color: var(--muted); }
+.sg-meta a { color: var(--accent); }
+.sg-msg { margin: 6px 0 10px; white-space: pre-wrap; }
+.sg-act { display: flex; gap: 8px; flex-wrap: wrap; }
+.sg-act select, .sg-act input { height: 32px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--bg-2); color: var(--text); padding: 0 8px; font: 13px var(--sans); }
+.sg-act input { flex: 1; min-width: 180px; }
+a.btn { text-decoration: none; display: inline-flex; align-items: center; }
+@media (max-width: 700px) { .sg-item { grid-template-columns: 1fr; } }

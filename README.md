@@ -9,3 +9,8 @@ Website for Kurt Vernon, MD, PA ("The GI Guy"), served by GitHub Pages.
 - `404.html` forwards old `giguy.net/*.php` links to the matching new page.
 
 Preview locally: `python3 -m http.server 8479` in this folder.
+
+## Suggested edits
+- People signed into `/admin/` see a 💡 **Suggest an edit** button on every page. It screenshots the screen, lets them draw on it, and saves the note + screenshot to the **private** repo `korivernon/giguy-edits` (`edits/<id>.json` + `.jpg`). The admin token must include that repo (Contents: read & write).
+- Admin → **Suggested edits** lists them with status and notes.
+- In Claude Code, run `/process-edits` here; `scripts/edits.py export|update|count` is the bridge (uses `gh` auth).

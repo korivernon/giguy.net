@@ -263,7 +263,7 @@
   };
 
   const NAV = [
-    ['banners', 'Banners'], ['practice', 'Practice info & hours'], ['locations', 'Locations'], ['home', 'Home page'], ['about', 'About & insurance'], ['conditions', 'Conditions'],
+    ['suggestions', 'Suggested edits'], ['banners', 'Banners'], ['practice', 'Practice info & hours'], ['locations', 'Locations'], ['home', 'Home page'], ['about', 'About & insurance'], ['conditions', 'Conditions'],
     ['fasttrack', 'Fast-Track colonoscopy'], ['doctor', 'Dr. Vernon'], ['team', 'Team'], ['services', 'Services'], ['faqs', 'FAQs'], ['forms', 'Forms & PDFs'], ['videos', 'Videos'],
     ['articles', 'Articles'], ['learn', 'Quiz & digestive system'], ['raw', 'Raw JSON'],
   ];
@@ -416,6 +416,7 @@
     tb.innerHTML = '<h1>' + esc(title) + '</h1>' +
       (d ? '<span class="dirty">● unpublished changes</span>' : '<span class="clean">✓ in sync</span>') +
       '<span class="sp"></span>' +
+      '<a class="btn sm" href="../" target="_blank" rel="noopener">View site ↗</a>' +
       '<button class="btn sm" type="button" id="preview">Preview</button>' +
       '<button class="btn sm danger" type="button" id="discard"' + (d ? '' : ' disabled') + '>Discard</button>' +
       '<button class="btn sm primary" type="button" id="publish"' + (d ? '' : ' disabled') + '>' + (S.mode === 'github' ? 'Publish' : 'Download JSON') + '</button>';
@@ -444,6 +445,7 @@
     if (COLLECTIONS[S.view]) return renderList(v, S.view);
     if (S.view === 'raw') return renderRaw(v);
     if (S.view === 'search') return renderSearch(v);
+    if (S.view === 'suggestions') return renderSuggestions(v);
     const hints = {
       practice: 'Phone, Patient Portal link, hours and footer text used across the whole site.',
       home: 'The top of the home page, the three highlights and the recognition strip.',
@@ -534,6 +536,56 @@
     const box = el.closest('.field, .rep-row') || el;
     box.classList.remove('flash'); void box.offsetWidth; box.classList.add('flash');
     return true;
+  }
+
+  /* ---------------- suggested edits (private repo, see assets/js/suggest.js) ---------------- */
+  async function renderSuggestions(v) {
+    const SG = window.GGSuggest;
+    if (S.mode !== 'github' || !SG) {
+      v.innerHTML = '<p class="hint">Suggested edits are saved to GitHub, so connect GitHub (sign out, then sign in with your token) to see them.</p>';
+      return;
+    }
+    v.innerHTML = '<p class="hint">Loading suggestions…</p>';
+    let items;
+    try { items = await SG.list(); } catch (err) { v.innerHTML = '<p class="hint" style="color:var(--down)">' + esc(SG.explain(err)) + '</p>'; return; }
+    if (S.view !== 'suggestions') return;
+    const showAll = !!S.sgAll;
+    const open = items.filter(x => x.status === 'new' || x.status === 'in_progress');
+    const shown = showAll ? items : open;
+    const kind = k => (SG.KINDS.find(x => x[0] === k) || [, k])[1];
+    v.innerHTML = '<p class="hint">Sent with the 💡 <b>Suggest an edit</b> button, which only people signed into this admin page see, on every page of the site. They\'re stored privately in <code>' + esc(SG.repo()) + '</code>. ' +
+        'To build them, run <code>/process-edits</code> in Claude Code in the giguy.net project.</p>' +
+      '<div class="listbar"><span class="mono" style="font-size:12px;color:var(--muted)">' + open.length + ' open · ' + items.length + ' total</span><span class="sp"></span>' +
+        '<label class="check" style="margin:0"><input type="checkbox" id="sg-all"' + (showAll ? ' checked' : '') + '>show done and won\'t do</label></div>' +
+      (shown.length ? '<div class="sg-list">' + shown.map(x =>
+        '<article class="sg-item" data-id="' + esc(x.id) + '">' +
+          (x.screenshot ? '<a class="sg-thumb" target="_blank" rel="noopener" data-shot="' + esc(x.id) + '"><span>loading…</span></a>' : '<div class="sg-thumb none">no screenshot</div>') +
+          '<div class="sg-body">' +
+            '<div class="sg-meta"><span class="mode-pill">' + esc(kind(x.kind)) + '</span> <a href="..' + esc(x.page || '/') + '" target="_blank" rel="noopener">' + esc(x.page || '/') + '</a>' +
+              ' · ' + esc(new Date(x.submitted_at).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + (x.submitted_by ? ' · @' + esc(x.submitted_by) : '') + '</div>' +
+            '<p class="sg-msg">' + esc(x.message) + '</p>' +
+            '<div class="sg-act"><select data-k="status">' + SG.STATUSES.map(s => '<option value="' + s[0] + '"' + (s[0] === x.status ? ' selected' : '') + '>' + s[1] + '</option>').join('') + '</select>' +
+              '<input data-k="resolution" placeholder="Note: what changed, or why not" value="' + esc(x.resolution || '') + '">' +
+              '<button class="btn sm primary" type="button" data-save>Save</button></div>' +
+            (x.resolved_commit ? '<div class="sg-meta">commit ' + esc(String(x.resolved_commit).slice(0, 7)) + '</div>' : '') +
+          '</div></article>').join('') + '</div>'
+        : '<div class="list"><div class="empty">' + (items.length ? 'Nothing open. Tick "show done" to see past suggestions.' : 'No suggestions yet. Open the site in this browser and tap 💡 Suggest an edit.') + '</div></div>');
+    $('#sg-all').onchange = e => { S.sgAll = e.target.checked; renderSuggestions(v); };
+    // Screenshots come through the API (private repo).
+    v.querySelectorAll('[data-shot]').forEach(async a => {
+      const item = items.find(x => x.id === a.dataset.shot);
+      try { const u = await SG.imageUrl(item); a.href = u; a.innerHTML = '<img src="' + u + '" alt="Screenshot for this suggestion">'; }
+      catch (err) { a.innerHTML = '<span>couldn\'t load</span>'; }
+    });
+    v.querySelectorAll('[data-save]').forEach(b => b.onclick = async () => {
+      const row = b.closest('[data-id]'); const item = items.find(x => x.id === row.dataset.id);
+      b.disabled = true; b.textContent = 'Saving…';
+      try {
+        const next = await SG.update(item, { status: row.querySelector('[data-k=status]').value, resolution: row.querySelector('[data-k=resolution]').value.trim() });
+        Object.assign(item, next); toast('Saved', 'ok'); b.textContent = 'Saved';
+        setTimeout(() => { b.disabled = false; b.textContent = 'Save'; }, 1200);
+      } catch (err) { b.disabled = false; b.textContent = 'Save'; toast(SG.explain(err), 'err'); }
+    });
   }
 
   /* ---------------- collection list ---------------- */
@@ -747,6 +799,7 @@
     S.base = serialize(S.data);
     offerDraftRestore();
     renderShell();
+    if (window.GGSuggest) window.GGSuggest.mount();   // 💡 Suggest an edit (needs the GitHub token, so not in local mode)
     window.addEventListener('hashchange', go);
     go();
   }
