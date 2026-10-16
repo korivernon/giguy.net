@@ -519,15 +519,21 @@
       return;
     }
     header();
+    if (draft) {
+      const past = new URLSearchParams(location.search).has('version');
+      $('#site-header').insertAdjacentHTML('afterbegin', '<div class="banner banner-info" role="status"><div class="container banner-in"><span class="banner-msg">' +
+        (past ? 'Preview of a past version from the admin Change history, not the live site.' : 'Preview of unpublished edits, not the live site.') + '</span></div></div>');
+    }
     const render = PAGES[PAGE] || PAGES.home;
     $('#app').innerHTML = render();
     footer();
     applyTitleCase(document.body);
     document.title = titleCase(document.title);
     // Admin preview: keep ?draft=1 on links between pages so the unpublished version follows you.
+    const keep = new URLSearchParams(location.search).has('version') ? 'version=1' : 'draft=1';
     if (draft) document.querySelectorAll('a[href]').forEach(a => {
       const h = a.getAttribute('href');
-      if (/^[a-z0-9-]+\.html/i.test(h) && !/[?&]draft=/.test(h)) a.setAttribute('href', h.replace(/^([^?#]+)(\?[^#]*)?/, (m, p, q) => p + (q ? q + '&' : '?') + 'draft=1'));
+      if (/^[a-z0-9-]+\.html/i.test(h) && !/[?&](draft|version)=/.test(h)) a.setAttribute('href', h.replace(/^([^?#]+)(\?[^#]*)?/, (m, p, q) => p + (q ? q + '&' : '?') + keep));
     });
     document.addEventListener('click', e => {
       const b = e.target.closest('[data-yt]'); if (!b) return;

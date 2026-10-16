@@ -4,6 +4,7 @@
 
   const DRAFT_KEY = 'giguy:draft';
   const TOKEN_KEY = 'giguy:gh-token';
+  const VERSION_KEY = 'giguy:version-preview';
 
   function store(kind) {
     try { return kind === 'session' ? global.sessionStorage : global.localStorage; } catch (e) { return null; }
@@ -77,6 +78,10 @@
       const d = readDraft();
       if (d) return { data: d, draft: true };
     }
+    // A past version opened from the admin's Change history (kept apart from unpublished edits).
+    if (params.has('version')) {
+      try { const v = JSON.parse(store('local').getItem(VERSION_KEY) || 'null'); if (v) return { data: v, draft: true, version: true }; } catch (e) { /* fall through */ }
+    }
     const base = global.GG_BASE || '';
     const res = await fetch(base + 'data/site.json?t=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error('site.json ' + res.status);
@@ -84,7 +89,7 @@
   }
 
   global.GG = {
-    DRAFT_KEY, TOKEN_KEY,
+    DRAFT_KEY, TOKEN_KEY, VERSION_KEY,
     esc, safeUrl, isExternal, tel, inline, md, lines, bannerState, loadSite, readDraft, getItem,
   };
 })(window);

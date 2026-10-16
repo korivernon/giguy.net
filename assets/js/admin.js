@@ -267,7 +267,7 @@
   };
 
   const NAV = [
-    ['suggestions', 'Suggested edits'], ['banners', 'Banners'], ['practice', 'Practice info & hours'], ['locations', 'Locations'], ['home', 'Home page'], ['about', 'About & insurance'], ['conditions', 'Conditions'],
+    ['suggestions', 'Suggested edits'], ['history', 'Change history'], ['oldsite', 'Old site'], ['banners', 'Banners'], ['practice', 'Practice info & hours'], ['locations', 'Locations'], ['home', 'Home page'], ['about', 'About & insurance'], ['conditions', 'Conditions'],
     ['fasttrack', 'Fast-Track colonoscopy'], ['doctor', 'Dr. Vernon'], ['team', 'Team'], ['services', 'Services'], ['faqs', 'FAQs'], ['forms', 'Forms & PDFs'], ['videos', 'Videos'],
     ['articles', 'Articles'], ['learn', 'Quiz & digestive system'], ['raw', 'Raw JSON'],
   ];
@@ -450,6 +450,8 @@
     if (S.view === 'raw') return renderRaw(v);
     if (S.view === 'search') return renderSearch(v);
     if (S.view === 'suggestions') return renderSuggestions(v);
+    if (S.view === 'history') return renderHistory(v);
+    if (S.view === 'oldsite') return renderOldSite(v);
     const hints = {
       practice: 'Phone, Patient Portal link, hours and footer text used across the whole site.',
       home: 'The top of the home page, the three highlights and the recognition strip.',
@@ -540,6 +542,122 @@
     const box = el.closest('.field, .rep-row') || el;
     box.classList.remove('flash'); void box.offsetWidth; box.classList.add('flash');
     return true;
+  }
+
+  /* ---------------- change history: every commit = a version you can view, preview or restore ---------------- */
+  const needGitHub = v => { v.innerHTML = '<p class="hint">This needs GitHub. Sign out, then sign in with your token.</p>'; };
+  const when = iso => new Date(iso).toLocaleString([], { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+  async function renderHistory(v) {
+    if (S.mode !== 'github') return needGitHub(v);
+    v.innerHTML = '<p class="hint">Loading changes…</p>';
+    let commits;
+    try { commits = await gh('/repos/' + S.repo + '/commits?sha=' + encodeURIComponent(S.branch) + '&per_page=60&t=' + Date.now()); }
+    catch (err) { v.innerHTML = '<p class="hint" style="color:var(--down)">' + esc(err.message) + '</p>'; return; }
+    if (S.view !== 'history') return;
+    v.innerHTML = '<p class="hint">Every change to the site, newest first: edits published here and changes made in code. Tap one to see exactly what changed. ' +
+        '<b>Preview</b> shows the site\'s content as it was then; <b>Restore</b> puts the whole site back to that version as a new change, so nothing is lost and a restore can be undone the same way.</p>' +
+      '<div class="hist">' + commits.map((c, i) => {
+        const [title, ...rest] = c.commit.message.split('\n');
+        const body = rest.join('\n').replace(/\n*Co-Authored-By:.*$/s, '').trim();
+        return '<details class="hist-item" data-sha="' + c.sha + '"><summary><span class="hist-title">' + esc(title) + (i === 0 ? ' <span class="mode-pill gh">LIVE</span>' : '') + '</span>' +
+          '<span class="hist-meta">' + esc(when(c.commit.author.date)) + ' · ' + esc(c.author ? '@' + c.author.login : c.commit.author.name) + ' · <code>' + c.sha.slice(0, 7) + '</code></span></summary>' +
+          (body ? '<p class="hist-body">' + esc(body) + '</p>' : '') +
+          '<div class="hist-acts"><button class="btn sm" type="button" data-act="preview">Preview this version</button>' +
+            (i === 0 ? '' : '<button class="btn sm danger" type="button" data-act="restore">Restore this version</button>') +
+            '<a class="btn sm" href="https://github.com/' + esc(S.repo) + '/commit/' + c.sha + '" target="_blank" rel="noopener">Open on GitHub ↗</a></div>' +
+          '<div class="hist-diff"><span class="hint">Loading what changed…</span></div></details>';
+      }).join('') + '</div>';
+    v.querySelectorAll('.hist-item').forEach(d => d.addEventListener('toggle', () => { if (d.open && !d.dataset.loaded) { d.dataset.loaded = 1; showDiff(d); } }));
+    v.querySelector('.hist').addEventListener('click', e => {
+      const b = e.target.closest('[data-act]'); if (!b) return;
+      const sha = b.closest('[data-sha]').dataset.sha;
+      if (b.dataset.act === 'preview') previewVersion(sha, b);
+      if (b.dataset.act === 'restore') restoreVersion(sha, commits[0].sha, b.closest('.hist-item').querySelector('.hist-title').textContent);
+    });
+  }
+  async function showDiff(d) {
+    const box = d.querySelector('.hist-diff');
+    try {
+      const c = await gh('/repos/' + S.repo + '/commits/' + d.dataset.sha);
+      box.innerHTML = c.files.map(f => {
+        const isData = /\.(png|jpe?g|gif|pdf|webp|ico)$/i.test(f.filename);
+        const lines = (f.patch || '').split('\n').filter(l => !/^\\ No newline/.test(l));
+        const shown = lines.slice(0, 220);
+        return '<div class="diff-file"><div class="diff-name"><b>' + esc(f.filename) + '</b> <span class="mono">' + esc(f.status) + ' +' + f.additions + ' −' + f.deletions + '</span></div>' +
+          (isData ? '<div class="diff-note">file (image or document) ' + esc(f.status) + '</div>'
+            : !f.patch ? '<div class="diff-note">too large to show here — open on GitHub</div>'
+            : '<pre class="diff">' + shown.map(l => '<span class="' + (l[0] === '+' ? 'add' : l[0] === '-' ? 'del' : l.startsWith('@@') ? 'hunk' : '') + '">' + esc(l) + '</span>').join('\n') +
+              (lines.length > shown.length ? '\n<span class="hunk">… ' + (lines.length - shown.length) + ' more lines on GitHub</span>' : '') + '</pre>') + '</div>';
+      }).join('') || '<div class="diff-note">No file changes.</div>';
+    } catch (err) { box.innerHTML = '<span class="hint" style="color:var(--down)">' + esc(err.message) + '</span>'; }
+  }
+  // The site's content (data/site.json) as of that version, opened in the normal draft preview.
+  async function previewVersion(sha, b) {
+    b.disabled = true;
+    try {
+      const f = await gh(contentsUrl(DATA_PATH) + '?ref=' + sha);
+      put(ls(), K.VERSION_KEY, utf8b64(f.content));
+      window.open('../?version=1', '_blank');
+      toast('Opened that version in a preview tab. Your unpublished edits are untouched.', 'ok');
+    } catch (err) { toast('Preview failed: ' + err.message, 'err'); }
+    b.disabled = false;
+  }
+  // Restore = a NEW commit whose files equal that version's files (history kept; undo by restoring again).
+  async function restoreVersion(sha, headSha, title) {
+    if (dirty() && !confirm('You have unpublished edits in the admin. Restoring will replace the live site; your edits stay as a draft on this device. Continue?')) return;
+    if (!confirm('Restore the whole site to this version?\n\n"' + title + '"\n\nEverything changed after it, content and design, is undone, as a new change you can undo the same way. The live site updates in about a minute.')) return;
+    try {
+      toast('Restoring…');
+      const target = await gh('/repos/' + S.repo + '/git/commits/' + sha);
+      const commit = await gh('/repos/' + S.repo + '/git/commits', { method: 'POST', body: JSON.stringify({
+        message: 'Restore the site to "' + title + '" (' + sha.slice(0, 7) + ')\n\nRestored from the admin Change history. Undo by restoring the version before this one.',
+        tree: target.tree.sha, parents: [headSha] }) });
+      await gh('/repos/' + S.repo + '/git/refs/heads/' + encodeURIComponent(S.branch), { method: 'PATCH', body: JSON.stringify({ sha: commit.sha, force: false }) });
+      const f = await ghLoad(); S.data = f.data; S.sha = f.sha; S.base = serialize(S.data); normalize();
+      toast('Restored. The live site updates in about a minute.', 'ok');
+      renderView();
+    } catch (err) {
+      toast((err.status === 422 || err.status === 409 ? 'Someone published a change just now; reload Change history and try again. ' : 'Restore failed: ') + err.message, 'err');
+    }
+  }
+
+  /* ---------------- old site archive (private repo, captured before the move) ---------------- */
+  async function renderOldSite(v) {
+    if (S.mode !== 'github') return needGitHub(v);
+    const SG = window.GGSuggest, repo = SG ? SG.repo() : 'korivernon/giguy-edits';
+    v.innerHTML = '<p class="hint">Loading the archive…</p>';
+    let idx;
+    try { const f = await gh('/repos/' + repo + '/contents/old-site/pages.json'); idx = JSON.parse(utf8b64(f.content)); }
+    catch (err) { v.innerHTML = '<p class="hint" style="color:var(--down)">' + esc(SG ? SG.explain(err) : err.message) + '</p>'; return; }
+    if (S.view !== 'oldsite') return;
+    v.innerHTML = '<p class="hint">The old giguy.net exactly as it was on the NexG server, captured ' + esc(when(idx.captured_at.replace(/([+-]\d\d)(\d\d)$/, '$1:$2'))) + ', before the move. ' +
+        'Stored privately in <code>' + esc(repo) + '/old-site</code>, with every page, image and PDF. Tap a page to see screenshots.</p>' +
+      '<div class="hist">' + idx.pages.map((p, i) => '<details class="hist-item old-page" data-i="' + i + '"><summary><span class="hist-title">' + esc(p.title || p.url) + '</span><span class="hist-meta">' + esc(p.url.replace('https://giguy.net/', '/')) + '</span></summary>' +
+        '<div class="hist-acts"><button class="btn sm" type="button" data-raw="' + esc(p.desktop) + '">Desktop screenshot ↗</button><button class="btn sm" type="button" data-raw="' + esc(p.phone) + '">Phone screenshot ↗</button>' +
+        '<button class="btn sm" type="button" data-raw="' + esc(p.file) + '" data-type="text/plain">Page source ↗</button>' +
+        '<a class="btn sm" href="https://github.com/' + esc(repo) + '/tree/main/old-site" target="_blank" rel="noopener">All files on GitHub ↗</a></div>' +
+        '<div class="old-shots"></div></details>').join('') + '</div>';
+    const raw = async (path, type) => {
+      const res = await fetch('https://api.github.com/repos/' + repo + '/contents/' + path.split('/').map(encodeURIComponent).join('/'),
+        { headers: { Accept: 'application/vnd.github.raw', Authorization: 'Bearer ' + S.token } });
+      if (!res.ok) throw new Error('GitHub ' + res.status);
+      const blob = await res.blob();
+      return URL.createObjectURL(type ? new Blob([blob], { type }) : blob);
+    };
+    v.querySelectorAll('.old-page').forEach(d => d.addEventListener('toggle', async () => {
+      if (!d.open || d.dataset.loaded) return; d.dataset.loaded = 1;
+      const p = idx.pages[Number(d.dataset.i)], box = d.querySelector('.old-shots');
+      box.innerHTML = '<span class="hint">Loading screenshots…</span>';
+      try {
+        const [dk, ph] = await Promise.all([raw(p.desktop), raw(p.phone)]);
+        box.innerHTML = '<figure><img src="' + dk + '" alt="Desktop screenshot"><figcaption>Desktop</figcaption></figure><figure><img src="' + ph + '" alt="Phone screenshot"><figcaption>Phone</figcaption></figure>';
+      } catch (err) { box.innerHTML = '<span class="hint" style="color:var(--down)">' + esc(err.message) + '</span>'; }
+    }));
+    v.querySelectorAll('[data-raw]').forEach(b => b.onclick = async () => {
+      const w = window.open('', '_blank');
+      try { const u = await raw(b.dataset.raw, b.dataset.type); if (w) w.location = u; else window.open(u, '_blank'); }
+      catch (err) { if (w) w.close(); toast(err.message, 'err'); }
+    });
   }
 
   /* ---------------- suggested edits (private repo, see assets/js/suggest.js) ---------------- */
