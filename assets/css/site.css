@@ -462,3 +462,12 @@ a.cond .more { margin-top: 10px; }
 .video-frame:hover .video-play { background: var(--primary); }
 .detail .videos { grid-template-columns: 1fr; }
 @media (min-width: 700px) { .detail .videos { grid-template-columns: 1fr 1fr; } }
+
+/* billing & payments */
+.card.billing { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start; }
+.card.billing .hl-ico { width: 46px; height: 46px; margin: 0; }
+.card.billing h2 { margin-bottom: 6px; }
+.billing-acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+@media (max-width: 520px) { .card.billing { grid-template-columns: 1fr; } }
+
+.footer .hours-lines { color: #cddbc8; font-size: inherit; }

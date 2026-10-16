@@ -12,7 +12,11 @@
     "footerTagline": "Your partner in personalized, compassionate digestive care.",
     "endoscopyHours": "Monday – Thursday: 5:30 am – 3:00 pm\nSecond Saturday of each month",
     "klaraUrl": "",
-    "klaraLabel": "Message us on Klara"
+    "klaraLabel": "Message us on Klara",
+    "payUrl": "https://giguy.mygportal.com/",
+    "payLabel": "Pay Your Bill",
+    "payNote": "Pay securely through our Patient Portal: log in, then choose **Pay your bills**. Questions about a bill? Call (919) 577-0085.",
+    "portalRegisterUrl": "https://giguy.mygportal.com/PP6-5-10/Account/Register"
   },
   "banners": [
     {

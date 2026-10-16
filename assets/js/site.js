@@ -28,6 +28,7 @@
     doc: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm-1 7V3.5L18.5 9zM8 13h8v2H8zm0 4h8v2H8z"/></svg>',
     check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>',
     arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l-1.4 1.4 5.6 5.6H4v2h12.2l-5.6 5.6L12 20l8-8z"/></svg>',
+    card: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 14H4v-6h16zm0-10H4V6h16z"/></svg>',
     chat: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2zm3 5v2h10V9zm0 4v2h7v-2z"/></svg>',
     menu: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>',
     close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z"/></svg>',
@@ -113,7 +114,7 @@
         '<div class="foot-visit"><h4>Visit</h4><div class="foot-locs">' + shown(D.locations).map(l =>
           '<p><b>' + esc(l.name) + '</b><a class="foot-addr" href="' + mapUrl(l) + '" target="_blank" rel="noopener">' + esc(l.address).replace(/\n/g, '<br>') + '</a><a href="' + tel(l.phone) + '">Phone ' + esc(l.phone) + '</a>' + (l.fax ? '<span>Fax ' + esc(l.fax) + '</span>' : '') + '</p>').join('') + '</div></div>' +
         '<div class="foot-hours">' + hoursHtml(P, 'h4') + '</div>' +
-        '<div class="foot-patients"><h4>Patients</h4><ul><li><a href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + esc(P.portalLabel || 'Patient Portal') + '</a></li>' + (P.klaraUrl ? '<li><a href="' + esc(safeUrl(P.klaraUrl)) + '" target="_blank" rel="noopener">' + esc(P.klaraLabel || 'Message us on Klara') + '</a></li>' : '') + (shown(D.videos).length ? '<li><a href="patients.html#videos">Instruction Videos</a></li>' : '') + '<li><a href="patients.html#forms">Patient Forms</a></li><li><a href="patients.html#prep">Colonoscopy Prep</a></li><li><a href="risk-quiz.html">Colon Cancer Risk Quiz</a></li></ul></div>' +
+        '<div class="foot-patients"><h4>Patients</h4><ul><li><a href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + esc(P.portalLabel || 'Patient Portal') + '</a></li>' + (P.payUrl ? '<li><a href="' + esc(safeUrl(P.payUrl)) + '" target="_blank" rel="noopener">' + esc(P.payLabel || 'Pay Your Bill') + '</a></li>' : '') + (P.klaraUrl ? '<li><a href="' + esc(safeUrl(P.klaraUrl)) + '" target="_blank" rel="noopener">' + esc(P.klaraLabel || 'Message us on Klara') + '</a></li>' : '') + (shown(D.videos).length ? '<li><a href="patients.html#videos">Instruction Videos</a></li>' : '') + '<li><a href="patients.html#forms">Patient Forms</a></li><li><a href="patients.html#prep">Colonoscopy Prep</a></li><li><a href="risk-quiz.html">Colon Cancer Risk Quiz</a></li></ul></div>' +
         '<div class="foot-explore"><h4>Explore</h4><ul>' + navItems().slice(1).map(n => '<li><a href="' + n[1] + '">' + n[2] + '</a></li>').join('') + '</ul></div>' +
       '</div>' +
       (D.partners && D.partners.length ? '<div class="partners">' + D.partners.map(p => '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '" loading="lazy">').join('') + '</div>' : '') +
@@ -374,7 +375,8 @@
   PAGES.patients = function () {
     const P = D.practice || {};
     const portal = '<a class="head-portal" href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + ICON.lock + esc(P.portalLabel || 'Patient Portal') + ' ' + ICON.arrow + '</a>';
-    const head = '<div class="head-links">' + portal + klaraLink(P, 'head-portal') + '</div>';
+    const pay = P.payUrl ? '<a class="head-portal" href="' + esc(safeUrl(P.payUrl)) + '" target="_blank" rel="noopener">' + ICON.card + esc(P.payLabel || 'Pay Your Bill') + ' ' + ICON.arrow + '</a>' : '';
+    const head = '<div class="head-links">' + portal + pay + klaraLink(P, 'head-portal') + '</div>';
     const vids = shown(D.videos);
     return sectionHead('patients', 'Forms, colonoscopy prep, instruction videos, insurance and answers to common questions.', head) +
       ftPromo() +
@@ -388,6 +390,11 @@
           '<div class="hours-in-card">' + hoursHtml(P, 'h3') + '</div></div>' +
         '<div class="card"><h2>Insurance</h2><p>' + inline((D.about || {}).insurance) + '</p></div>' +
       '</div></section>' +
+      (P.payUrl ? '<section class="section" id="billing"><div class="container"><div class="card billing">' +
+        '<span class="hl-ico">' + ICON.card + '</span><div><h2>Billing &amp; Payments</h2><p>' + inline(P.payNote || '') + '</p>' +
+        '<div class="billing-acts"><a class="btn btn-primary btn-sm" href="' + esc(safeUrl(P.payUrl)) + '" target="_blank" rel="noopener">' + esc(P.payLabel || 'Pay Your Bill') + ' ' + ICON.arrow + '</a>' +
+        (P.portalRegisterUrl ? '<a class="btn btn-outline btn-sm" href="' + esc(safeUrl(P.portalRegisterUrl)) + '" target="_blank" rel="noopener">New to the portal? Register</a>' : '') +
+        '</div></div></div></div></section>' : '') +
       '<section class="section"><div class="container"><div class="card note"><h2>Before you message us</h2><p>' + esc(P.emergencyNote) + '</p><p class="muted small">Social media pages are for general information only, and we can\'t give medical advice there. For a specific question, please call the office or use the Patient Portal.</p></div></div></section>' +
       '<section class="section alt"><div class="container narrow"><h2>Common questions</h2>' + faqHtml(D.faqs) + '</div></section>';
   };
