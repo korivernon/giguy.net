@@ -154,11 +154,15 @@
   // Office name on one line, number on the next; outlined so it reads as a choice, not a white slab.
   const callOpts = (cls) => '<div class="call-opts' + (cls ? ' ' + cls : '') + '">' + shown(D.locations).map(l =>
     '<a class="call-opt" href="' + tel(l.phone) + '"><small>' + esc(l.name) + '</small><b>' + ICON.phone + esc(l.phone) + '</b></a>').join('') + '</div>';
-  // Office hours, then endoscopy hours when set; one time block per line.
+  // Office hours apply to both offices; endoscopy hours belong to the office that has them (Fuquay-Varina).
+  // One time block per line. Each office can override its office hours in the admin (blank = the practice's).
+  const hoursBlock = (hTag, title, txt) => txt ? '<' + hTag + ' class="hours-title">' + title + '</' + hTag + '><p class="hours-lines">' + lines(txt).map(esc).join('<br>') + '</p>' : '';
   function hoursHtml(P, hTag) {
-    const block = (title, txt) => txt ? '<' + hTag + ' class="hours-title">' + title + '</' + hTag + '><p class="hours-lines">' + lines(txt).map(esc).join('<br>') + '</p>' : '';
-    return block('Office Hours', P.hours) + block('Endoscopy Hours', P.endoscopyHours);
+    const locs = shown(D.locations);
+    return hoursBlock(hTag, 'Office Hours', P.hours) +
+      locs.filter(l => l.endoscopyHours).map(l => hoursBlock(hTag, 'Endoscopy Hours' + (locs.length > 1 ? ' (' + esc(l.name) + ')' : ''), l.endoscopyHours)).join('');
   }
+  const locHoursHtml = (l, P) => '<div class="loc-hours">' + hoursBlock('h4', 'Office Hours', l.hours || P.hours) + hoursBlock('h4', 'Endoscopy Hours', l.endoscopyHours) + '</div>';
   const klaraLink = (P, cls) => P.klaraUrl ? '<a class="' + cls + '" href="' + esc(safeUrl(P.klaraUrl)) + '" target="_blank" rel="noopener">' + ICON.chat + esc(P.klaraLabel || 'Message us on Klara') + ' ' + ICON.arrow + '</a>' : '';
   const ytId = u => { const m = String(u || '').match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/); return m ? m[1] : ''; };
   // Click-to-play: YouTube's thumbnail first; the player (privacy-enhanced domain) loads only when tapped.
@@ -179,6 +183,7 @@
         '<div class="loc-body"><h3>' + esc(l.name) + ' office</h3>' +
         '<p class="icoline">' + ICON.pin + '<span>' + esc(l.address).replace(/\n/g, '<br>') + '</span></p>' +
         '<p class="icoline">' + ICON.phone + '<span><a href="' + tel(l.phone) + '">' + esc(l.phone) + '</a>' + (l.fax ? ' · Fax ' + esc(l.fax) : '') + '</span></p>' +
+        locHoursHtml(l, D.practice || {}) +
         '<div class="loc-acts"><a class="btn btn-primary btn-sm" href="' + tel(l.phone) + '">Call</a><a class="btn btn-outline btn-sm" href="' + mapUrl(l) + '" target="_blank" rel="noopener">Directions</a></div></div>' +
       '</article>').join('') + '</div>';
   }
@@ -211,8 +216,7 @@
       (H.recognition ? '<section class="recog"><div class="container recog-in">' + ICON.check + '<p>' + inline(H.recognition) + (H.recognitionLink ? ' <a href="' + esc(safeUrl(H.recognitionLink)) + '">Read more</a>' : '') + '</p></div></section>' : '') +
       '<section class="section"><div class="container two-col">' +
         '<div><p class="eyebrow">FAQs</p><h2>Your questions, answered</h2>' + faqHtml(D.faqs) + '</div>' +
-        '<div><p class="eyebrow">Visit us</p><h2>Two convenient offices</h2>' + locationCards(false) +
-          '<div class="card hours">' + hoursHtml(P, 'h3') + '</div></div>' +
+        '<div><p class="eyebrow">Visit us</p><h2>Two convenient offices</h2>' + locationCards(false) + '</div>' +
       '</div></section>' + callBand();
   };
 
@@ -469,8 +473,8 @@
     const P = D.practice || {};
     return sectionHead('contact', 'Two offices serving the Greater Raleigh area and surrounding communities.') +
       '<section class="section"><div class="container">' + locationCards(true) +
-        '<div class="two-col" style="margin-top:24px"><div class="card hours">' + hoursHtml(P, 'h3') + (P.klaraUrl ? '<p style="margin-top:14px">' + klaraLink(P, 'btn btn-outline btn-sm') + '</p>' : '') + '</div>' +
-        '<div class="card note"><p><b>In an emergency, call 911.</b> ' + esc(P.emergencyNote) + '</p><p class="muted small">We monitor our website and social media, but social media is for general information only and can\'t be used for medical advice. To protect your privacy, please call the office with questions about your care.</p></div></div>' +
+        (P.klaraUrl ? '<p style="margin:18px 0 0">' + klaraLink(P, 'btn btn-outline btn-sm') + '</p>' : '') +
+        '<div style="margin-top:24px"><div class="card note"><p><b>In an emergency, call 911.</b> ' + esc(P.emergencyNote) + '</p><p class="muted small">We monitor our website and social media, but social media is for general information only and can\'t be used for medical advice. To protect your privacy, please call the office with questions about your care.</p></div></div>' +
       '</div></section>';
   };
 

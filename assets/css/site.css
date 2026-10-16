@@ -471,3 +471,9 @@ a.cond .more { margin-top: 10px; }
 @media (max-width: 520px) { .card.billing { grid-template-columns: 1fr; } }
 
 .footer .hours-lines { color: #cddbc8; font-size: inherit; }
+
+/* hours inside each office card */
+.loc-hours { margin: 4px 0 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+.loc-hours h4 { font-size: .95rem; color: var(--deep); margin: 0 0 4px; }
+.loc-hours .hours-lines { margin: 0 0 10px; font-size: .95rem; color: var(--muted); }
+.loc-hours .hours-lines:last-child { margin-bottom: 0; }

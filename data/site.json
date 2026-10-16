@@ -10,7 +10,6 @@
     "emergencyNote": "If this is a medical emergency, call 911 or go to your nearest emergency room. Please don't use the website, patient portal or social media for urgent medical questions.",
     "disclaimer": "This site is for educational use only. Nothing on it is a substitute for medical advice, diagnosis or treatment.",
     "footerTagline": "Your partner in personalized, compassionate digestive care.",
-    "endoscopyHours": "Monday – Thursday: 5:30 am – 3:00 pm\nSecond Saturday of each month",
     "klaraUrl": "",
     "klaraLabel": "Message us on Klara",
     "payUrl": "https://giguy.mygportal.com/",
@@ -570,7 +569,9 @@
       "phone": "(919) 577-0085",
       "fax": "",
       "mapQuery": "1004 Procure St, Fuquay-Varina, NC 27526",
-      "hidden": false
+      "hidden": false,
+      "hours": "",
+      "endoscopyHours": "Monday – Thursday: 5:30 am – 3:00 pm\nSecond Saturday of each month"
     },
     {
       "id": "dunn",
@@ -579,7 +580,9 @@
       "phone": "(910) 891-5808",
       "fax": "(910) 891-5323",
       "mapQuery": "904 W Broad St, Dunn, NC 28334",
-      "hidden": false
+      "hidden": false,
+      "hours": "",
+      "endoscopyHours": ""
     }
   ],
   "forms": [
