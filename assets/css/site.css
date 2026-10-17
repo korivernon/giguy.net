@@ -72,7 +72,7 @@ svg { width: 1.1em; height: 1.1em; fill: currentColor; flex: none; }
 .tb-phones { display: flex; gap: 2px 18px; flex-wrap: wrap; justify-content: center; line-height: 1.5; }
 .topbar a { color: #fff; text-decoration: none; }
 .topbar a:hover { text-decoration: underline; }
-.header { background: var(--bg); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 50; }
+.header { background: var(--bg); border-bottom: 1px solid var(--line); position: relative; z-index: 50; }
 .header-in { display: flex; align-items: center; gap: 18px; min-height: 76px; }
 .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); margin-right: auto; }
 .logo img { width: 112px; }
