@@ -554,7 +554,7 @@
     },
     {
       "q": "How do I prepare for my procedure?",
-      "a": "It depends on the procedure. A colonoscopy requires a clear-liquid diet and bowel prep. We'll give you instructions for your procedure, and you can download the [colonoscopy prep instructions](patients.html#prep) here."
+      "a": "It depends on the procedure. A colonoscopy requires a clear-liquid diet and bowel prep. We'll give you instructions for your procedure, and you can download the [colonoscopy prep instructions](colonoscopy-prep.html) here."
     },
     {
       "q": "Which insurance do you accept?",
@@ -587,18 +587,26 @@
   ],
   "forms": [
     {
-      "id": "patient-forms",
-      "title": "New patient forms",
-      "text": "Fill these out before your visit to save time at check-in.",
-      "file": "files/patient-forms.pdf",
+      "id": "patient-forms-fillable",
+      "title": "New patient forms (fill out online)",
+      "text": "Type your answers right into the PDF on a computer or phone, then save it and bring it, or print it. Nothing is sent anywhere until you choose to.",
+      "file": "files/patient-forms-fillable.pdf",
       "anchor": "forms",
       "hidden": false
     },
     {
+      "id": "patient-forms",
+      "title": "New patient forms (print)",
+      "text": "Print these, fill them out by hand, and bring them to your visit.",
+      "file": "files/patient-forms.pdf",
+      "anchor": "forms-print",
+      "hidden": false
+    },
+    {
       "id": "colonoscopy-prep",
-      "title": "Colonoscopy prep (magnesium citrate, split dose)",
-      "text": "What to buy, what to eat and when to take each dose. Keep these instructions handy.",
-      "file": "files/colonoscopy-prep-magnesium-citrate.pdf",
+      "title": "Colonoscopy prep instructions",
+      "text": "Choose your prep and see every step, with your dates. Print it or save it as a PDF.",
+      "file": "colonoscopy-prep.html",
       "anchor": "prep",
       "hidden": false
     }
@@ -787,6 +795,26 @@
       "youtube": "https://www.youtube.com/watch?v=OHRdnj_8DZU",
       "text": "How in-office hemorrhoid treatment works.",
       "service": "hemorrhoid-treatment",
+      "hidden": false
+    }
+  ],
+  "prepPage": {
+    "title": "Colonoscopy Prep",
+    "intro": "Choose the prep Dr. Vernon prescribed to see exactly what to do and when. Add your procedure date to see the actual dates, then print it or save it as a PDF.",
+    "clearLiquids": "Water\nClear broth or bouillon\nApple juice or white grape juice\nSports drinks such as Gatorade (not red or purple)\nPlain gelatin such as Jell-O (not red or purple)\nPopsicles (not red or purple)\nBlack coffee or tea (no milk or creamer)\nClear sodas such as ginger ale or Sprite",
+    "help": "Questions about your prep? Call Fuquay-Varina at (919) 577-0085 or Dunn at (910) 891-5808, Monday – Thursday 8:30 am – 5:00 pm, Friday 9:00 am – 12:00 pm."
+  },
+  "preps": [
+    {
+      "id": "magnesium-citrate",
+      "name": "Magnesium Citrate (split dose)",
+      "summary": "Two bottles of magnesium citrate and Dulcolax tablets, all available over the counter.",
+      "buy": "2 bottles of magnesium citrate (over the counter, about $8–10)\n1 bottle of Dulcolax 5 mg tablets, 10 count (over the counter, about $3–5)",
+      "weekBefore": "Tell your physician if you take blood-thinning medications such as Coumadin, Plavix, Eliquis, Pradaxa, Lovenox or aspirin. You may be asked to stop them 3 to 7 days before your procedure, if your family physician or cardiologist approves.",
+      "dayBefore": "No more solid food. Only clear liquids for the whole day.\nAt 5:00 pm, drink one bottle of magnesium citrate, followed by three 8 oz glasses (24 oz) of any clear liquid. Also take 5 Dulcolax tablets. This part of the prep takes about 1 hour.\nStay close to a bathroom.\nStay very well hydrated. Drink extra clear liquids before you go to bed.",
+      "dayOf": "Beginning at 11:00 pm, drink the second bottle of magnesium citrate, followed by three 8 oz glasses (24 oz) of any clear liquid. This part of the prep takes about 1 hour.\nDo not eat anything.\nDo not drink anything for 3 hours before your procedure.\nIf you take medications, you may take essential medications (for blood pressure, heart or seizures) the morning of the procedure with a small sip of water.\nIf you are diabetic, do not take your oral diabetes medicines the morning of the procedure. If you take injectable insulin, take half of your morning dose. Procedures are canceled if your blood sugar is over 300.\nArrive at the facility at the time the office gave you.",
+      "notes": "Take all of the medication and liquids so Dr. Vernon can see your entire colon clearly.\n\nA colonoscopy prep makes your body lose a lot of fluid, which can make you ill (dehydration). Drink extra clear liquids before the prep, stay hydrated with clear liquids during the prep as directed, and drink clear liquids after you get home.",
+      "pdf": "files/colonoscopy-prep-magnesium-citrate.pdf",
       "hidden": false
     }
   ]

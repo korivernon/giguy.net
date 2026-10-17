@@ -18,7 +18,7 @@
     ['contact', 'contact.html', 'Contact Us'],
   ];
   const PAGE = document.body.dataset.page;
-  const navKey = PAGE === 'article' || PAGE === 'quiz' ? 'learn' : PAGE === 'condition' ? 'conditions' : PAGE === 'procedure' ? 'services' : PAGE;
+  const navKey = PAGE === 'article' || PAGE === 'quiz' ? 'learn' : PAGE === 'prep' ? 'patients' : PAGE === 'condition' ? 'conditions' : PAGE === 'procedure' ? 'services' : PAGE;
 
   const ICON = {
     phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>',
@@ -114,7 +114,7 @@
         '<div class="foot-visit"><h4>Visit</h4><div class="foot-locs">' + shown(D.locations).map(l =>
           '<p><b>' + esc(l.name) + '</b><a class="foot-addr" href="' + mapUrl(l) + '" target="_blank" rel="noopener">' + esc(l.address).replace(/\n/g, '<br>') + '</a><a href="' + tel(l.phone) + '">Phone ' + esc(l.phone) + '</a>' + (l.fax ? '<span>Fax ' + esc(l.fax) + '</span>' : '') + '</p>').join('') + '</div></div>' +
         '<div class="foot-hours">' + hoursHtml(P, 'h4') + '</div>' +
-        '<div class="foot-patients"><h4>Patients</h4><ul><li><a href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + esc(P.portalLabel || 'Patient Portal') + '</a></li>' + (P.payUrl ? '<li><a href="' + esc(safeUrl(P.payUrl)) + '" target="_blank" rel="noopener">' + esc(P.payLabel || 'Pay Your Bill') + '</a></li>' : '') + (P.klaraUrl ? '<li><a href="' + esc(safeUrl(P.klaraUrl)) + '" target="_blank" rel="noopener">' + esc(P.klaraLabel || 'Message us on Klara') + '</a></li>' : '') + (shown(D.videos).length ? '<li><a href="patients.html#videos">Instruction Videos</a></li>' : '') + '<li><a href="patients.html#forms">Patient Forms</a></li><li><a href="patients.html#prep">Colonoscopy Prep</a></li><li><a href="risk-quiz.html">Colon Cancer Risk Quiz</a></li></ul></div>' +
+        '<div class="foot-patients"><h4>Patients</h4><ul><li><a href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + esc(P.portalLabel || 'Patient Portal') + '</a></li>' + (P.payUrl ? '<li><a href="' + esc(safeUrl(P.payUrl)) + '" target="_blank" rel="noopener">' + esc(P.payLabel || 'Pay Your Bill') + '</a></li>' : '') + (P.klaraUrl ? '<li><a href="' + esc(safeUrl(P.klaraUrl)) + '" target="_blank" rel="noopener">' + esc(P.klaraLabel || 'Message us on Klara') + '</a></li>' : '') + (shown(D.videos).length ? '<li><a href="patients.html#videos">Instruction Videos</a></li>' : '') + '<li><a href="patients.html#forms">Patient Forms</a></li><li><a href="colonoscopy-prep.html">Colonoscopy Prep</a></li><li><a href="risk-quiz.html">Colon Cancer Risk Quiz</a></li></ul></div>' +
         '<div class="foot-explore"><h4>Explore</h4><ul>' + navItems().slice(1).map(n => '<li><a href="' + n[1] + '">' + n[2] + '</a></li>').join('') + '</ul></div>' +
       '</div>' +
       (D.partners && D.partners.length ? '<div class="partners">' + D.partners.map(p => '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '" loading="lazy">').join('') + '</div>' : '') +
@@ -207,7 +207,7 @@
       '<section class="quick"><div class="container quick-grid">' +
         '<a class="qcard" href="contact.html">' + ICON.pin + '<span><b>Locations & hours</b><small>Fuquay-Varina and Dunn</small></span></a>' +
         (forms[0] ? '<a class="qcard" href="patients.html#' + esc(forms[0].anchor || forms[0].id) + '">' + ICON.doc + '<span><b>Patient forms</b><small>Fill out before your visit</small></span></a>' : '') +
-        (forms[1] ? '<a class="qcard" href="patients.html#' + esc(forms[1].anchor || forms[1].id) + '">' + ICON.doc + '<span><b>Colonoscopy prep</b><small>Step-by-step instructions</small></span></a>' : '') +
+        (shown(D.preps).length ? '<a class="qcard" href="colonoscopy-prep.html">' + ICON.doc + '<span><b>Colonoscopy prep</b><small>Step-by-step instructions</small></span></a>' : '') +
         '<a class="qcard" href="risk-quiz.html">' + ICON.check + '<span><b>Are you at risk?</b><small>Quick colon cancer quiz</small></span></a>' +
       '</div></section>' +
       '<section class="section"><div class="container"><div class="hl-grid">' + (H.highlights || []).map((h, i) =>
@@ -259,7 +259,7 @@
       ftPromo() +
       '<section class="section"><div class="container">' + serviceCards(shown(D.services)) + '</div></section>' +
       '<section class="section alt"><div class="container"><h2>Conditions we treat</h2><p class="muted">Choose one to learn what it is and how we treat it.</p><ul class="chips big">' + shown(D.conditions).map(c => '<li><a href="' + condUrl(c) + '">' + esc(c.name || c) + '</a></li>').join('') + '</ul>' +
-      '<p class="muted" style="margin-top:20px">Has Dr. Vernon recommended a procedure? See <a href="patients.html#prep">preparation instructions</a> or call us with any questions.</p></div></section>' +
+      '<p class="muted" style="margin-top:20px">Has Dr. Vernon recommended a procedure? See <a href="colonoscopy-prep.html">preparation instructions</a> or call us with any questions.</p></div></section>' +
       callBand();
   };
 
@@ -359,7 +359,7 @@
     if (!s) return notFound('Procedure');
     document.title = s.title + ' · The GI Guy';
     const conds = shown(D.conditions).filter(c => (c.procedures || []).includes(s.id));
-    const form = /colonoscopy|sigmoid/.test(s.id) ? shown(D.forms).find(f => /prep/.test(f.id)) : null;
+    const form = /colonoscopy|sigmoid/.test(s.id) && shown(D.preps).length ? { title: 'Colonoscopy prep instructions', file: 'colonoscopy-prep.html', page: true } : null;
     const ft = s.id === 'colonoscopy' && ftOn();
     return pageHead(s.title, s.summary, crumbLink('services') + ' / ' + esc(s.title)) +
       '<section class="section"><div class="container two-col wide-left"><article class="prose detail">' +
@@ -371,7 +371,7 @@
         (shown(D.videos).some(v => v.service === s.id) ? block('Watch', videoCards(shown(D.videos).filter(v => v.service === s.id))) : '') +
       '</article><aside class="detail-side">' +
         (ft ? '<a class="card quiz-promo ft-promo" href="fast-track-colonoscopy.html">' + ICON.clock + '<span><b>Positive stool test?</b><small>Fast-Track: colonoscopy usually in 7–14 days.</small></span>' + ICON.arrow + '</a>' : '') +
-        (form ? '<a class="card doc" href="' + esc(safeUrl(form.file)) + '" target="_blank" rel="noopener">' + ICON.doc + '<span><b>' + esc(form.title) + '</b><em>Open PDF ' + ICON.arrow + '</em></span></a>' : '') +
+        (form ? '<a class="card doc" href="' + esc(safeUrl(form.file)) + '">' + ICON.doc + '<span><b>' + esc(form.title) + '</b><em>View the steps ' + ICON.arrow + '</em></span></a>' : '') +
         (conds.length ? '<div class="card"><h3>Conditions it helps with</h3><ul class="plain">' + conds.map(c => '<li><a href="' + condUrl(c) + '">' + esc(c.name) + '</a></li>').join('') + '</ul></div>' : '') +
       '</aside></div></section>' + callBand();
   };
@@ -386,8 +386,8 @@
       ftPromo() +
       (vids.length ? '<section class="section" id="videos"><div class="container"><h2>Instruction Videos</h2>' + videoCards(vids) + '</div></section>' : '') +
       '<section class="section alt"><div class="container"><h2>Forms & instructions</h2><div class="docs">' + shown(D.forms).map(f =>
-        '<a class="card doc" id="' + esc(f.anchor || f.id) + '" href="' + esc(safeUrl(f.file)) + '" target="_blank" rel="noopener">' + ICON.doc +
-        '<span><b>' + esc(f.title) + '</b><small>' + esc(f.text) + '</small><em>Open PDF ' + ICON.arrow + '</em></span></a>').join('') + '</div></div></section>' +
+        '<a class="card doc" id="' + esc(f.anchor || f.id) + '" href="' + esc(safeUrl(f.file)) + '"' + (/\.pdf$/i.test(f.file) ? ' target="_blank" rel="noopener"' : '') + '>' + ICON.doc +
+        '<span><b>' + esc(f.title) + '</b><small>' + esc(f.text) + '</small><em>' + (/\.pdf$/i.test(f.file) ? 'Open PDF' : 'View') + ' ' + ICON.arrow + '</em></span></a>').join('') + '</div></div></section>' +
       '<section class="section"><div class="container two-col">' +
         '<div class="card"><h2>Appointments</h2><p>To schedule, reschedule or ask a question, call the office nearest you.</p>' +
           shown(D.locations).map(l => '<p class="icoline">' + ICON.phone + '<span><b>' + esc(l.name) + ':</b> <a href="' + tel(l.phone) + '">' + esc(l.phone) + '</a></span></p>').join('') +
@@ -469,6 +469,54 @@
     };
   }
 
+  /* ---------------- colonoscopy prep: pick your prep, see the steps, print / save as PDF ---------------- */
+  PAGES.prep = function () {
+    const PP = D.prepPage || {}, preps = shown(D.preps);
+    document.title = (PP.title || 'Colonoscopy Prep') + ' · The GI Guy';
+    if (!preps.length) return pageHead(PP.title || 'Colonoscopy Prep', 'Prep instructions are coming soon. Please call the office.', crumbLink('patients'));
+    return pageHead(PP.title || 'Colonoscopy Prep', PP.intro, crumbLink('patients') + ' / ' + esc(PP.title || 'Colonoscopy Prep')) +
+      '<section class="section prep"><div class="container">' +
+        '<div class="prep-controls no-print">' +
+          '<div><h2 class="prep-step-h">1. Choose your prep</h2><div class="prep-choices" role="tablist">' + preps.map((x, i) =>
+            '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-prep="' + esc(x.id) + '"><b>' + esc(x.name) + '</b>' + (x.summary ? '<small>' + esc(x.summary) + '</small>' : '') + '</button>').join('') + '</div></div>' +
+          '<div class="prep-date"><h2 class="prep-step-h">2. Your procedure date <span class="muted">(optional)</span></h2><input type="date" id="prep-date" aria-label="Procedure date"></div>' +
+        '</div>' +
+        '<article class="card prep-sheet" id="prep-sheet"></article>' +
+        '<div class="prep-actions no-print"><button class="btn btn-primary" type="button" id="prep-print">' + ICON.doc + 'Print or save as PDF</button>' +
+          '<span class="muted small">On a phone: tap Print, then Share or Save to Files to keep a PDF.</span></div>' +
+      '</div></section>';
+  };
+  function afterPrep() {
+    const sheet = $('#prep-sheet'); if (!sheet) return;
+    const PP = D.prepPage || {}, preps = shown(D.preps), P = D.practice || {};
+    const key = 'giguy:prep';
+    let cur = preps[0].id;
+    try { const saved = JSON.parse(localStorage.getItem(key) || '{}'); if (preps.some(x => x.id === saved.id)) cur = saved.id; if (saved.date) $('#prep-date').value = saved.date; } catch (e) { /* storage blocked */ }
+    const fmt = (iso, delta) => { if (!iso) return ''; const d = new Date(iso + 'T12:00:00'); d.setDate(d.getDate() + delta); return d.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' }); };
+    const steps = t => '<ol class="prep-list">' + lines(t).map(l => '<li>' + inline(l) + '</li>').join('') + '</ol>';
+    function draw() {
+      const x = preps.find(p => p.id === cur) || preps[0], date = $('#prep-date').value;
+      document.querySelectorAll('[data-prep]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.prep === x.id)));
+      const stage = (title, delta, body) => body ? '<section class="prep-stage"><h3>' + title + (date ? ' <span class="prep-when">' + esc(fmt(date, delta)) + '</span>' : '') + '</h3>' + steps(body) + '</section>' : '';
+      sheet.innerHTML =
+        '<header class="prep-head"><img src="img/logos/logo.png" alt="The GI Guy" width="110" height="44"><div><h2>' + esc(x.name) + '</h2>' +
+          '<p class="muted">Colonoscopy prep · ' + esc(P.doctor || '') + (date ? ' · Procedure ' + esc(fmt(date, 0)) : '') + '</p></div></header>' +
+        (x.buy ? '<section class="prep-stage"><h3>Buy at the pharmacy</h3><ul class="ticks">' + lines(x.buy).map(l => '<li>' + ICON.check + '<span>' + inline(l) + '</span></li>').join('') + '</ul></section>' : '') +
+        stage('One week before', -7, x.weekBefore) +
+        stage('The day before', -1, x.dayBefore) +
+        stage('The day of your colonoscopy', 0, x.dayOf) +
+        (PP.clearLiquids ? '<section class="prep-stage"><h3>Clear liquids you can have</h3><p class="muted small">Anything you can see through. Avoid red and purple.</p><ul class="prep-liquids">' + lines(PP.clearLiquids).map(l => '<li>' + esc(l) + '</li>').join('') + '</ul></section>' : '') +
+        (x.notes ? '<section class="prep-stage prep-notes">' + md(x.notes) + '</section>' : '') +
+        '<footer class="prep-foot">' + inline(PP.help || '') + (x.pdf ? ' <a class="no-print" href="' + esc(safeUrl(x.pdf)) + '" target="_blank" rel="noopener">Original printed instructions (PDF)</a>' : '') + '</footer>';
+      applyTitleCase(sheet);
+      try { localStorage.setItem(key, JSON.stringify({ id: x.id, date })); } catch (e) { /* storage blocked */ }
+    }
+    document.querySelector('.prep-choices').addEventListener('click', e => { const b = e.target.closest('[data-prep]'); if (b) { cur = b.dataset.prep; draw(); } });
+    $('#prep-date').addEventListener('change', draw);
+    $('#prep-print').onclick = () => window.print();
+    draw();
+  }
+
   PAGES.contact = function () {
     const P = D.practice || {};
     return sectionHead('contact', 'Two offices serving the Greater Raleigh area and surrounding communities.') +
@@ -541,6 +589,7 @@
     });
     document.querySelectorAll('[data-expand]').forEach(b => b.onclick = () => { document.getElementById(b.dataset.expand).classList.add('open'); b.remove(); });
     if (PAGE === 'learn') afterLearn();
+    if (PAGE === 'prep') afterPrep();
     if (PAGE === 'quiz') afterQuiz();
     if (location.hash) { const t = document.getElementById(location.hash.slice(1)); if (t) setTimeout(() => t.scrollIntoView(), 0); }
   }

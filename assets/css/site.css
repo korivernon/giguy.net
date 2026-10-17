@@ -491,3 +491,41 @@ a.cond .more { margin-top: 10px; }
 
 /* phone numbers never split at the hyphen */
 a[href^="tel:"], .tel { white-space: nowrap; }
+
+/* uniform card titles: section cards 1.2rem, small tiles 1.05rem */
+.cp-head h3 { font-size: 1.2rem; }
+.hours-in-card h3 { font-size: 1.05rem; }
+
+/* colonoscopy prep page */
+.prep-controls { display: grid; gap: 18px; margin-bottom: 20px; }
+@media (min-width: 860px) { .prep-controls { grid-template-columns: 2fr 1fr; align-items: start; } }
+.prep-step-h { font-size: 1.05rem; margin: 0 0 10px; }
+.prep-choices { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.prep-choices button { text-align: left; font: inherit; background: #fff; border: 2px solid var(--line); border-radius: var(--radius); padding: 12px 14px; cursor: pointer; color: var(--ink); }
+.prep-choices button b { display: block; color: var(--deep); }
+.prep-choices button small { display: block; color: var(--muted); margin-top: 2px; font-size: .88rem; }
+.prep-choices button[aria-selected="true"] { border-color: var(--primary); background: #eef6ec; box-shadow: inset 4px 0 0 var(--primary); }
+.prep-date input { font: 16px var(--font); padding: 10px 12px; border: 2px solid var(--line); border-radius: 12px; background: #fff; color: var(--ink); width: 100%; max-width: 260px; }
+.prep-head { display: flex; gap: 16px; align-items: center; border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 8px; }
+.prep-head h2 { margin: 0 0 2px; font-size: 1.4rem; }
+.prep-head p { margin: 0; font-size: .92rem; }
+.prep-stage { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.prep-stage:last-of-type { border-bottom: 0; }
+.prep-stage h3 { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; margin: 0 0 8px; }
+.prep-when { font-size: .9rem; font-weight: 700; color: var(--primary); background: #eef6ec; border-radius: 999px; padding: 2px 10px; }
+.prep-list { margin: 0; padding-left: 22px; } .prep-list li { margin: 6px 0; }
+.prep-liquids { columns: 2; margin: 0; padding-left: 20px; } .prep-liquids li { margin: 3px 0; break-inside: avoid; }
+@media (max-width: 520px) { .prep-liquids { columns: 1; } }
+.prep-notes { color: var(--muted); }
+.prep-foot { font-size: .9rem; color: var(--muted); padding-top: 12px; }
+.prep-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-top: 18px; }
+/* print / save as PDF: only the instructions sheet */
+@media print {
+  body { background: #fff; }
+  #site-header, #site-footer, .page-head, .no-print, #gg-suggest, .banner, .cta, .skip { display: none !important; }
+  .section.prep { padding: 0; }
+  .prep-sheet { border: 0; box-shadow: none; padding: 0; }
+  .prep-when { background: none; padding: 0; }
+  .prep-stage { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}

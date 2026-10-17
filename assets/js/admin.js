@@ -182,6 +182,23 @@
       { k: 'procedures', label: 'Related procedures', type: 'list', hint: 'Comma-separated service ids: colonoscopy, egd, capsule-endoscopy, flexible-sigmoidoscopy, esophageal-dilation, hemorrhoid-treatment, cologuard, consultations' },
       { k: 'hidden', label: 'Hidden from the site', type: 'check' },
     ],
+    preps: [
+      { k: 'name', label: 'Prep name (button)', req: true, hint: 'e.g. Magnesium Citrate (split dose)' },
+      { k: 'summary', label: 'One-line description', hint: 'Shown under the name on the button.' },
+      { k: 'buy', label: 'Buy at the pharmacy (one item per line)', type: 'textarea', rows: 3 },
+      { k: 'weekBefore', label: 'One week before (one step per line)', type: 'textarea', rows: 3 },
+      { k: 'dayBefore', label: 'The day before (one step per line)', type: 'textarea', rows: 5 },
+      { k: 'dayOf', label: 'The day of the colonoscopy (one step per line)', type: 'textarea', rows: 6 },
+      { k: 'notes', label: 'Notes at the end', type: 'textarea', rows: 3 },
+      { k: 'pdf', label: 'Original printed instructions (PDF, optional)', type: 'file', dir: 'files', accept: 'application/pdf', keepName: true },
+      { k: 'hidden', label: 'Hidden from the site', type: 'check' },
+    ],
+    prepPage: [
+      { k: 'prepPage.title', label: 'Page title' },
+      { k: 'prepPage.intro', label: 'Intro', type: 'textarea', rows: 3 },
+      { k: 'prepPage.clearLiquids', label: 'Clear liquids (one per line, shown for every prep)', type: 'textarea', rows: 8 },
+      { k: 'prepPage.help', label: 'Questions line at the bottom', type: 'textarea', rows: 2 },
+    ],
     videos: [
       { k: 'title', label: 'Title', req: true },
       { k: 'youtube', label: 'YouTube link', req: true, hint: 'Paste the video address, e.g. https://www.youtube.com/watch?v=…' },
@@ -259,6 +276,7 @@
     team: { label: 'Team', one: 'provider', sym: () => 'TEAM', title: x => x.name, sub: x => x.role || '', blank: () => ({ id: '', name: '', role: '', photo: '', statement: '', bio: '', education: '', memberships: '', hidden: false }), idFrom: x => slug(x.name) },
     services: { label: 'Services', one: 'service', sym: () => 'SVC', title: x => x.title, sub: x => x.summary || '', blank: () => ({ id: '', title: '', summary: '', points: '', hidden: false }), idFrom: x => slug(x.title) },
     conditions: { label: 'Conditions', one: 'condition', sym: () => 'COND', title: x => x.name, sub: x => short(x.text, 100), blank: () => ({ id: '', name: '', text: '', hidden: false }), idFrom: x => slug(x.name) },
+    preps: { label: 'Colonoscopy preps', one: 'prep', sym: () => 'PREP', title: x => x.name, sub: x => x.summary || '', blank: () => ({ id: '', name: '', summary: '', buy: '', weekBefore: '', dayBefore: '', dayOf: '', notes: '', pdf: '', hidden: false }), idFrom: x => slug(x.name) },
     videos: { label: 'Videos', one: 'video', sym: () => 'VIDEO', title: x => x.title, sub: x => x.youtube || '', blank: () => ({ id: '', title: '', youtube: '', text: '', service: '', hidden: false }), idFrom: x => slug(x.title) },
     faqs: { label: 'FAQs', one: 'question', sym: () => 'FAQ', title: x => x.q, sub: x => short(x.a, 100), blank: () => ({ id: '', q: '', a: '' }), idFrom: x => slug(x.q) },
     locations: { label: 'Locations', one: 'location', sym: () => 'OFFICE', title: x => x.name, sub: x => (x.address || '').replace(/\n/g, ', ') + ' · ' + (x.phone || ''), blank: () => ({ id: '', name: '', address: '', phone: '', fax: '', mapQuery: '', hidden: false }), idFrom: x => slug(x.name) },
@@ -268,7 +286,7 @@
 
   const NAV = [
     ['suggestions', 'Suggested edits'], ['history', 'Change history'], ['oldsite', 'Old site'], ['banners', 'Banners'], ['practice', 'Practice info & hours'], ['locations', 'Locations'], ['home', 'Home page'], ['about', 'About & insurance'], ['conditions', 'Conditions'],
-    ['fasttrack', 'Fast-Track colonoscopy'], ['doctor', 'Dr. Vernon'], ['team', 'Team'], ['services', 'Services'], ['faqs', 'FAQs'], ['forms', 'Forms & PDFs'], ['videos', 'Videos'],
+    ['fasttrack', 'Fast-Track colonoscopy'], ['doctor', 'Dr. Vernon'], ['team', 'Team'], ['services', 'Services'], ['faqs', 'FAQs'], ['forms', 'Forms & PDFs'], ['preps', 'Colonoscopy preps'], ['prepPage', 'Prep page text'], ['videos', 'Videos'],
     ['articles', 'Articles'], ['learn', 'Quiz & digestive system'], ['raw', 'Raw JSON'],
   ];
 
@@ -881,7 +899,7 @@
       d[k] = d[k] || [];
       d[k].forEach(x => { if (!x.id) x.id = uniqueId(d[k], COLLECTIONS[k].idFrom(x) || 'item'); });
     });
-    ['practice', 'home', 'about', 'doctor', 'quiz', 'fasttrack'].forEach(k => { d[k] = d[k] || {}; });
+    ['practice', 'home', 'about', 'doctor', 'quiz', 'fasttrack', 'prepPage'].forEach(k => { d[k] = d[k] || {}; });
     d.social = d.social || [];  d.organs = d.organs || [];
   }
 
