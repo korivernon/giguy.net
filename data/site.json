@@ -55,6 +55,20 @@
   "about": {
     "title": "About Us",
     "text": "At The GI Guy, we are dedicated to expert gastroenterology care with a compassionate, holistic approach. Led by Dr. Kurt Vernon, our practice has served the Greater Raleigh area for over 30 years from two offices in Fuquay-Varina and Dunn, NC.\n\nWe use modern endoscopy equipment and create a unique atmosphere where patients come first.\n\nOur approach looks at your health as a whole: we provide education, incorporate nutrition and lifestyle, and recommend only the best quality products.",
+    "stats": [
+      {
+        "value": "30+",
+        "label": "Years caring for patients in the Greater Raleigh area"
+      },
+      {
+        "value": "2",
+        "label": "Offices, in Fuquay-Varina and Dunn"
+      },
+      {
+        "value": "90%+",
+        "label": "Of our patients come to us by referral"
+      }
+    ],
     "values": [
       {
         "title": "Personalized care",

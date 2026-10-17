@@ -534,3 +534,64 @@ a[href^="tel:"], .tel { white-space: nowrap; }
   .prep-stage { break-inside: avoid; }
   a { color: inherit; text-decoration: none; }
 }
+
+/* about page */
+.about-lead > p:first-child { font-size: 1.18rem; color: var(--deep); }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 24px 0; }
+.stat { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow); }
+.stat b { display: block; font-size: 2rem; line-height: 1.1; color: var(--primary); }
+.stat span { display: block; color: var(--muted); font-size: .92rem; margin-top: 4px; }
+.about-dr { display: grid; grid-template-columns: 1fr; gap: 14px; align-items: center; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); text-decoration: none; color: var(--ink); transition: border-color .15s, transform .15s; }
+.about-dr:hover { border-color: var(--accent); transform: translateY(-2px); color: var(--ink); }
+.about-dr img { width: 100%; border-radius: 12px; background: #000; }
+.about-dr > span { display: flex; flex-direction: column; gap: 4px; }
+.about-dr .eyebrow { margin: 0; }
+.about-dr b { font-size: 1.15rem; color: var(--deep); }
+.about-dr-go { display: inline-flex; align-items: center; gap: 6px; color: var(--primary); font-weight: 700; margin-top: 4px; }
+.about-dr-go svg { width: 16px; height: 16px; }
+.treats-all { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; font-weight: 700; text-decoration: none; }
+.treats-all svg { width: 16px; height: 16px; }
+@media (min-width: 600px) { .about-dr { grid-template-columns: 240px 1fr; } }
+@media (min-width: 900px) { .treats { position: sticky; top: 100px; } }
+
+/* ---------- desktop layouts ---------- */
+.stack { display: grid; gap: 20px; align-content: start; }
+.card.billing { margin: 0; }
+@media (min-width: 900px) {
+  /* Our Team: photo and credentials on the left, story on the right */
+  .doctor { grid-template-columns: 400px 1fr; gap: 48px; align-items: start; }
+  .doctor-photo { position: sticky; top: 100px; }
+  .doctor .creds { margin-top: 28px; }
+  .doctor .creds div:nth-last-child(-n+2) { border-bottom: 0; }
+  .doctor-body h2 { font-size: 2rem; }
+  .doctor-body > p { font-size: 1.05rem; }
+  .person img { aspect-ratio: 1 / 1; }
+  /* Patient Resources */
+  .docs { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .faq-wrap { display: grid; grid-template-columns: 320px 1fr; gap: 48px; align-items: start; }
+  .faq-side { position: sticky; top: 100px; }
+  .faq-side .call-opts { grid-template-columns: 1fr; }
+  /* Learn */
+  .organs { grid-template-columns: 380px 1fr; gap: 48px; }
+  .organs > img { max-width: 380px; }
+  /* Risk quiz */
+  .quiz-wrap { display: grid; grid-template-columns: 1fr 340px; gap: 40px; align-items: start; }
+  .quiz-side { position: sticky; top: 100px; display: grid; gap: 18px; }
+  .quiz-side .call-opts { grid-template-columns: 1fr; }
+  /* Colonoscopy prep: the sheet with a sticky panel beside it */
+  .prep-layout { display: grid; grid-template-columns: 300px 1fr; gap: 32px; align-items: start; }
+  .prep-layout .prep-controls { position: sticky; top: 100px; grid-template-columns: 1fr; margin: 0; }
+  .prep-layout .prep-actions { margin-top: 0; flex-direction: column; align-items: stretch; }
+  .prep-call .call-opts { grid-template-columns: 1fr; }
+  .prep-date input { max-width: none; }
+}
+@media (min-width: 1050px) { .videos { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); } .cards.cards-4 { grid-template-columns: repeat(4, 1fr); } }
+.quiz-side .card h3, .prep-call h3 { font-size: 1.05rem; margin: 0 0 8px; }
+.prep-call { margin-top: 4px; }
+.prep-call .call-opts { margin: 0; }
+/* Contact: office cards the same height, buttons along the bottom */
+.loc { display: flex; flex-direction: column; }
+.loc-body { flex: 1; display: flex; flex-direction: column; }
+.loc-acts { margin-top: auto; padding-top: 6px; }
+@media (max-width: 899px) { .prep-call { display: none; } }
+@media (min-width: 900px) { .map { height: 300px; } }

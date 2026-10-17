@@ -138,6 +138,7 @@
     about: [
       { k: 'about.title', label: 'Headline' },
       { k: 'about.text', label: 'About text', type: 'textarea', rows: 8, hint: 'Blank line = new paragraph. [link](https://…) works.' },
+      { k: 'about.stats', label: 'Stats (beside the about text)', type: 'pairs', fields: [['value', 'e.g. 30+'], ['label', 'What it means']] },
       { k: 'about.values', label: 'Three values', type: 'pairs', fields: TF, long: 1 },
       { k: 'about.insurance', label: 'Insurance', type: 'textarea', rows: 3 },
       { k: 'about.wellnessTitle', label: 'Wellness title' },

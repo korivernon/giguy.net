@@ -222,11 +222,17 @@
   };
 
   PAGES.about = function () {
-    const A = D.about || {};
+    const A = D.about || {}, Dr = D.doctor || {};
     return sectionHead('about', '') +
       '<section class="section"><div class="container two-col wide-left">' +
-        '<div class="prose">' + md(A.text) + '</div>' +
-        '<aside class="card treats"><h3>Conditions we treat</h3><ul class="chips">' + shown(D.conditions).map(c => '<li><a href="' + condUrl(c) + '">' + esc(c.name || c) + '</a></li>').join('') + '</ul></aside>' +
+        '<div class="about-main"><div class="prose about-lead">' + md(A.text) + '</div>' +
+          ((A.stats || []).length ? '<div class="stats">' + A.stats.map(x => '<div class="stat"><b>' + esc(x.value) + '</b><span>' + esc(x.label) + '</span></div>').join('') + '</div>' : '') +
+          (Dr.photo ? '<a class="about-dr" href="team.html"><img src="' + esc(Dr.photo) + '" alt="Dr. Kurt Vernon" width="481" height="310" loading="lazy">' +
+            '<span><small class="eyebrow">Meet the GI Guy</small><b>' + esc(Dr.name) + '</b><span class="muted">' + esc(Dr.role) + ' · Board-certified, Fellow of the American College of Gastroenterology</span>' +
+            '<span class="about-dr-go">Meet our team ' + ICON.arrow + '</span></span></a>' : '') +
+        '</div>' +
+        '<aside class="card treats"><h3>Conditions we treat</h3><ul class="chips">' + shown(D.conditions).map(c => '<li><a href="' + condUrl(c) + '">' + esc(c.name || c) + '</a></li>').join('') + '</ul>' +
+          '<a class="treats-all" href="conditions.html">See all conditions ' + ICON.arrow + '</a></aside>' +
       '</div></section>' +
       '<section class="section alt"><div class="container"><div class="hl-grid">' + (A.values || []).map((v, i) =>
         '<div class="hl"><span class="hl-ico">' + ICON[HL_ICONS[i % 3]] + '</span><h3>' + esc(v.title) + '</h3><p>' + inline(v.text) + '</p></div>').join('') + '</div></div></section>' +
@@ -241,8 +247,8 @@
     return sectionHead('team', 'Personal care from a team that knows you by name.') +
       '<section class="section"><div class="container">' +
         '<article class="doctor"><div class="doctor-photo"><img src="' + esc(Dr.photo) + '" alt="Dr. Kurt Vernon" width="481" height="310"></div>' +
-        '<div class="doctor-body"><p class="eyebrow">' + esc(Dr.role) + '</p><h2>' + esc(Dr.name) + '</h2><blockquote>“' + esc(Dr.quote) + '”</blockquote>' + md(Dr.bio) + '</div></article>' +
-        '<dl class="creds">' + (Dr.credentials || []).map(c => '<div><dt>' + esc(c.label) + '</dt><dd>' + esc(c.value) + '</dd></div>').join('') + '</dl>' +
+        '<div class="doctor-body"><p class="eyebrow">' + esc(Dr.role) + '</p><h2>' + esc(Dr.name) + '</h2><blockquote>“' + esc(Dr.quote) + '”</blockquote>' + md(Dr.bio) +
+        '<dl class="creds">' + (Dr.credentials || []).map(c => '<div><dt>' + esc(c.label) + '</dt><dd>' + esc(c.value) + '</dd></div>').join('') + '</dl></div></article>' +
       '</div></section>' +
       '<section class="section alt"><div class="container"><h2 class="center">Our providers</h2><div class="team">' + shown(D.team).map(p =>
         '<article class="card person" id="' + esc(p.id) + '">' +
@@ -393,15 +399,15 @@
         '<div class="card"><h2>Appointments</h2><p>To schedule, reschedule or ask a question, call the office nearest you.</p>' +
           shown(D.locations).map(l => '<p class="icoline">' + ICON.phone + '<span><b>' + esc(l.name) + ':</b> <a href="' + tel(l.phone) + '">' + esc(l.phone) + '</a></span></p>').join('') +
           '<div class="hours-in-card">' + hoursHtml(P, 'h3') + '</div></div>' +
-        '<div class="card"><h2>Insurance</h2><p>' + inline((D.about || {}).insurance) + '</p></div>' +
-      '</div></section>' +
-      (P.payUrl ? '<section class="section" id="billing"><div class="container"><div class="card billing">' +
+        '<div class="stack"><div class="card"><h2>Insurance</h2><p>' + inline((D.about || {}).insurance) + '</p></div>' +
+      (P.payUrl ? '<div class="card billing" id="billing">' +
         '<span class="hl-ico">' + ICON.card + '</span><div><h2>Billing &amp; Payments</h2><p>' + inline(P.payNote || '') + '</p>' +
         '<div class="billing-acts"><a class="btn btn-primary btn-sm" href="' + esc(safeUrl(P.payUrl)) + '" target="_blank" rel="noopener">' + esc(P.payLabel || 'Pay Your Bill') + ' ' + ICON.arrow + '</a>' +
         (P.portalRegisterUrl ? '<a class="btn btn-outline btn-sm" href="' + esc(safeUrl(P.portalRegisterUrl)) + '" target="_blank" rel="noopener">New to the portal? Register</a>' : '') +
-        '</div></div></div></div></section>' : '') +
+        '</div></div></div>' : '') + '</div>' +
+      '</div></section>' +
       '<section class="section"><div class="container"><div class="card note"><h2>Before you message us</h2><p>' + esc(P.emergencyNote) + '</p><p class="muted small">Social media pages are for general information only, and we can\'t give medical advice there. For a specific question, please call the office or use the Patient Portal.</p></div></div></section>' +
-      '<section class="section alt"><div class="container narrow"><h2>Common questions</h2>' + faqHtml(D.faqs) + '</div></section>';
+      '<section class="section alt"><div class="container faq-wrap"><div class="faq-side"><h2>Common questions</h2><p class="muted">Don\'t see your question? Call the office nearest you.</p>' + callOpts('on-light') + '</div>' + faqHtml(D.faqs) + '</div></section>';
   };
 
   PAGES.learn = function () {
@@ -415,7 +421,7 @@
         '<div><div class="organ-tabs" role="tablist">' + organs.map((o, i) => '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-organ="' + i + '">' + esc(o.name) + '</button>').join('') + '</div>' +
         '<div class="card organ-panel" id="organ-panel" role="tabpanel"></div></div></div>' +
       '</div></section>' +
-      '<section class="section"><div class="container"><h2>Articles</h2><div class="cards">' + shown(D.articles).map(a =>
+      '<section class="section"><div class="container"><h2>Articles</h2><div class="cards cards-4">' + shown(D.articles).map(a =>
         '<a class="card article-card" href="article.html?id=' + encodeURIComponent(a.id) + '"><h3>' + esc(a.title) + '</h3><p class="muted">' + esc(a.summary) + '</p><span class="more">Read ' + ICON.arrow + '</span></a>').join('') +
         '<a class="card article-card" href="about.html#wellness"><h3>' + esc((D.about || {}).wellnessTitle) + '</h3><p class="muted">Our integrated approach to nutrition, lifestyle and doctor-approved wellness products.</p><span class="more">Read ' + ICON.arrow + '</span></a>' +
       '</div></div></section>';
@@ -443,17 +449,23 @@
       '<div class="card" style="margin-top:16px"><h3>Questions?</h3><p>Call us at <a href="' + tel(D.practice.phone) + '">' + esc(D.practice.phone) + '</a>.</p></div></aside></div></section>';
   };
 
+  function quizSide() {
+    const scr = shown(D.conditions).find(c => c.id === 'colon-cancer-screening');
+    return '<aside class="quiz-side">' +
+      (scr ? '<div class="card"><h3>' + esc(scr.name) + '</h3><p class="muted">' + esc(scr.text || '') + '</p><a class="more" href="' + condUrl(scr) + '">Learn more ' + ICON.arrow + '</a></div>' : '') +
+      '<div class="card"><h3>Questions? Call Us</h3>' + callOpts('on-light') + '</div></aside>';
+  }
   PAGES.quiz = function () {
     const Q = D.quiz || {};
     document.title = Q.title + ' · The GI Guy';
     return pageHead(Q.title, Q.intro, crumbLink('learn') + ' / ' + esc(Q.title)) +
-      '<section class="section"><div class="container narrow"><form class="quiz" id="quiz">' + (Q.questions || []).map((q, i) =>
+      '<section class="section"><div class="container quiz-wrap"><div class="quiz-main"><form class="quiz" id="quiz">' + (Q.questions || []).map((q, i) =>
         '<fieldset class="q"><legend>' + (i + 1) + '. ' + esc(q) + '</legend><div class="yn">' +
         '<label><input type="radio" name="q' + i + '" value="yes" required><span>Yes</span></label>' +
         '<label><input type="radio" name="q' + i + '" value="no"><span>No</span></label></div></fieldset>').join('') +
       '<button class="btn btn-primary" type="submit">See my result</button>' +
       '<div class="quiz-result" id="quiz-result" hidden></div></form>' +
-      '<p class="muted small">This quiz is for education only and is not a diagnosis. Nothing you enter is sent anywhere.</p></div></section>';
+      '<p class="muted small">This quiz is for education only and is not a diagnosis. Nothing you enter is sent anywhere.</p></div>' + quizSide() + '</div></section>';
   };
   function afterQuiz() {
     const f = $('#quiz'); if (!f) return;
@@ -477,15 +489,16 @@
     if (!preps.length) return pageHead(PP.title || 'Colonoscopy Prep', 'Prep instructions are coming soon. Please call the office.', crumbLink('patients'));
     return pageHead(PP.title || 'Colonoscopy Prep', PP.intro, crumbLink('patients') + ' / ' + esc(PP.title || 'Colonoscopy Prep')) +
       '<section class="section prep"><div class="container">' +
-        '<div class="prep-controls no-print">' +
+        '<div class="prep-layout"><div class="prep-controls no-print">' +
           // The chooser only appears once there's more than one prep to pick from.
           (preps.length > 1 ? '<div><h2 class="prep-step-h">1. Choose your prep</h2><div class="prep-choices" role="tablist">' + preps.map((x, i) =>
             '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-prep="' + esc(x.id) + '"><b>' + esc(x.name) + '</b>' + (x.summary ? '<small>' + esc(x.summary) + '</small>' : '') + '</button>').join('') + '</div></div>' : '') +
           '<div class="prep-date"><h2 class="prep-step-h">' + (preps.length > 1 ? '2. ' : '') + 'Your procedure date <span class="muted">(optional)</span></h2><input type="date" id="prep-date" aria-label="Procedure date"></div>' +
-        '</div>' +
-        '<article class="card prep-sheet" id="prep-sheet"></article>' +
-        '<div class="prep-actions no-print"><button class="btn btn-primary" type="button" id="prep-print">' + ICON.doc + 'Print or save as PDF</button>' +
+          '<div class="prep-actions"><button class="btn btn-primary" type="button" id="prep-print">' + ICON.doc + 'Print or save as PDF</button>' +
           '<span class="muted small">On a phone: tap Print, then Share or Save to Files to keep a PDF.</span></div>' +
+          '<div class="prep-call"><h3>Questions About Your Prep?</h3>' + callOpts('on-light') + '</div>' +
+        '</div>' +
+        '<article class="card prep-sheet" id="prep-sheet"></article></div>' +
       '</div></section>';
   };
   function afterPrep() {
