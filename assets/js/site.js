@@ -414,20 +414,20 @@
 
   PAGES.learn = function () {
     const organs = D.organs || [];
-    return sectionHead('learn', 'Patient education: how your digestive system works, your colon cancer risk, and articles on common procedures.') +
-      '<section class="section"><div class="container">' +
-        '<a class="card quiz-promo" href="risk-quiz.html">' + ICON.check + '<span><b>Are you at risk for colon cancer?</b><small>Take the 9-question quiz. It takes about a minute.</small></span>' + ICON.arrow + '</a>' +
-      '</div></section>' +
-      '<section class="section alt" id="digestive-system"><div class="container"><h2>Your digestive system</h2><p class="muted">Tap an organ on the diagram, or follow a bite of food from start to finish.</p>' +
+    return sectionHead('learn', 'Patient education: articles on common procedures, how your digestive system works, and your colon cancer risk.') +
+      '<section class="section"><div class="container"><h2>Articles</h2><div class="cards cards-4">' + shown(D.articles).map(a =>
+        '<a class="card article-card" href="article.html?id=' + encodeURIComponent(a.id) + '"><h3>' + esc(a.title) + '</h3><p class="muted">' + esc(a.summary) + '</p><span class="more">Read ' + ICON.arrow + '</span></a>').join('') +
+        '<a class="card article-card" href="about.html#wellness"><h3>' + esc((D.about || {}).wellnessTitle) + '</h3><p class="muted">Our integrated approach to nutrition, lifestyle and doctor-approved wellness products.</p><span class="more">Read ' + ICON.arrow + '</span></a>' +
+      '</div></div></section>' +
+      '<section class="section" id="digestive-system"><div class="container"><h2>Your digestive system</h2><p class="muted">Tap an organ on the diagram, or follow a bite of food from start to finish.</p>' +
         '<div class="organs"><div class="gut-wrap">' + GUT_SVG + '<div class="gut-tip" id="gut-tip" hidden></div></div>' +
         '<div><div class="gut-play"><button class="btn btn-primary btn-sm" type="button" id="gut-play">' + ICON.play + '<span>Follow your food</span></button><div class="gut-steps" id="gut-steps" aria-hidden="true"></div></div>' +
         '<div class="organ-tabs" role="tablist">' + organs.map((o, i) => '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-organ="' + i + '">' + esc(o.name) + '</button>').join('') + '</div>' +
         '<div class="card organ-panel" id="organ-panel" role="tabpanel" aria-live="polite"></div></div></div>' +
       '</div></section>' +
-      '<section class="section"><div class="container"><h2>Articles</h2><div class="cards cards-4">' + shown(D.articles).map(a =>
-        '<a class="card article-card" href="article.html?id=' + encodeURIComponent(a.id) + '"><h3>' + esc(a.title) + '</h3><p class="muted">' + esc(a.summary) + '</p><span class="more">Read ' + ICON.arrow + '</span></a>').join('') +
-        '<a class="card article-card" href="about.html#wellness"><h3>' + esc((D.about || {}).wellnessTitle) + '</h3><p class="muted">Our integrated approach to nutrition, lifestyle and doctor-approved wellness products.</p><span class="more">Read ' + ICON.arrow + '</span></a>' +
-      '</div></div></section>';
+      '<section class="section alt"><div class="container">' +
+        '<a class="card quiz-promo" href="risk-quiz.html">' + ICON.check + '<span><b>Are you at risk for colon cancer?</b><small>Take the 9-question quiz. It takes about a minute.</small></span>' + ICON.arrow + '</a>' +
+      '</div></section>';
   };
   // Interactive digestive system: the photo-real illustration with tappable regions drawn over it.
   // Region keys = organ names from site.json (lowercase, spaces → dashes); viewBox matches the picture.
