@@ -558,10 +558,11 @@ a[href^="tel:"], .tel { white-space: nowrap; }
 @media (min-width: 900px) {
   /* Our Team: photo and credentials on the left, story on the right */
   /* Our Team: Dr. Vernon's photo on top, his story underneath */
-  .doctor { grid-template-columns: 1fr; gap: 28px; max-width: 900px; margin: 0 auto; }
-  .doctor-photo img { max-width: 640px; }
-  .doctor-body { text-align: left; }
-  .doctor .creds { margin-top: 28px; }
+  /* Our Team: smaller photo on the right, the story wraps around it */
+  .doctor { display: block; }
+  .doctor-photo { float: right; width: 400px; margin: 4px 0 20px 36px; }
+  .doctor-photo img { max-width: 100%; }
+  .doctor .creds { clear: both; margin-top: 28px; }
   .doctor .creds div:nth-last-child(-n+2) { border-bottom: 0; }
   .doctor-body h2 { font-size: 2rem; }
   .doctor-body > p { font-size: 1.05rem; }
