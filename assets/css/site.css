@@ -205,7 +205,6 @@ svg { width: 1.1em; height: 1.1em; fill: currentColor; flex: none; }
 .doctor-photo img { border-radius: 20px; background: #000; width: 100%; max-width: 480px; margin: 0 auto; box-shadow: var(--shadow); }
 blockquote { margin: 0 0 22px; padding: 4px 0 4px 18px; border-left: 4px solid var(--accent); font-size: .94rem; line-height: 1.6; color: #5b6357; font-style: italic; }
 .doctor { display: grid; gap: 28px; }
-@media (min-width: 800px) { .doctor { grid-template-columns: minmax(0, 420px) 1fr; gap: 48px; } }
 .doctor-body p { color: var(--ink); }
 .creds { display: grid; gap: 0; margin: 32px 0 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 @media (min-width: 800px) { .creds { grid-template-columns: 1fr 1fr; } }
@@ -552,15 +551,16 @@ a[href^="tel:"], .tel { white-space: nowrap; }
 .treats-all { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; font-weight: 700; text-decoration: none; }
 .treats-all svg { width: 16px; height: 16px; }
 @media (min-width: 600px) { .about-dr { grid-template-columns: 240px 1fr; } }
-@media (min-width: 900px) { .treats { position: sticky; top: 100px; } }
 
 /* ---------- desktop layouts ---------- */
 .stack { display: grid; gap: 20px; align-content: start; }
 .card.billing { margin: 0; }
 @media (min-width: 900px) {
   /* Our Team: photo and credentials on the left, story on the right */
-  .doctor { grid-template-columns: 400px 1fr; gap: 48px; align-items: start; }
-  .doctor-photo { position: sticky; top: 100px; }
+  /* Our Team: Dr. Vernon's photo on top, his story underneath */
+  .doctor { grid-template-columns: 1fr; gap: 28px; max-width: 900px; margin: 0 auto; }
+  .doctor-photo img { max-width: 640px; }
+  .doctor-body { text-align: left; }
   .doctor .creds { margin-top: 28px; }
   .doctor .creds div:nth-last-child(-n+2) { border-bottom: 0; }
   .doctor-body h2 { font-size: 2rem; }
@@ -569,18 +569,17 @@ a[href^="tel:"], .tel { white-space: nowrap; }
   /* Patient Resources */
   .docs { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
   .faq-wrap { display: grid; grid-template-columns: 320px 1fr; gap: 48px; align-items: start; }
-  .faq-side { position: sticky; top: 100px; }
   .faq-side .call-opts { grid-template-columns: 1fr; }
   /* Learn */
   .organs { grid-template-columns: 380px 1fr; gap: 48px; }
   .organs > img { max-width: 380px; }
   /* Risk quiz */
   .quiz-wrap { display: grid; grid-template-columns: 1fr 340px; gap: 40px; align-items: start; }
-  .quiz-side { position: sticky; top: 100px; display: grid; gap: 18px; }
+  .quiz-side { display: grid; gap: 18px; }
   .quiz-side .call-opts { grid-template-columns: 1fr; }
-  /* Colonoscopy prep: the sheet with a sticky panel beside it */
+  /* Colonoscopy prep: the sheet with a panel beside it */
   .prep-layout { display: grid; grid-template-columns: 300px 1fr; gap: 32px; align-items: start; }
-  .prep-layout .prep-controls { position: sticky; top: 100px; grid-template-columns: 1fr; margin: 0; }
+  .prep-layout .prep-controls { grid-template-columns: 1fr; margin: 0; }
   .prep-layout .prep-actions { margin-top: 0; flex-direction: column; align-items: stretch; }
   .prep-call .call-opts { grid-template-columns: 1fr; }
   .prep-date input { max-width: none; }
