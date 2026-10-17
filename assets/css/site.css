@@ -121,6 +121,7 @@ svg { width: 1.1em; height: 1.1em; fill: currentColor; flex: none; }
 /* sections */
 .section { padding: 56px 0; }
 .section.alt { background: var(--alt); }
+.section.hl-sec { padding-top: 16px; padding-bottom: 0; }
 @media (max-width: 600px) { .section { padding: 40px 0; } }
 .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; font-weight: 800; color: var(--primary); margin: 0 0 8px; }
 .sec-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; }
@@ -135,7 +136,14 @@ svg { width: 1.1em; height: 1.1em; fill: currentColor; flex: none; }
 /* hero */
 .hero { background: radial-gradient(1200px 500px at 85% 20%, #fde3d8 0%, transparent 60%), var(--bg); padding: 48px 0 40px; }
 .hero-in { display: grid; gap: 32px; align-items: start; }
-@media (min-width: 900px) { .hero-in { grid-template-columns: 1.1fr 1fr; gap: 56px; } .hero { padding: 72px 0 64px; } }
+.hero-left { display: contents; }
+.hero-copy { order: 1; } .hero-photo { order: 2; } .hero-quick { order: 3; }
+@media (min-width: 900px) {
+  .hero-in { grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+  .hero { padding: 56px 0 48px; }
+  .hero-left { display: block; }
+  .hero-quick { margin-top: 32px; grid-template-columns: 1fr 1fr !important; }
+}
 .hero .lead { font-size: 1.18rem; color: var(--muted); max-width: 620px; }
 .hero-acts { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
 @media (max-width: 480px) { .hero-acts .btn { flex: 1 1 100%; } }
@@ -148,7 +156,6 @@ svg { width: 1.1em; height: 1.1em; fill: currentColor; flex: none; }
 @media (max-width: 899px) { .hero-photo { max-width: 520px; } }
 
 /* quick links */
-.quick { margin-top: -8px; padding-bottom: 8px; }
 .quick-grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
 @media (min-width: 600px) { .quick-grid { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1000px) { .quick-grid { grid-template-columns: repeat(4, 1fr); } }
@@ -170,11 +177,9 @@ svg { width: 1.1em; height: 1.1em; fill: currentColor; flex: none; }
 .hl-ico svg { width: 22px; height: 22px; }
 @media (min-width: 800px) {
   .hl-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; background: none; border: 0; padding: 0; box-shadow: none; }
-  .hl { display: block; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+  .hl { display: grid; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; box-shadow: var(--shadow); }
   .hl:last-child { border-bottom: 1px solid var(--line); }
-  .hl-ico { width: 52px; height: 52px; border-radius: 16px; margin-bottom: 14px; }
-  .hl-ico svg { width: 26px; height: 26px; }
-  .hl h3 { font-size: 1.2rem; }
+  .hl h3 { font-size: 1.15rem; }
 }
 
 /* tiles + cards */

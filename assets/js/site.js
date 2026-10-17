@@ -195,22 +195,23 @@
     const H = D.home || {}, P = D.practice || {}, Dr = D.doctor || {};
     const forms = shown(D.forms);
     return '<section class="hero"><div class="container hero-in">' +
-        '<div class="hero-copy"><p class="eyebrow">' + esc(H.eyebrow) + '</p><h1>' + esc(H.title) + '</h1><p class="lead">' + inline(H.text) + '</p>' +
+        '<div class="hero-left"><div class="hero-copy"><p class="eyebrow">' + esc(H.eyebrow) + '</p><h1>' + esc(H.title) + '</h1><p class="lead">' + inline(H.text) + '</p>' +
           '<div class="hero-acts"><a class="btn btn-primary" href="' + tel(P.phone) + '">' + ICON.phone + 'Call to schedule</a>' +
           '<a class="btn btn-outline" href="#conditions">' + esc(H.conditionsTitle || 'Conditions & Services') + '</a></div></div>' +
+        // Quick links sit under the hero text on desktop (filling the space beside the photo) and below the photo on phones.
+        '<div class="quick-grid hero-quick">' +
+          '<a class="qcard" href="contact.html">' + ICON.pin + '<span><b>Locations & hours</b><small>Fuquay-Varina and Dunn</small></span></a>' +
+          (forms[0] ? '<a class="qcard" href="patients.html#' + esc(forms[0].anchor || forms[0].id) + '">' + ICON.doc + '<span><b>Patient forms</b><small>Fill out before your visit</small></span></a>' : '') +
+          (shown(D.preps).length ? '<a class="qcard" href="colonoscopy-prep.html">' + ICON.doc + '<span><b>Colonoscopy prep</b><small>Step-by-step instructions</small></span></a>' : '') +
+          '<a class="qcard" href="risk-quiz.html">' + ICON.check + '<span><b>Are you at risk?</b><small>Quick colon cancer quiz</small></span></a>' +
+        '</div></div>' +
         '<figure class="hero-photo"><img src="' + esc(Dr.photo) + '" alt="Dr. Kurt Vernon, The GI Guy" width="481" height="310">' +
           '<figcaption class="hero-meet"><p class="eyebrow">Meet the GI Guy</p><h2>' + esc(Dr.name) + '</h2>' +
           '<blockquote>“' + esc(Dr.quote) + '”</blockquote>' +
           '<a class="btn btn-primary btn-sm" href="team.html">Meet our team ' + ICON.arrow + '</a></figcaption></figure>' +
       '</div></section>' +
       (ftOn() && D.fasttrack.homeBand ? '<section class="ft-band"><div class="container ft-band-in"><p>' + inline(D.fasttrack.homeBand) + '</p><a class="btn btn-accent" href="fast-track-colonoscopy.html">How Fast-Track works ' + ICON.arrow + '</a></div></section>' : '') +
-      '<section class="quick"><div class="container quick-grid">' +
-        '<a class="qcard" href="contact.html">' + ICON.pin + '<span><b>Locations & hours</b><small>Fuquay-Varina and Dunn</small></span></a>' +
-        (forms[0] ? '<a class="qcard" href="patients.html#' + esc(forms[0].anchor || forms[0].id) + '">' + ICON.doc + '<span><b>Patient forms</b><small>Fill out before your visit</small></span></a>' : '') +
-        (shown(D.preps).length ? '<a class="qcard" href="colonoscopy-prep.html">' + ICON.doc + '<span><b>Colonoscopy prep</b><small>Step-by-step instructions</small></span></a>' : '') +
-        '<a class="qcard" href="risk-quiz.html">' + ICON.check + '<span><b>Are you at risk?</b><small>Quick colon cancer quiz</small></span></a>' +
-      '</div></section>' +
-      '<section class="section"><div class="container"><div class="hl-grid">' + (H.highlights || []).map((h, i) =>
+      '<section class="section hl-sec"><div class="container"><div class="hl-grid">' + (H.highlights || []).map((h, i) =>
         '<div class="hl"><span class="hl-ico">' + ICON[HL_ICONS[i % 3]] + '</span><h3>' + esc(h.title) + '</h3><p>' + inline(h.text) + '</p></div>').join('') + '</div></div></section>' +
       condProcBlock() +
       (H.recognition ? '<section class="recog"><div class="container recog-in">' + ICON.check + '<p>' + inline(H.recognition) + (H.recognitionLink ? ' <a href="' + esc(safeUrl(H.recognitionLink)) + '">Read more</a>' : '') + '</p></div></section>' : '') +
