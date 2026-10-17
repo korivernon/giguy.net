@@ -477,9 +477,10 @@
     return pageHead(PP.title || 'Colonoscopy Prep', PP.intro, crumbLink('patients') + ' / ' + esc(PP.title || 'Colonoscopy Prep')) +
       '<section class="section prep"><div class="container">' +
         '<div class="prep-controls no-print">' +
-          '<div><h2 class="prep-step-h">1. Choose your prep</h2><div class="prep-choices" role="tablist">' + preps.map((x, i) =>
-            '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-prep="' + esc(x.id) + '"><b>' + esc(x.name) + '</b>' + (x.summary ? '<small>' + esc(x.summary) + '</small>' : '') + '</button>').join('') + '</div></div>' +
-          '<div class="prep-date"><h2 class="prep-step-h">2. Your procedure date <span class="muted">(optional)</span></h2><input type="date" id="prep-date" aria-label="Procedure date"></div>' +
+          // The chooser only appears once there's more than one prep to pick from.
+          (preps.length > 1 ? '<div><h2 class="prep-step-h">1. Choose your prep</h2><div class="prep-choices" role="tablist">' + preps.map((x, i) =>
+            '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-prep="' + esc(x.id) + '"><b>' + esc(x.name) + '</b>' + (x.summary ? '<small>' + esc(x.summary) + '</small>' : '') + '</button>').join('') + '</div></div>' : '') +
+          '<div class="prep-date"><h2 class="prep-step-h">' + (preps.length > 1 ? '2. ' : '') + 'Your procedure date <span class="muted">(optional)</span></h2><input type="date" id="prep-date" aria-label="Procedure date"></div>' +
         '</div>' +
         '<article class="card prep-sheet" id="prep-sheet"></article>' +
         '<div class="prep-actions no-print"><button class="btn btn-primary" type="button" id="prep-print">' + ICON.doc + 'Print or save as PDF</button>' +
@@ -511,7 +512,8 @@
       applyTitleCase(sheet);
       try { localStorage.setItem(key, JSON.stringify({ id: x.id, date })); } catch (e) { /* storage blocked */ }
     }
-    document.querySelector('.prep-choices').addEventListener('click', e => { const b = e.target.closest('[data-prep]'); if (b) { cur = b.dataset.prep; draw(); } });
+    const choices = document.querySelector('.prep-choices');
+    if (choices) choices.addEventListener('click', e => { const b = e.target.closest('[data-prep]'); if (b) { cur = b.dataset.prep; draw(); } });
     $('#prep-date').addEventListener('change', draw);
     $('#prep-print').onclick = () => window.print();
     draw();
