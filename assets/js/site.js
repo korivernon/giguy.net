@@ -429,28 +429,28 @@
         '<a class="card article-card" href="about.html#wellness"><h3>' + esc((D.about || {}).wellnessTitle) + '</h3><p class="muted">Our integrated approach to nutrition, lifestyle and doctor-approved wellness products.</p><span class="more">Read ' + ICON.arrow + '</span></a>' +
       '</div></div></section>';
   };
-  // Interactive digestive system: shapes keyed by organ name (lowercase, spaces → dashes).
-  const GUT_SVG = '<svg class="gut" viewBox="0 0 300 460" role="img" aria-label="Diagram of the digestive system">' +
-    '<path class="gut-body" d="M150 10a32 32 0 1 1 0 64a32 32 0 1 1 0-64Z"/>' +
-    '<path class="gut-body" d="M128 74h44l4 20q56 6 70 36l12 120q4 50-14 80l-8 110H64l-8-110q-18-30-14-80l12-120q14-30 70-36Z"/>' +
-    '<g class="org" data-key="colon"><path class="org-tube" d="M98 380V292q0-16 16-16h84q16 0 16 16v64q0 26-26 28-20 2-28 12" stroke-width="20"/></g>' +
-    '<g class="org" data-key="small-intestine"><ellipse class="org-hit" cx="156" cy="334" rx="44" ry="44"/><path class="org-tube" d="M184 296c-34-10-60 4-44 16s56-6 48 12-64 0-60 20 58-4 54 16-42 6-32 16" stroke-width="10"/></g>' +
-    '<g class="org" data-key="rectum"><path class="org-tube" d="M160 396l-4 36" stroke-width="16"/></g>' +
-    '<g class="org" data-key="pancreas"><path d="M140 252q30-12 74-6 12 4 6 12-30 4-70 8-16-2-10-14Z"/></g>' +
-    '<g class="org" data-key="stomach"><path d="M160 170q16-8 36-2 30 10 32 40 0 32-28 40-24 4-32-12 18 0 28-12 10-18-6-28-18-6-28-14Z"/></g>' +
-    '<g class="org" data-key="liver"><path d="M78 168q42-20 108-8 6 16-10 32-36 22-80 30-20-12-18-54Z"/></g>' +
-    '<g class="org" data-key="gallbladder"><path d="M116 214q8-6 16 0 4 12-8 22-12-8-8-22Z"/></g>' +
-    '<g class="org" data-key="esophagus"><path class="org-tube" d="M150 76c0 32 2 62 10 94" stroke-width="9"/></g>' +
-    '<circle class="gut-food" id="gut-food" r="6" cx="150" cy="64" opacity="0"/>' +
+  // Interactive digestive system: the photo-real illustration with tappable regions drawn over it.
+  // Region keys = organ names from site.json (lowercase, spaces → dashes); viewBox matches the picture.
+  const GUT_SVG = '<img src="img/digestive-torso.jpg" alt="" width="780" height="1260" loading="lazy">' +
+    '<svg class="gut" viewBox="0 0 260 420" aria-hidden="true">' +
+    '<g class="org" data-key="esophagus"><path class="org-hit tube" d="M121 0C122 40 128 90 138 165" stroke-width="16"/></g>' +
+    '<g class="org" data-key="liver"><path class="org-hit" d="M38 150C60 138 110 136 150 146 175 148 195 152 203 162 195 165 175 160 160 163 140 172 125 185 120 200 100 212 68 218 45 215 36 200 34 170 38 150Z"/></g>' +
+    '<g class="org" data-key="stomach"><path class="org-hit" d="M120 208C118 190 135 170 160 163 185 157 205 168 207 185 208 205 190 215 165 213 145 212 128 214 120 208Z"/></g>' +
+    '<g class="org" data-key="colon"><path class="org-hit tube" d="M62 318C58 290 56 255 60 228 62 220 70 216 80 220 110 226 150 226 185 216 195 213 200 218 200 228 202 260 203 300 198 325 192 340 170 342 150 338 140 336 135 338 133 345" stroke-width="26"/></g>' +
+    '<g class="org" data-key="small-intestine"><path class="org-hit" d="M82 236C110 222 158 222 180 238 188 272 186 306 174 332 150 342 97 340 76 326 66 298 68 260 82 236Z"/></g>' +
+    '<g class="org" data-key="rectum"><path class="org-hit tube" d="M133 345C132 365 132 385 131 402" stroke-width="22"/></g>' +
+    '<g class="org" data-key="pancreas"><ellipse class="org-hit" cx="134" cy="206" rx="22" ry="7"/></g>' +
+    '<g class="org" data-key="gallbladder"><ellipse class="org-hit" cx="111" cy="201" rx="9" ry="11"/></g>' +
+    '<circle class="gut-food" id="gut-food" r="5.5" cx="121" cy="2" opacity="0"/>' +
     '</svg>';
   // The trip a bite of food takes, one leg per organ; "helpers" pauses where bile and enzymes join in.
   const GUT_TRIP = [
-    ['esophagus', 'M150 60L150 76c0 32 2 62 10 94'],
-    ['stomach', 'M160 170q30 4 44 24 10 24-8 42-16 10-28 4'],
+    ['esophagus', 'M121 2C122 40 128 90 138 165'],
+    ['stomach', 'M138 165C165 160 200 168 203 185 204 205 185 214 160 212 140 211 128 212 120 208'],
     ['helpers', null],
-    ['small-intestine', 'M168 240L184 296c-34-10-60 4-44 16s56-6 48 12-64 0-60 20 58-4 54 16-42 6-32 16'],
-    ['colon', 'M150 376L98 380V292q0-16 16-16h84q16 0 16 16v64q0 26-26 28-20 2-28 12'],
-    ['rectum', 'M160 396l-4 36'],
+    ['small-intestine', 'M120 208C105 220 90 230 95 250 100 270 150 260 165 275 180 290 140 300 110 300 85 300 90 325 120 330 150 335 175 320 178 300 178 290 160 335 130 340 100 345 75 335 62 318'],
+    ['colon', 'M62 318C58 290 56 255 60 228 62 220 70 216 80 220 110 226 150 226 185 216 195 213 200 218 200 228 202 260 203 300 198 325 192 340 170 342 150 338 140 336 135 338 133 345'],
+    ['rectum', 'M133 345C132 365 132 385 131 402'],
   ];
   const HELPERS_TEXT = 'As food leaves the stomach, the **liver**, **gallbladder** and **pancreas** send in bile and enzymes that break down fats, proteins and sugars.';
   function afterLearn() {
@@ -475,18 +475,20 @@
       document.querySelectorAll('[data-organ]').forEach(b => b.setAttribute('aria-selected', String(Number(b.dataset.organ) === i)));
       light([key(o.name)]);
     };
+    // Tapping an organ (or its button) shows it and moves the food through it.
+    const show = i => { stop(); pick(i); const leg = GUT_TRIP.find(([k]) => k === key(organs[i].name)); if (leg && leg[1]) travel(leg[1], ++run); };
     // Shapes: hover shows the name, click picks the organ.
     svg.querySelectorAll('.org').forEach(g => {
       const i = byKey[g.dataset.key];
       if (i == null) { g.classList.add('off'); return; }
       g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button'); g.setAttribute('aria-label', organs[i].name);
-      g.addEventListener('click', () => { stop(); pick(i); });
-      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stop(); pick(i); } });
+      g.addEventListener('click', () => show(i));
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(i); } });
       g.addEventListener('mouseenter', () => { tip.textContent = organs[i].name; tip.hidden = false; svg.classList.add('hovering'); g.classList.add('hover'); });
       g.addEventListener('mousemove', e => { const r = svg.parentNode.getBoundingClientRect(); tip.style.left = (e.clientX - r.left) + 'px'; tip.style.top = (e.clientY - r.top) + 'px'; });
       g.addEventListener('mouseleave', () => { tip.hidden = true; svg.classList.remove('hovering'); g.classList.remove('hover'); });
     });
-    document.querySelector('.organ-tabs').addEventListener('click', e => { const b = e.target.closest('[data-organ]'); if (b) { stop(); pick(Number(b.dataset.organ)); } });
+    document.querySelector('.organ-tabs').addEventListener('click', e => { const b = e.target.closest('[data-organ]'); if (b) show(Number(b.dataset.organ)); });
 
     // "Follow your food": a dot travels the tract and the panel narrates each stop.
     const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -497,6 +499,22 @@
     const setBtn = (label, icon) => { playBtn.innerHTML = ICON[icon] + '<span>' + label + '</span>'; };
     function stop() { run++; paused = false; food.setAttribute('opacity', '0'); steps.classList.remove('going'); setBtn('Follow your food', 'play'); }
     const wait = ms => new Promise(r => setTimeout(r, ms));
+    // Slide the food dot along one leg; resolves early if another run starts.
+    function travel(d, me) {
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path'); path.setAttribute('d', d);
+      const len = path.getTotalLength(), dur = reduce ? 0 : Math.max(1800, len * 14);
+      food.setAttribute('opacity', '1');
+      const t0 = performance.now();
+      return new Promise(res => {
+        const tick = now => {
+          if (me !== run) return res();
+          const t = dur ? Math.min(1, (now - t0) / dur) : 1, pt = path.getPointAtLength(len * t);
+          food.setAttribute('cx', pt.x); food.setAttribute('cy', pt.y);
+          t < 1 ? requestAnimationFrame(tick) : res();
+        };
+        requestAnimationFrame(tick);
+      });
+    }
     async function go(from) {
       const me = ++run; paused = false; steps.classList.add('going'); setBtn('Pause', 'pause');
       for (let n = from; n < trip.length; n++) {
@@ -511,19 +529,7 @@
           await wait(3200); continue;
         }
         pick(byKey[k]);
-        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path'); path.setAttribute('d', d);
-        const len = path.getTotalLength(), dur = reduce ? 0 : Math.max(1800, len * 14);
-        food.setAttribute('opacity', '1');
-        const t0 = performance.now();
-        await new Promise(res => {
-          const tick = now => {
-            if (me !== run) return res();
-            const t = dur ? Math.min(1, (now - t0) / dur) : 1, pt = path.getPointAtLength(len * t);
-            food.setAttribute('cx', pt.x); food.setAttribute('cy', pt.y);
-            t < 1 ? requestAnimationFrame(tick) : res();
-          };
-          requestAnimationFrame(tick);
-        });
+        await travel(d, me);
         await wait(reduce ? 3500 : 1600);
       }
       if (me !== run) return;

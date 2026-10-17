@@ -594,29 +594,19 @@ a[href^="tel:"], .tel { white-space: nowrap; }
 @media (max-width: 899px) { .prep-call { display: none; } }
 @media (min-width: 900px) { .map { height: 300px; } }
 
-/* interactive digestive system */
-.gut-wrap { position: relative; max-width: 380px; width: 100%; margin: 0 auto; background: #fff; border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); padding: 12px 8px 0; }
-.gut { display: block; width: 100%; height: auto; }
-.gut-body { fill: #eef4ec; stroke: #cfdccb; stroke-width: 2; }
-.org { cursor: pointer; transition: opacity .2s; outline: none; }
-.org path, .org ellipse { transition: filter .2s, stroke .2s; }
-.org > path:not(.org-tube) { stroke: rgba(255,255,255,.7); stroke-width: 1.5; }
-.org-tube { fill: none; stroke-linecap: round; stroke-linejoin: round; }
-.org-hit { fill: #f6d8cf; opacity: .55; }
-.org[data-key="liver"] path { fill: #9b4434; }
-.org[data-key="gallbladder"] path { fill: #7d9b35; }
-.org[data-key="stomach"] path { fill: #df8a78; }
-.org[data-key="pancreas"] path { fill: #eab65f; }
-.org[data-key="esophagus"] .org-tube { stroke: #d9917f; }
-.org[data-key="small-intestine"] .org-tube { stroke: #e6a291; }
-.org[data-key="colon"] .org-tube { stroke: #c97c62; }
-.org[data-key="rectum"] .org-tube { stroke: #b4604a; }
-.gut.has-sel .org:not(.on), .gut.hovering .org:not(.hover):not(.on) { opacity: .35; }
-.gut.hovering .org.hover { opacity: 1; }
-.org.on path, .org.hover path, .org:focus-visible path { filter: drop-shadow(0 0 5px rgba(26, 87, 24, .65)); }
-.org.on > path:not(.org-tube) { stroke: var(--primary); stroke-width: 3; }
+/* interactive digestive system: tappable regions over the illustration */
+.gut-wrap { position: relative; max-width: 380px; width: 100%; margin: 0 auto; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); line-height: 0; }
+.gut-wrap img { width: 100%; height: auto; display: block; }
+.gut { position: absolute; inset: 0; width: 100%; height: 100%; }
+.org { cursor: pointer; outline: none; }
+.org-hit { fill: rgba(255, 255, 255, 0); stroke: rgba(255, 255, 255, 0); stroke-linecap: round; stroke-linejoin: round; transition: fill .2s, stroke .2s; }
+.tube { fill: none !important; }
+.org.hover .org-hit:not(.tube), .org:focus-visible .org-hit:not(.tube) { fill: rgba(255, 255, 255, .28); }
+.org.hover .tube, .org:focus-visible .tube { stroke: rgba(255, 255, 255, .3); }
+.org.on .org-hit:not(.tube) { fill: rgba(247, 165, 130, .32); stroke: #fff; stroke-width: 2; filter: drop-shadow(0 0 4px rgba(14, 58, 13, .7)); }
+.org.on .tube { stroke: rgba(247, 165, 130, .5); filter: drop-shadow(0 0 4px rgba(14, 58, 13, .7)); }
 .org.off { cursor: default; }
-.gut-food { fill: var(--primary); stroke: #fff; stroke-width: 2.5; filter: drop-shadow(0 1px 3px rgba(0,0,0,.35)); }
+.gut-food { fill: #ffd34d; stroke: #0e3a0d; stroke-width: 2; filter: drop-shadow(0 1px 3px rgba(0,0,0,.5)); }
 .gut-tip { position: absolute; transform: translate(-50%, -140%); background: var(--deep); color: #fff; font-size: .85rem; font-weight: 700; padding: 4px 10px; border-radius: 8px; pointer-events: none; white-space: nowrap; }
 .gut-play { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
 .gut-play .btn svg { width: 16px; height: 16px; }
