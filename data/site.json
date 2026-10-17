@@ -627,32 +627,44 @@
   ],
   "organs": [
     {
+      "name": "Esophagus",
+      "text": "The muscular tube that carries food and liquid from your throat to your stomach. A ring of muscle at the bottom keeps stomach acid from coming back up. When it's weak, acid can splash back and cause heartburn.",
+      "related": "heartburn-acid-reflux, difficulty-swallowing, egd, esophageal-dilation"
+    },
+    {
       "name": "Stomach",
-      "text": "A J-shaped organ just left of center, between the esophagus and the small intestine. Protein digestion begins here."
-    },
-    {
-      "name": "Small intestine",
-      "text": "Folded into much of the abdomen, it does most of the digestion and absorption of nutrients. Enzymes and bile break food into small building blocks that pass into the bloodstream. The duodenum is its first, C-shaped section."
-    },
-    {
-      "name": "Colon",
-      "text": "The large intestine wraps around the small intestine like a frame. It absorbs water from what's left of digested food and moves waste out of the body."
-    },
-    {
-      "name": "Rectum",
-      "text": "The last 6–8 inches of the large intestine. It holds stool until it leaves the body."
+      "text": "A J-shaped organ just left of center, between the esophagus and the small intestine. Protein digestion begins here.",
+      "related": "heartburn-acid-reflux, ulcers-gallstones, helicobacter-pylori, abdominal-pain, egd"
     },
     {
       "name": "Liver",
-      "text": "The largest internal organ. It stores vitamins, sugars and fats and releases them as needed; builds the proteins that clot blood and make new cells; filters waste from the blood; and breaks down harmful substances like alcohol."
+      "text": "The largest internal organ. It stores vitamins, sugars and fats and releases them as needed; builds the proteins that clot blood and make new cells; filters waste from the blood; and breaks down harmful substances like alcohol.",
+      "related": "fatty-liver, liver-disease, hepatitis"
     },
     {
       "name": "Gallbladder",
-      "text": "A small organ under the liver on the right side. It stores bile made by the liver and releases it into the intestine to help digest fats."
+      "text": "A small organ under the liver on the right side. It stores bile made by the liver and releases it into the intestine to help digest fats.",
+      "related": "ulcers-gallstones, abdominal-pain"
     },
     {
       "name": "Pancreas",
-      "text": "A fish-shaped organ behind the stomach. It makes hormones like insulin and glucagon, and digestive enzymes that it sends to the small intestine."
+      "text": "A fish-shaped organ behind the stomach. It makes hormones like insulin and glucagon, and digestive enzymes that it sends to the small intestine.",
+      "related": "abdominal-pain, consultations"
+    },
+    {
+      "name": "Small intestine",
+      "text": "Folded into much of the abdomen, it does most of the digestion and absorption of nutrients. Enzymes and bile break food into small building blocks that pass into the bloodstream. The duodenum is its first, C-shaped section.",
+      "related": "inflammatory-bowel-disease, intestinal-bleeding, abdominal-pain, capsule-endoscopy"
+    },
+    {
+      "name": "Colon",
+      "text": "The large intestine wraps around the small intestine like a frame. It absorbs water from what's left of digested food and moves waste out of the body.",
+      "related": "colon-cancer, colon-cancer-screening, irritable-bowel-syndrome, inflammatory-bowel-disease, diverticulosis, constipation, colonoscopy, cologuard"
+    },
+    {
+      "name": "Rectum",
+      "text": "The last 6–8 inches of the large intestine. It holds stool until it leaves the body.",
+      "related": "hemorrhoids, rectal-bleeding, flexible-sigmoidoscopy, hemorrhoid-treatment"
     }
   ],
   "quiz": {

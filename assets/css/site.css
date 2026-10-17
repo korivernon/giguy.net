@@ -279,7 +279,6 @@ details summary { cursor: pointer; font-weight: 700; color: var(--primary); }
 .quiz-promo small { color: var(--muted); }
 .organs { display: grid; gap: 24px; margin-top: 16px; align-items: start; }
 @media (min-width: 800px) { .organs { grid-template-columns: 320px 1fr; gap: 40px; } }
-.organs > img { max-width: 300px; margin: 0 auto; border-radius: 16px; }
 .organ-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
 .organ-tabs button { font: 600 .95rem var(--font); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; cursor: pointer; color: var(--deep); min-height: 42px; }
 .organ-tabs button[aria-selected="true"] { background: var(--primary); color: #fff; border-color: var(--primary); }
@@ -573,7 +572,6 @@ a[href^="tel:"], .tel { white-space: nowrap; }
   .faq-side .call-opts { grid-template-columns: 1fr; }
   /* Learn */
   .organs { grid-template-columns: 380px 1fr; gap: 48px; }
-  .organs > img { max-width: 380px; }
   /* Risk quiz */
   .quiz-wrap { display: grid; grid-template-columns: 1fr 340px; gap: 40px; align-items: start; }
   .quiz-side { display: grid; gap: 18px; }
@@ -595,3 +593,38 @@ a[href^="tel:"], .tel { white-space: nowrap; }
 .loc-acts { margin-top: auto; padding-top: 6px; }
 @media (max-width: 899px) { .prep-call { display: none; } }
 @media (min-width: 900px) { .map { height: 300px; } }
+
+/* interactive digestive system */
+.gut-wrap { position: relative; max-width: 380px; width: 100%; margin: 0 auto; background: #fff; border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); padding: 12px 8px 0; }
+.gut { display: block; width: 100%; height: auto; }
+.gut-body { fill: #eef4ec; stroke: #cfdccb; stroke-width: 2; }
+.org { cursor: pointer; transition: opacity .2s; outline: none; }
+.org path, .org ellipse { transition: filter .2s, stroke .2s; }
+.org > path:not(.org-tube) { stroke: rgba(255,255,255,.7); stroke-width: 1.5; }
+.org-tube { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.org-hit { fill: #f6d8cf; opacity: .55; }
+.org[data-key="liver"] path { fill: #9b4434; }
+.org[data-key="gallbladder"] path { fill: #7d9b35; }
+.org[data-key="stomach"] path { fill: #df8a78; }
+.org[data-key="pancreas"] path { fill: #eab65f; }
+.org[data-key="esophagus"] .org-tube { stroke: #d9917f; }
+.org[data-key="small-intestine"] .org-tube { stroke: #e6a291; }
+.org[data-key="colon"] .org-tube { stroke: #c97c62; }
+.org[data-key="rectum"] .org-tube { stroke: #b4604a; }
+.gut.has-sel .org:not(.on), .gut.hovering .org:not(.hover):not(.on) { opacity: .35; }
+.gut.hovering .org.hover { opacity: 1; }
+.org.on path, .org.hover path, .org:focus-visible path { filter: drop-shadow(0 0 5px rgba(26, 87, 24, .65)); }
+.org.on > path:not(.org-tube) { stroke: var(--primary); stroke-width: 3; }
+.org.off { cursor: default; }
+.gut-food { fill: var(--primary); stroke: #fff; stroke-width: 2.5; filter: drop-shadow(0 1px 3px rgba(0,0,0,.35)); }
+.gut-tip { position: absolute; transform: translate(-50%, -140%); background: var(--deep); color: #fff; font-size: .85rem; font-weight: 700; padding: 4px 10px; border-radius: 8px; pointer-events: none; white-space: nowrap; }
+.gut-play { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+.gut-play .btn svg { width: 16px; height: 16px; }
+.gut-steps { display: flex; gap: 6px; }
+.gut-steps i { width: 22px; height: 6px; border-radius: 3px; background: var(--line); transition: background .3s; }
+.gut-steps i.done { background: #a9cba1; }
+.gut-steps i.now { background: var(--primary); }
+.gut-steps:not(.going) i:not(.done) { opacity: .6; }
+.gut-rel-h { margin: 14px 0 6px; font-weight: 800; font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--primary); }
+.organ-panel { min-height: 180px; }
+@media (max-width: 899px) { .gut-wrap { max-width: 250px; } }

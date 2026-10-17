@@ -21,6 +21,8 @@
   const navKey = PAGE === 'article' || PAGE === 'quiz' ? 'learn' : PAGE === 'prep' ? 'patients' : PAGE === 'condition' ? 'conditions' : PAGE === 'procedure' ? 'services' : PAGE;
 
   const ICON = {
+    play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
+    pause: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>',
     phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>',
     clock: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm.5-13H11v6l5.2 3.1.8-1.2-4.5-2.7z"/></svg>',
     pin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>',
@@ -416,24 +418,123 @@
       '<section class="section"><div class="container">' +
         '<a class="card quiz-promo" href="risk-quiz.html">' + ICON.check + '<span><b>Are you at risk for colon cancer?</b><small>Take the 9-question quiz. It takes about a minute.</small></span>' + ICON.arrow + '</a>' +
       '</div></section>' +
-      '<section class="section alt" id="digestive-system"><div class="container"><h2>Your digestive system</h2><p class="muted">Tap an organ to learn what it does.</p>' +
-        '<div class="organs"><img src="img/digestive-system.png" alt="Diagram of the digestive system" loading="lazy" width="637" height="790">' +
-        '<div><div class="organ-tabs" role="tablist">' + organs.map((o, i) => '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-organ="' + i + '">' + esc(o.name) + '</button>').join('') + '</div>' +
-        '<div class="card organ-panel" id="organ-panel" role="tabpanel"></div></div></div>' +
+      '<section class="section alt" id="digestive-system"><div class="container"><h2>Your digestive system</h2><p class="muted">Tap an organ on the diagram, or follow a bite of food from start to finish.</p>' +
+        '<div class="organs"><div class="gut-wrap">' + GUT_SVG + '<div class="gut-tip" id="gut-tip" hidden></div></div>' +
+        '<div><div class="gut-play"><button class="btn btn-primary btn-sm" type="button" id="gut-play">' + ICON.play + '<span>Follow your food</span></button><div class="gut-steps" id="gut-steps" aria-hidden="true"></div></div>' +
+        '<div class="organ-tabs" role="tablist">' + organs.map((o, i) => '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-organ="' + i + '">' + esc(o.name) + '</button>').join('') + '</div>' +
+        '<div class="card organ-panel" id="organ-panel" role="tabpanel" aria-live="polite"></div></div></div>' +
       '</div></section>' +
       '<section class="section"><div class="container"><h2>Articles</h2><div class="cards cards-4">' + shown(D.articles).map(a =>
         '<a class="card article-card" href="article.html?id=' + encodeURIComponent(a.id) + '"><h3>' + esc(a.title) + '</h3><p class="muted">' + esc(a.summary) + '</p><span class="more">Read ' + ICON.arrow + '</span></a>').join('') +
         '<a class="card article-card" href="about.html#wellness"><h3>' + esc((D.about || {}).wellnessTitle) + '</h3><p class="muted">Our integrated approach to nutrition, lifestyle and doctor-approved wellness products.</p><span class="more">Read ' + ICON.arrow + '</span></a>' +
       '</div></div></section>';
   };
+  // Interactive digestive system: shapes keyed by organ name (lowercase, spaces → dashes).
+  const GUT_SVG = '<svg class="gut" viewBox="0 0 300 460" role="img" aria-label="Diagram of the digestive system">' +
+    '<path class="gut-body" d="M150 10a32 32 0 1 1 0 64a32 32 0 1 1 0-64Z"/>' +
+    '<path class="gut-body" d="M128 74h44l4 20q56 6 70 36l12 120q4 50-14 80l-8 110H64l-8-110q-18-30-14-80l12-120q14-30 70-36Z"/>' +
+    '<g class="org" data-key="colon"><path class="org-tube" d="M98 380V292q0-16 16-16h84q16 0 16 16v64q0 26-26 28-20 2-28 12" stroke-width="20"/></g>' +
+    '<g class="org" data-key="small-intestine"><ellipse class="org-hit" cx="156" cy="334" rx="44" ry="44"/><path class="org-tube" d="M184 296c-34-10-60 4-44 16s56-6 48 12-64 0-60 20 58-4 54 16-42 6-32 16" stroke-width="10"/></g>' +
+    '<g class="org" data-key="rectum"><path class="org-tube" d="M160 396l-4 36" stroke-width="16"/></g>' +
+    '<g class="org" data-key="pancreas"><path d="M140 252q30-12 74-6 12 4 6 12-30 4-70 8-16-2-10-14Z"/></g>' +
+    '<g class="org" data-key="stomach"><path d="M160 170q16-8 36-2 30 10 32 40 0 32-28 40-24 4-32-12 18 0 28-12 10-18-6-28-18-6-28-14Z"/></g>' +
+    '<g class="org" data-key="liver"><path d="M78 168q42-20 108-8 6 16-10 32-36 22-80 30-20-12-18-54Z"/></g>' +
+    '<g class="org" data-key="gallbladder"><path d="M116 214q8-6 16 0 4 12-8 22-12-8-8-22Z"/></g>' +
+    '<g class="org" data-key="esophagus"><path class="org-tube" d="M150 76c0 32 2 62 10 94" stroke-width="9"/></g>' +
+    '<circle class="gut-food" id="gut-food" r="6" cx="150" cy="64" opacity="0"/>' +
+    '</svg>';
+  // The trip a bite of food takes, one leg per organ; "helpers" pauses where bile and enzymes join in.
+  const GUT_TRIP = [
+    ['esophagus', 'M150 60L150 76c0 32 2 62 10 94'],
+    ['stomach', 'M160 170q30 4 44 24 10 24-8 42-16 10-28 4'],
+    ['helpers', null],
+    ['small-intestine', 'M168 240L184 296c-34-10-60 4-44 16s56-6 48 12-64 0-60 20 58-4 54 16-42 6-32 16'],
+    ['colon', 'M150 376L98 380V292q0-16 16-16h84q16 0 16 16v64q0 26-26 28-20 2-28 12'],
+    ['rectum', 'M160 396l-4 36'],
+  ];
+  const HELPERS_TEXT = 'As food leaves the stomach, the **liver**, **gallbladder** and **pancreas** send in bile and enzymes that break down fats, proteins and sugars.';
   function afterLearn() {
     const organs = D.organs || [];
     const panel = $('#organ-panel'); if (!panel) return;
-    const pick = i => {
-      panel.innerHTML = '<h3>' + esc(organs[i].name) + '</h3>' + md(organs[i].text);
-      document.querySelectorAll('[data-organ]').forEach(b => b.setAttribute('aria-selected', String(Number(b.dataset.organ) === i)));
+    const svg = document.querySelector('.gut'), tip = $('#gut-tip'), food = $('#gut-food'), playBtn = $('#gut-play');
+    const key = n => String(n || '').toLowerCase().trim().replace(/\s+/g, '-');
+    const byKey = {}; organs.forEach((o, i) => { byKey[key(o.name)] = i; });
+    const findItem = id => shown(D.conditions).find(c => c.id === id) ? ['c', shown(D.conditions).find(c => c.id === id)] : shown(D.services).find(x => x.id === id) ? ['s', shown(D.services).find(x => x.id === id)] : null;
+    const relatedHtml = o => {
+      const items = String(o.related || '').split(',').map(x => x.trim()).filter(Boolean).map(findItem).filter(Boolean);
+      if (!items.length) return '';
+      return '<p class="gut-rel-h">How we can help</p><ul class="chips gut-rel">' + items.map(([t, x]) => '<li><a href="' + (t === 'c' ? condUrl(x) : procUrl(x)) + '">' + esc(x.name || x.title) + '</a></li>').join('') + '</ul>';
     };
-    document.querySelector('.organ-tabs').addEventListener('click', e => { const b = e.target.closest('[data-organ]'); if (b) pick(Number(b.dataset.organ)); });
+    const light = keys => {
+      svg.classList.toggle('has-sel', keys.length > 0);
+      svg.querySelectorAll('.org').forEach(g => g.classList.toggle('on', keys.includes(g.dataset.key)));
+    };
+    const pick = i => {
+      const o = organs[i]; if (!o) return;
+      panel.innerHTML = '<h3>' + esc(o.name) + '</h3>' + md(o.text) + relatedHtml(o);
+      document.querySelectorAll('[data-organ]').forEach(b => b.setAttribute('aria-selected', String(Number(b.dataset.organ) === i)));
+      light([key(o.name)]);
+    };
+    // Shapes: hover shows the name, click picks the organ.
+    svg.querySelectorAll('.org').forEach(g => {
+      const i = byKey[g.dataset.key];
+      if (i == null) { g.classList.add('off'); return; }
+      g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button'); g.setAttribute('aria-label', organs[i].name);
+      g.addEventListener('click', () => { stop(); pick(i); });
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stop(); pick(i); } });
+      g.addEventListener('mouseenter', () => { tip.textContent = organs[i].name; tip.hidden = false; svg.classList.add('hovering'); g.classList.add('hover'); });
+      g.addEventListener('mousemove', e => { const r = svg.parentNode.getBoundingClientRect(); tip.style.left = (e.clientX - r.left) + 'px'; tip.style.top = (e.clientY - r.top) + 'px'; });
+      g.addEventListener('mouseleave', () => { tip.hidden = true; svg.classList.remove('hovering'); g.classList.remove('hover'); });
+    });
+    document.querySelector('.organ-tabs').addEventListener('click', e => { const b = e.target.closest('[data-organ]'); if (b) { stop(); pick(Number(b.dataset.organ)); } });
+
+    // "Follow your food": a dot travels the tract and the panel narrates each stop.
+    const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const steps = $('#gut-steps');
+    const trip = GUT_TRIP.filter(([k]) => k === 'helpers' || byKey[k] != null);
+    steps.innerHTML = trip.map(() => '<i></i>').join('');
+    let run = 0, paused = false, stepAt = 0;
+    const setBtn = (label, icon) => { playBtn.innerHTML = ICON[icon] + '<span>' + label + '</span>'; };
+    function stop() { run++; paused = false; food.setAttribute('opacity', '0'); steps.classList.remove('going'); setBtn('Follow your food', 'play'); }
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+    async function go(from) {
+      const me = ++run; paused = false; steps.classList.add('going'); setBtn('Pause', 'pause');
+      for (let n = from; n < trip.length; n++) {
+        if (me !== run) return;
+        stepAt = n;
+        steps.querySelectorAll('i').forEach((el, j) => { el.className = j < n ? 'done' : j === n ? 'now' : ''; });
+        const [k, d] = trip[n];
+        if (k === 'helpers') {
+          panel.innerHTML = '<h3>Help from the Liver, Gallbladder and Pancreas</h3>' + md(HELPERS_TEXT);
+          document.querySelectorAll('[data-organ]').forEach(b => b.setAttribute('aria-selected', 'false'));
+          light(['liver', 'gallbladder', 'pancreas']);
+          await wait(3200); continue;
+        }
+        pick(byKey[k]);
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path'); path.setAttribute('d', d);
+        const len = path.getTotalLength(), dur = reduce ? 0 : Math.max(1800, len * 14);
+        food.setAttribute('opacity', '1');
+        const t0 = performance.now();
+        await new Promise(res => {
+          const tick = now => {
+            if (me !== run) return res();
+            const t = dur ? Math.min(1, (now - t0) / dur) : 1, pt = path.getPointAtLength(len * t);
+            food.setAttribute('cx', pt.x); food.setAttribute('cy', pt.y);
+            t < 1 ? requestAnimationFrame(tick) : res();
+          };
+          requestAnimationFrame(tick);
+        });
+        await wait(reduce ? 3500 : 1600);
+      }
+      if (me !== run) return;
+      steps.querySelectorAll('i').forEach(el => { el.className = 'done'; });
+      food.setAttribute('opacity', '0'); setBtn('Watch again', 'play'); stepAt = 0; run++;
+    }
+    playBtn.addEventListener('click', () => {
+      if (steps.classList.contains('going') && !paused) { run++; paused = true; setBtn('Resume', 'play'); return; }
+      if (paused) { go(stepAt); return; }
+      go(0);
+    });
     if (organs.length) pick(0);
   }
 

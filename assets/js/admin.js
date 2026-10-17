@@ -255,7 +255,7 @@
       { k: 'quiz.questions', label: 'Yes/no questions (one per line)', type: 'lines', rows: 10 },
       { k: 'quiz.yesResult', label: 'Result if any answer is Yes', type: 'textarea', rows: 2 },
       { k: 'quiz.noResult', label: 'Result if every answer is No', type: 'textarea', rows: 2 },
-      { k: 'organs', label: 'Your digestive system (organ + description)', type: 'pairs', fields: [['name', 'Organ'], ['text', 'What it does']], long: 1 },
+      { k: 'organs', label: 'Your digestive system (organ + description)', type: 'pairs', fields: [['name', 'Organ'], ['text', 'What it does'], ['related', 'Related condition/service ids, comma-separated (e.g. colon-cancer, colonoscopy)']], long: 1, hint: 'The diagram has shapes for Esophagus, Stomach, Liver, Gallbladder, Pancreas, Small intestine, Colon and Rectum. Keep those names so the organ lights up when tapped.' },
     ],
   };
 
