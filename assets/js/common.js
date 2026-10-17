@@ -42,6 +42,15 @@
       const ext = isExternal(url) ? ' target="_blank" rel="noopener"' : '';
       return '<a href="' + esc(url) + '"' + ext + '>' + t + '</a>';
     });
+    // Phone numbers written in text become tap-to-call links that never break across lines.
+    // (Skips numbers already inside a link, e.g. [call us](tel:...).)
+    // Fax numbers (preceded by "fax") just stay on one line; they aren't something to tap and call.
+    s = s.replace(/(<a\b[^>]*>.*?<\/a>)|\((\d{3})\)\s?(\d{3})-(\d{4})/g, (m, link, a, b, c, at, all) => {
+      if (link) return link;
+      const num = '(' + a + ') ' + b + '-' + c;
+      return /fax\b[^.;]{0,60}$/i.test(all.slice(Math.max(0, at - 70), at)) ? '<span class="tel">' + num + '</span>'
+        : '<a class="tel" href="tel:+1' + a + b + c + '">' + num + '</a>';
+    });
     return s;
   }
   // Blocks split on blank lines. "## " starts a heading line, "- " lines make a list.

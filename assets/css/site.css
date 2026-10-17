@@ -290,9 +290,16 @@ details summary { cursor: pointer; font-weight: 700; color: var(--primary); }
 .plain li:last-child { border: 0; }
 
 /* quiz */
-.quiz .q { border: 1px solid var(--line); background: #fff; border-radius: 12px; padding: 14px 18px; margin: 0 0 10px; display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
-.quiz legend { float: left; font-weight: 600; padding: 0; max-width: 560px; }
-.yn { display: flex; gap: 8px; }
+/* A fieldset's legend normally sits ON the top border; floating it pulls it inside the box. Floats only
+   work in block layout (not flex), so the box is a block (flow-root) and the buttons clear below. */
+.quiz .q { display: flow-root; border: 1px solid var(--line); background: #fff; border-radius: 12px; padding: 14px 18px; margin: 0 0 10px; min-width: 0; }
+.quiz legend { float: left; width: 100%; padding: 0; margin: 0 0 10px; font-weight: 600; line-height: 1.4; }
+.yn { display: flex; gap: 8px; clear: both; }
+@media (min-width: 700px) {
+  .quiz .q { display: flex; align-items: center; gap: 16px; }
+  .quiz .q > .yn { margin-left: auto; flex: none; }
+  .quiz legend { float: none; width: auto; margin: 0; display: contents; }
+}
 .yn label { position: relative; }
 .yn input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
 .yn span { display: inline-flex; min-width: 64px; min-height: 42px; align-items: center; justify-content: center; border-radius: 999px; border: 2px solid var(--line); font-weight: 700; color: var(--muted); }
@@ -421,7 +428,8 @@ a.cond .more { margin-top: 10px; }
 }
 
 /* call options: office name above the number, outlined */
-.call-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 520px; width: 100%; }
+/* Side by side when two boxes fit at full number size, stacked otherwise (e.g. inside the quiz result). */
+.call-opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; max-width: 520px; width: 100%; }
 @media (max-width: 340px) { .call-opts { grid-template-columns: 1fr; } }
 .call-opt { display: block; min-width: 0; padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, .35); border-radius: 12px; color: #fff; text-decoration: none; transition: background .15s, border-color .15s; }
 .call-opt:hover { background: rgba(255, 255, 255, .08); border-color: #fff; color: #fff; }
@@ -477,3 +485,9 @@ a.cond .more { margin-top: 10px; }
 .loc-hours h4 { font-size: .95rem; color: var(--deep); margin: 0 0 4px; }
 .loc-hours .hours-lines { margin: 0 0 10px; font-size: .95rem; color: var(--muted); }
 .loc-hours .hours-lines:last-child { margin-bottom: 0; }
+
+.quiz-result { margin-bottom: 18px; }
+.quiz + .muted.small, .quiz ~ p.muted { margin-top: 4px; }
+
+/* phone numbers never split at the hyphen */
+a[href^="tel:"], .tel { white-space: nowrap; }
