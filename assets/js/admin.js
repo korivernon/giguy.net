@@ -123,6 +123,7 @@
       { k: 'practice.emergencyNote', label: 'Emergency note', type: 'textarea', rows: 2 },
       { k: 'practice.disclaimer', label: 'Footer disclaimer', type: 'textarea', rows: 2 },
       { k: 'practice.footerTagline', label: 'Footer tagline' },
+      { k: 'practice.youtubeChannel', label: 'YouTube channel (link above the Body Guy videos)', hint: 'e.g. https://www.youtube.com/@bodyguylife. Blank = no link.' },
       { k: 'social', label: 'Social links (footer)', type: 'pairs', fields: [['label', 'Label'], ['url', 'https://…']] },
     ],
     home: [
@@ -205,6 +206,7 @@
       { k: 'youtube', label: 'YouTube link', req: true, hint: 'Paste the video address, e.g. https://www.youtube.com/watch?v=…' },
       { k: 'text', label: 'Short description', type: 'textarea', rows: 2 },
       { k: 'service', label: 'Also show on this service page (optional)', type: 'select', opts: [['', 'None'], ['colonoscopy', 'Colonoscopy'], ['egd', 'EGD (upper endoscopy)'], ['capsule-endoscopy', 'Capsule endoscopy'], ['flexible-sigmoidoscopy', 'Flexible sigmoidoscopy'], ['esophageal-dilation', 'Esophageal dilation'], ['hemorrhoid-treatment', 'Hemorrhoid treatment'], ['cologuard', 'Cologuard'], ['consultations', 'GI consultations']] },
+      { k: 'channel', label: 'From the Body Guy YouTube channel (shown in its own section)', type: 'check' },
       { k: 'hidden', label: 'Hidden from the site', type: 'check' },
     ],
     faqs: [
@@ -278,7 +280,7 @@
     services: { label: 'Services', one: 'service', sym: () => 'SVC', title: x => x.title, sub: x => x.summary || '', blank: () => ({ id: '', title: '', summary: '', points: '', hidden: false }), idFrom: x => slug(x.title) },
     conditions: { label: 'Conditions', one: 'condition', sym: () => 'COND', title: x => x.name, sub: x => short(x.text, 100), blank: () => ({ id: '', name: '', text: '', hidden: false }), idFrom: x => slug(x.name) },
     preps: { label: 'Colonoscopy preps', one: 'prep', sym: () => 'PREP', title: x => x.name, sub: x => x.summary || '', blank: () => ({ id: '', name: '', summary: '', buy: '', weekBefore: '', dayBefore: '', dayOf: '', notes: '', pdf: '', hidden: false }), idFrom: x => slug(x.name) },
-    videos: { label: 'Videos', one: 'video', sym: () => 'VIDEO', title: x => x.title, sub: x => x.youtube || '', blank: () => ({ id: '', title: '', youtube: '', text: '', service: '', hidden: false }), idFrom: x => slug(x.title) },
+    videos: { label: 'Videos', one: 'video', sym: () => 'VIDEO', title: x => x.title, sub: x => x.youtube || '', blank: () => ({ id: '', title: '', youtube: '', text: '', service: '', channel: false, hidden: false }), idFrom: x => slug(x.title) },
     faqs: { label: 'FAQs', one: 'question', sym: () => 'FAQ', title: x => x.q, sub: x => short(x.a, 100), blank: () => ({ id: '', q: '', a: '' }), idFrom: x => slug(x.q) },
     locations: { label: 'Locations', one: 'location', sym: () => 'OFFICE', title: x => x.name, sub: x => (x.address || '').replace(/\n/g, ', ') + ' · ' + (x.phone || ''), blank: () => ({ id: '', name: '', address: '', phone: '', fax: '', mapQuery: '', hidden: false }), idFrom: x => slug(x.name) },
     forms: { label: 'Forms & PDFs', one: 'form', sym: () => 'PDF', title: x => x.title, sub: x => x.file || '', blank: () => ({ id: '', title: '', text: '', file: '', hidden: false }), idFrom: x => slug(x.title) },

@@ -15,7 +15,8 @@
     "payUrl": "https://giguy.mygportal.com/",
     "payLabel": "Pay Your Bill",
     "payNote": "Pay securely through our Patient Portal: log in, then choose **Pay your bills**. Questions about a bill? Call (919) 577-0085.",
-    "portalRegisterUrl": "https://giguy.mygportal.com/PP6-5-10/Account/Register"
+    "portalRegisterUrl": "https://giguy.mygportal.com/PP6-5-10/Account/Register",
+    "youtubeChannel": "https://www.youtube.com/@bodyguylife"
   },
   "banners": [
     {
@@ -732,6 +733,10 @@
     {
       "label": "X",
       "url": "https://x.com/giguy_gig"
+    },
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/@bodyguylife"
     }
   ],
   "fasttrack": {
@@ -797,7 +802,8 @@
       "youtube": "https://www.youtube.com/watch?v=d5O31vWDol8",
       "text": "What to expect and how to get ready for your colonoscopy.",
       "service": "colonoscopy",
-      "hidden": false
+      "hidden": false,
+      "channel": false
     },
     {
       "id": "upper-endoscopy",
@@ -805,7 +811,8 @@
       "youtube": "https://www.youtube.com/watch?v=OQN41sMcdsU",
       "text": "How an upper endoscopy (EGD) works and what the risks are.",
       "service": "egd",
-      "hidden": false
+      "hidden": false,
+      "channel": false
     },
     {
       "id": "hemorrhoid-types",
@@ -813,7 +820,8 @@
       "youtube": "https://www.youtube.com/watch?v=WzI-iqU9VKw",
       "text": "The kinds of hemorrhoids and how each is treated.",
       "service": "hemorrhoid-treatment",
-      "hidden": false
+      "hidden": false,
+      "channel": false
     },
     {
       "id": "hemorrhoid-banding",
@@ -821,6 +829,106 @@
       "youtube": "https://www.youtube.com/watch?v=OHRdnj_8DZU",
       "text": "How in-office hemorrhoid treatment works.",
       "service": "hemorrhoid-treatment",
+      "hidden": false,
+      "channel": false
+    },
+    {
+      "id": "before-your-colonoscopy",
+      "title": "What to Know Before Your Colonoscopy",
+      "youtube": "https://www.youtube.com/watch?v=nOEsDeKPkrU",
+      "text": "How a colonoscopy is done and its possible risks, including bleeding, perforation and side effects from sedation.",
+      "service": "colonoscopy",
+      "channel": true,
+      "hidden": false
+    },
+    {
+      "id": "peg-vs-antifreeze",
+      "title": "Polyethylene Glycol vs. Antifreeze: The Facts",
+      "youtube": "https://www.youtube.com/watch?v=cQrs3kWtsCY",
+      "text": "Polyethylene glycol, the main ingredient in many bowel preps, is not the same as the ethylene glycol in antifreeze. Here is the difference.",
+      "service": "colonoscopy",
+      "channel": true,
+      "hidden": false
+    },
+    {
+      "id": "before-your-egd",
+      "title": "What to Know Before Your EGD",
+      "youtube": "https://www.youtube.com/watch?v=512IWRlI_Qg",
+      "text": "What to expect from an upper endoscopy (EGD) and how to get ready.",
+      "service": "egd",
+      "channel": true,
+      "hidden": false
+    },
+    {
+      "id": "eosinophilic-esophagitis",
+      "title": "What Is Eosinophilic Esophagitis?",
+      "youtube": "https://www.youtube.com/watch?v=j3EqJmbLj34",
+      "text": "Trouble swallowing, or food that feels stuck? EoE is a chronic allergic inflammation of the esophagus. Learn what causes it and how it is treated.",
+      "service": "esophageal-dilation",
+      "channel": true,
+      "hidden": false
+    },
+    {
+      "id": "fodmap-101",
+      "title": "FODMAP 101",
+      "youtube": "https://www.youtube.com/watch?v=Y6V5lbg1zxY",
+      "text": "A beginner's guide to FODMAPs, why they can upset your gut, and how the low-FODMAP diet works.",
+      "service": "consultations",
+      "channel": true,
+      "hidden": false
+    },
+    {
+      "id": "ppi-dementia",
+      "title": "Dementia and Your Proton Pump Inhibitor",
+      "youtube": "https://www.youtube.com/watch?v=qyFacJM6TdU",
+      "text": "What the research says about acid-reducing medicines (PPIs) and memory.",
+      "service": "",
+      "channel": true,
+      "hidden": false
+    },
+    {
+      "id": "norovirus",
+      "title": "Norovirus: What You Need to Know",
+      "youtube": "https://www.youtube.com/watch?v=sZViDj36umY",
+      "text": "The \"stomach bug\": how it spreads, what it feels like and how to protect yourself.",
+      "service": "",
+      "channel": true,
+      "hidden": false
+    },
+    {
+      "id": "zepbound",
+      "title": "The Truth About Zepbound",
+      "youtube": "https://www.youtube.com/watch?v=gzNwn8C3Fj4",
+      "text": "What to know about the weight-loss medicine Zepbound and your digestive system.",
+      "service": "",
+      "channel": true,
+      "hidden": false
+    },
+    {
+      "id": "zepbound-short",
+      "title": "Don't Take Zepbound Until You See This",
+      "youtube": "https://www.youtube.com/watch?v=vRldHliSlTM",
+      "text": "A one-minute short on Zepbound.",
+      "service": "",
+      "channel": true,
+      "hidden": false
+    },
+    {
+      "id": "fiber",
+      "title": "Train Your Gut With Fiber",
+      "youtube": "https://www.youtube.com/watch?v=lTi9bozM_jk",
+      "text": "\"Fibermaxxing\" is everywhere. The goal isn't to punish your gut with fiber, it's to train it. A one-minute short.",
+      "service": "",
+      "channel": true,
+      "hidden": false
+    },
+    {
+      "id": "body-guy-dec-2024",
+      "title": "Body Guy: December 22, 2024",
+      "youtube": "https://www.youtube.com/watch?v=0fPczaUbAEs",
+      "text": "",
+      "service": "",
+      "channel": true,
       "hidden": false
     }
   ],

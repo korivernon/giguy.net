@@ -393,7 +393,10 @@
     const vids = shown(D.videos);
     return sectionHead('patients', 'Forms, colonoscopy prep, instruction videos, insurance and answers to common questions.', head) +
       ftPromo() +
-      (vids.length ? '<section class="section" id="videos"><div class="container"><h2>Instruction Videos</h2>' + videoCards(vids) + '</div></section>' : '') +
+      (vids.some(v => !v.channel) ? '<section class="section" id="videos"><div class="container"><h2>Instruction Videos</h2>' + videoCards(vids.filter(v => !v.channel)) + '</div></section>' : '') +
+      (vids.some(v => v.channel) ? '<section class="section" id="health-videos"><div class="container"><div class="sec-head"><div><h2>Health videos from the Body Guy channel</h2><p class="muted">Short videos from Dr. Vernon on digestive health, procedures and the latest health news.</p></div>' +
+        (P.youtubeChannel ? '<a class="btn btn-outline btn-sm" href="' + esc(safeUrl(P.youtubeChannel)) + '" target="_blank" rel="noopener">See the channel on YouTube ' + ICON.arrow + '</a>' : '') + '</div>' +
+        videoCards(vids.filter(v => v.channel)) + '</div></section>' : '') +
       '<section class="section alt"><div class="container"><h2>Forms & instructions</h2><div class="docs">' + shown(D.forms).map(f =>
         '<a class="card doc" id="' + esc(f.anchor || f.id) + '" href="' + esc(safeUrl(f.file)) + '"' + (/\.pdf$/i.test(f.file) ? ' target="_blank" rel="noopener"' : '') + '>' + ICON.doc +
         '<span><b>' + esc(f.title) + '</b><small>' + esc(f.text) + '</small><em>' + (/\.pdf$/i.test(f.file) ? 'Open PDF' : 'View') + ' ' + ICON.arrow + '</em></span></a>').join('') + '</div></div></section>' +
