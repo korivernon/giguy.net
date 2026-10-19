@@ -234,7 +234,7 @@
       "title": "Cologuard® screening",
       "summary": "A no-prep, at-home stool DNA test for colon cancer.",
       "points": "An option for average-risk patients who don't want a colonoscopy\nA positive result needs a follow-up colonoscopy",
-      "hidden": false,
+      "hidden": true,
       "what": "Cologuard is a colon cancer screening test you do at home. It checks a stool sample for certain DNA changes and tiny amounts of blood that can be signs of colon cancer or large polyps. It is an option for some adults at average risk who have no symptoms. Dr. Vernon's practice can help you decide if it is the right test for you.",
       "why": "Colon cancer screening for average-risk adults age 45 and older\nA non-invasive option that does not require a bowel prep or sedation\nAn option for people who are not ready for a colonoscopy\nCan be done privately at home",
       "prep": "No bowel prep, diet changes, or time off work are needed. The kit is shipped to your home after your doctor orders it. Read the instructions in the kit before you start. Cologuard is not the right test if you have symptoms, a history of polyps or colon cancer, inflammatory bowel disease, or a strong family history, so talk with the doctor first.",
@@ -299,7 +299,6 @@
       "when": "Adults at average risk should start screening at age 45. People with a family history, a history of polyps, or inflammatory bowel disease may need to start earlier and be screened more often, so talk with the doctor about your risk.",
       "procedures": [
         "colonoscopy",
-        "cologuard",
         "flexible-sigmoidoscopy"
       ],
       "causesTitle": "Who needs it sooner",
@@ -660,7 +659,7 @@
     {
       "name": "Colon",
       "text": "The large intestine wraps around the small intestine like a frame. It absorbs water from what's left of digested food and moves waste out of the body.",
-      "related": "colon-cancer, colon-cancer-screening, irritable-bowel-syndrome, inflammatory-bowel-disease, diverticulosis, constipation, colonoscopy, cologuard"
+      "related": "colon-cancer, colon-cancer-screening, irritable-bowel-syndrome, inflammatory-bowel-disease, diverticulosis, constipation, colonoscopy"
     },
     {
       "name": "Rectum",
