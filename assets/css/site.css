@@ -618,3 +618,22 @@ a[href^="tel:"], .tel { white-space: nowrap; }
 .gut-rel-h { margin: 14px 0 6px; font-weight: 800; font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--primary); }
 .organ-panel { min-height: 180px; }
 @media (max-width: 899px) { .gut-wrap { max-width: 250px; } }
+
+/* policy pages */
+.print-only { display: none; }
+.policy h2 { font-size: 1.25rem; margin-top: 1.6em; }
+.policy ul { margin: 0 0 1em; } .policy li { margin: 6px 0; }
+.policy-acts { display: flex; gap: 10px; flex-wrap: wrap; }
+.policy-acts svg { width: 16px; height: 16px; }
+.policy-date { margin-top: 24px; }
+.policy-print-head { align-items: center; gap: 16px; border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 12px; }
+.policy-print-head h1 { font-size: 1.5rem; margin: 0; color: var(--deep); }
+.policy-print-head p { margin: 2px 0 0; color: var(--muted); font-size: .9rem; }
+@media print {
+  .print-only { display: flex !important; }
+  .policy-print-head { display: flex !important; }
+  .two-col.wide-left { display: block; }
+  .section { padding: 0; }
+  .policy { font-size: 11pt; }
+  .policy h2 { break-after: avoid; }
+}

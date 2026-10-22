@@ -6,7 +6,7 @@
     "phone": "(919) 577-0085",
     "portalUrl": "https://giguy.mygportal.com/",
     "portalLabel": "Patient Portal",
-    "hours": "Monday – Thursday: 8:30 am – 5:00 pm\nFriday: 9:00 am – 12:00 pm\nSaturday – Sunday: Closed",
+    "hours": "Monday – Thursday: 8:30 am – 5:00 pm\nFriday – Sunday: Closed",
     "emergencyNote": "If this is a medical emergency, call 911 or go to your nearest emergency room. Please don't use the website, patient portal or social media for urgent medical questions.",
     "disclaimer": "This site is for educational use only. Nothing on it is a substitute for medical advice, diagnosis or treatment.",
     "footerTagline": "Your partner in personalized, compassionate digestive care.",
@@ -86,7 +86,7 @@
     ],
     "insurance": "We accept Medicare, Blue Cross Blue Shield, Cigna, Aetna, UnitedHealthcare, Wellpath and many other plans. Please call us to confirm your coverage.",
     "wellnessTitle": "Full spectrum wellness",
-    "wellnessText": "Your digestive system is tied to your health as a whole, so we take an integrated wellness approach. Browse the doctor-approved wellness products in our [GI Guy Metagenics store](https://giguy.metagenics.com/), and ask Dr. Vernon or our staff about questions and recommendations."
+    "wellnessText": "Your digestive system is tied to your health as a whole, so we take an integrated wellness approach. Browse the doctor-approved wellness products in [our online wellness store](https://giguy.metagenics.com/), and ask Dr. Vernon or our staff about questions and recommendations."
   },
   "doctor": {
     "name": "Kurt Vernon, MD, FACG",
@@ -164,7 +164,7 @@
       "points": "Finds and removes precancerous polyps before they become cancer\nHelps diagnose abdominal pain, rectal bleeding and changes in bowel habits",
       "hidden": false,
       "what": "A colonoscopy is an exam of the inside of the colon and rectum. The doctor uses a long, thin, flexible tube with a camera on the end. Polyps can be removed and tissue samples can be taken during the same exam.",
-      "why": "Screening for colon cancer starting at age 45 for average-risk adults\nFinding and removing polyps before they can become cancer\nChecking the cause of rectal bleeding or black stools\nLooking into changes in bowel habits, diarrhea, or belly pain\nFollow-up after a positive stool test such as Cologuard\nMonitoring inflammatory bowel disease or a history of polyps",
+      "why": "Screening for colon cancer starting at age 45 for average-risk adults\nFinding and removing polyps before they can become cancer\nChecking the cause of rectal bleeding or black stools\nLooking into changes in bowel habits, diarrhea, or belly pain\nFollow-up after a positive stool test such as a stool DNA test\nMonitoring inflammatory bowel disease or a history of polyps",
       "prep": "Your colon must be completely clean so the doctor can see the lining clearly. This usually means a clear liquid diet the day before and drinking a bowel prep solution that causes diarrhea. You may need to change or stop some medicines, such as blood thinners or diabetes medicines, but only as directed. The office will give you specific instructions, so follow them closely and call with any questions.",
       "expect": "You will receive sedation through an IV, so most people sleep through the exam or remember very little. You lie on your side while the doctor gently guides the scope through the colon and looks at the lining. Any polyps found can usually be removed during the exam. The procedure itself often takes about 30 to 60 minutes, but plan to be at the center longer for check-in and recovery.",
       "after": "You must have an adult drive you home because of the sedation, and you should not drive, work, or make important decisions for the rest of the day. You may feel bloated or have gas for a few hours. Dr. Vernon will share what was seen after the exam, and biopsy or polyp results are usually ready within a week or two."
@@ -220,24 +220,60 @@
     {
       "id": "hemorrhoid-treatment",
       "title": "Hemorrhoid treatment",
-      "summary": "Minimally invasive relief with the CRH O'Regan System.",
+      "summary": "Minimally invasive, in-office hemorrhoid banding.",
       "points": "Quick, in-office banding with little to no downtime for most patients\nLasting relief from pain, bleeding and discomfort",
       "hidden": false,
-      "what": "Dr. Vernon treats internal hemorrhoids in the office using the CRH O'Regan System. This method uses a small rubber band placed around the base of an internal hemorrhoid. The band cuts off the blood supply, so the hemorrhoid shrinks and falls off, usually within a few days. It uses gentle suction and does not require metal clamps.",
+      "what": "Dr. Vernon treats internal hemorrhoids in the office with banding (rubber band ligation). A small rubber band is placed around the base of an internal hemorrhoid. The band cuts off the blood supply, so the hemorrhoid shrinks and falls off, usually within a few days. It uses gentle suction and does not require metal clamps.",
       "why": "Internal hemorrhoids that bleed\nHemorrhoids that bulge out during bowel movements\nItching, irritation, or discomfort that does not get better with home care\nAn option to treat hemorrhoids in the office instead of in an operating room",
       "prep": "Most people need little or no special preparation. You can usually eat normally and drive yourself to and from the visit. Tell the office about all your medicines, especially blood thinners. The office will give you any specific instructions you need.",
       "expect": "The treatment is done in the office and usually takes only a few minutes. No sedation is needed. Dr. Vernon gently places a small band on one hemorrhoid at a time. Most people need a few visits, spaced a couple of weeks apart, to treat all the hemorrhoids.",
       "after": "Most people go right back to normal activities the same day. You may feel mild pressure or fullness for a day or two, and you may notice a small amount of bleeding when the band falls off. Eating more fiber and drinking water can help prevent hemorrhoids from coming back; call the office for severe pain, heavy bleeding, fever, or trouble passing urine."
     },
     {
-      "id": "cologuard",
-      "title": "Cologuard® screening",
+      "id": "motility-study",
+      "title": "Motility study",
+      "summary": "Measures how well the muscles of your esophagus work when you swallow.",
+      "points": "A thin, flexible tube measures pressure as you swallow\nFinds the cause of trouble swallowing or chest pain\nNo sedation needed",
+      "hidden": false,
+      "what": "An esophageal motility study (esophageal manometry) measures the strength and rhythm of the muscle contractions in your esophagus when you swallow. It also checks how well the valve at the bottom of the esophagus (the lower esophageal sphincter) opens and closes.",
+      "why": "Trouble swallowing, or food that feels stuck\nChest pain that is not caused by the heart\nHeartburn or regurgitation that doesn't get better with medicine\nChecking the esophagus before reflux surgery\nLooking for conditions such as achalasia or esophageal spasm",
+      "prep": "Don't eat or drink for several hours before the test. Some medicines can affect the results, so tell the office about everything you take; you may be asked to stop some for a short time. The office will give you specific instructions.",
+      "expect": "You are awake for the test so you can swallow when asked; no sedation is needed. After a numbing gel is put in your nose, a thin, flexible tube is passed through your nose into your esophagus and stomach. You take small sips of water while the tube measures pressure. The test itself usually takes 15 to 30 minutes.",
+      "after": "You can drive yourself home, eat, and go back to your normal activities right away. Your nose or throat may feel a little sore for a short time. Dr. Vernon will go over your results at a follow-up."
+    },
+    {
+      "id": "anorectal-manometry",
+      "title": "Anorectal manometry",
+      "summary": "Checks how well the muscles and nerves of the rectum and anus work.",
+      "points": "A small, flexible tube measures muscle pressure\nHelps find the cause of constipation or leakage\nNo sedation needed",
+      "hidden": false,
+      "what": "Anorectal manometry measures the strength of the muscles around the anus, how well you can feel stool in your rectum, and the reflexes and coordination needed for a normal bowel movement.",
+      "why": "Long-term constipation or trouble passing stool\nLeakage of stool (fecal incontinence)\nChecking how well the pelvic floor muscles work together\nBefore or after some anal or rectal surgery",
+      "prep": "You may be asked to use an enema 1 to 2 hours before the test so your rectum is empty. You can usually eat and take your medicines as normal. The office will give you specific instructions.",
+      "expect": "You lie on your side. A thin, flexible tube with a small balloon on the end is placed a short way into the rectum. You will be asked to squeeze, relax and push at different times, and the balloon may be gently filled with air to test how well you sense fullness. No sedation is needed, and the test usually takes about 30 minutes.",
+      "after": "You can drive yourself home and go back to your normal activities right away. Dr. Vernon will go over the results, which help guide treatment such as diet changes, medicine or pelvic floor therapy (biofeedback)."
+    },
+    {
+      "id": "liver-elastography",
+      "title": "Liver elastography",
+      "summary": "A quick, painless scan that measures scarring and fat in the liver.",
+      "points": "Painless and non-invasive, no needles\nMeasures liver stiffness (scarring) and fat\nUsually takes about 10 to 15 minutes",
+      "hidden": false,
+      "what": "Liver elastography uses a special ultrasound probe to send a gentle pulse through the liver and measure how stiff it is. A stiffer liver means more scarring (fibrosis). The scan can also estimate how much fat is in the liver. In many cases it can take the place of a liver biopsy.",
+      "why": "Checking for scarring in fatty liver disease\nMonitoring hepatitis B or C\nAlcohol-related liver disease\nFollowing other long-term liver conditions over time\nLooking into abnormal liver blood tests",
+      "prep": "Don't eat or drink for about 3 hours before the scan. Wear comfortable clothing that lets you uncover the right side of your belly. The office will give you specific instructions.",
+      "expect": "You lie on your back with your right arm raised above your head. Gel is put on your skin over the liver, and the probe is held against your right side between the ribs. You may feel a light tap with each pulse, but it doesn't hurt. No sedation is needed, and the scan usually takes about 10 to 15 minutes.",
+      "after": "You can go back to your normal activities right away. Dr. Vernon will go over your results and what they mean for your care."
+    },
+    {
+      "id": "stool-dna-test",
+      "title": "At-home stool DNA test",
       "summary": "A no-prep, at-home stool DNA test for colon cancer.",
       "points": "An option for average-risk patients who don't want a colonoscopy\nA positive result needs a follow-up colonoscopy",
       "hidden": true,
-      "what": "Cologuard is a colon cancer screening test you do at home. It checks a stool sample for certain DNA changes and tiny amounts of blood that can be signs of colon cancer or large polyps. It is an option for some adults at average risk who have no symptoms. Dr. Vernon's practice can help you decide if it is the right test for you.",
+      "what": "a stool DNA test is a colon cancer screening test you do at home. It checks a stool sample for certain DNA changes and tiny amounts of blood that can be signs of colon cancer or large polyps. It is an option for some adults at average risk who have no symptoms. Dr. Vernon's practice can help you decide if it is the right test for you.",
       "why": "Colon cancer screening for average-risk adults age 45 and older\nA non-invasive option that does not require a bowel prep or sedation\nAn option for people who are not ready for a colonoscopy\nCan be done privately at home",
-      "prep": "No bowel prep, diet changes, or time off work are needed. The kit is shipped to your home after your doctor orders it. Read the instructions in the kit before you start. Cologuard is not the right test if you have symptoms, a history of polyps or colon cancer, inflammatory bowel disease, or a strong family history, so talk with the doctor first.",
+      "prep": "No bowel prep, diet changes, or time off work are needed. The kit is shipped to your home after your doctor orders it. Read the instructions in the kit before you start. a stool DNA test is not the right test if you have symptoms, a history of polyps or colon cancer, inflammatory bowel disease, or a strong family history, so talk with the doctor first.",
       "expect": "You collect a stool sample at home using the container in the kit and follow the steps to add the preservative and seal it. Then you place the sample in the box and mail it back using the included shipping label. Send the sample back soon after you collect it, as the kit instructions explain. The lab tests the sample and sends the results to your doctor.",
       "after": "Your doctor's office will contact you with the results. A negative result means no signs were found, and you will need to repeat screening in the future, usually every three years. A positive result does not mean you have cancer, but it does mean you need a colonoscopy to look for the cause."
     },
@@ -268,7 +304,8 @@
       "procedures": [
         "egd",
         "esophageal-dilation",
-        "consultations"
+        "consultations",
+        "motility-study"
       ]
     },
     {
@@ -290,12 +327,12 @@
     {
       "id": "colon-cancer-screening",
       "name": "Colon cancer screening",
-      "text": "Tests that find colon cancer, or the polyps that can become cancer, before symptoms start. Options include colonoscopy and stool tests like Cologuard®; most adults should begin at 45.",
+      "text": "Tests that find colon cancer, or the polyps that can become cancer, before symptoms start. Options include colonoscopy and at-home stool tests; most adults should begin at 45.",
       "hidden": false,
       "what": "Colon cancer screening means checking for cancer or polyps before you have any symptoms. Screening can find polyps so they can be removed before they turn into cancer. It can also find cancer early, when it is often easier to treat. There are several screening options, and your doctor can help you pick the right one.",
       "causes": "Reaching age 45 or older\nA family history of colon cancer or polyps\nA personal history of polyps or colon cancer\nInflammatory bowel disease\nCertain inherited genetic conditions",
       "symptoms": "Screening is meant for people with no symptoms\nMost polyps and early cancers cause no symptoms\nIf you do have symptoms, such as bleeding or a change in bowel habits, you need a diagnostic exam, not just screening",
-      "treatment": "Colonoscopy is the most complete screening test because it lets the doctor see the whole colon and remove polyps during the same exam. The practice also offers Cologuard, a stool DNA test you do at home, for some average-risk adults. A positive stool test needs a follow-up colonoscopy. How often you need screening depends on your test results and personal risk.",
+      "treatment": "Colonoscopy is the most complete screening test because it lets the doctor see the whole colon and remove polyps during the same exam. At-home stool tests, including stool DNA tests, are an option for some average-risk adults. A positive stool test needs a follow-up colonoscopy. How often you need screening depends on your test results and personal risk.",
       "when": "Adults at average risk should start screening at age 45. People with a family history, a history of polyps, or inflammatory bowel disease may need to start earlier and be screened more often, so talk with the doctor about your risk.",
       "procedures": [
         "colonoscopy",
@@ -329,7 +366,8 @@
       "treatment": "Fatty liver is often found on blood tests or imaging done for another reason. Dr. Vernon may order blood work, an ultrasound, or other tests to check how much the liver is affected and whether there is scarring. The main treatment is lifestyle change, including gradual weight loss, healthy eating, regular activity, and limiting alcohol. The practice offers nutrition and lifestyle wellness guidance to support these changes. Managing diabetes, cholesterol, and blood pressure also helps protect the liver.",
       "when": "Call the doctor if you have abnormal liver tests or risk factors such as diabetes or extra weight. Get care right away if you notice yellow skin or eyes, belly swelling, confusion, or vomiting blood.",
       "procedures": [
-        "consultations"
+        "consultations",
+        "liver-elastography"
       ]
     },
     {
@@ -392,7 +430,8 @@
       "procedures": [
         "egd",
         "esophageal-dilation",
-        "consultations"
+        "consultations",
+        "motility-study"
       ]
     },
     {
@@ -438,7 +477,8 @@
       "when": "Call the doctor if you have abnormal liver tests, yellow skin or eyes, or swelling in the belly or legs. Get emergency care for vomiting blood, black stools, confusion, or severe belly pain.",
       "procedures": [
         "egd",
-        "consultations"
+        "consultations",
+        "liver-elastography"
       ]
     },
     {
@@ -449,7 +489,7 @@
       "what": "Hemorrhoids are swollen veins in the lower rectum and anus. Internal hemorrhoids are inside the rectum and are often painless, but they can bleed. External hemorrhoids are under the skin around the anus and can be itchy or painful. Hemorrhoids are very common and treatable.",
       "causes": "Straining during bowel movements\nLong-term constipation or diarrhea\nSitting on the toilet for long periods\nPregnancy\nExtra body weight\nA low-fiber diet",
       "symptoms": "Bright red blood on toilet paper or in the toilet\nItching or irritation around the anus\nPain or discomfort, especially when sitting\nA lump or swelling near the anus\nTissue that bulges out during bowel movements",
-      "treatment": "Dr. Vernon can usually diagnose hemorrhoids with an exam in the office. Mild hemorrhoids often improve with more fiber, more water, and less straining. For internal hemorrhoids that keep causing problems, the practice offers in-office banding with the CRH O'Regan System. This method uses a small rubber band to cut off blood flow to the hemorrhoid so it shrinks and falls off. Because bleeding can also come from other causes, a colonoscopy may be recommended, and some patients may need a referral to a surgeon.",
+      "treatment": "Dr. Vernon can usually diagnose hemorrhoids with an exam in the office. Mild hemorrhoids often improve with more fiber, more water, and less straining. For internal hemorrhoids that keep causing problems, the practice offers in-office hemorrhoid banding. This method uses a small rubber band to cut off blood flow to the hemorrhoid so it shrinks and falls off. Because bleeding can also come from other causes, a colonoscopy may be recommended, and some patients may need a referral to a surgeon.",
       "when": "Call the doctor if you have rectal bleeding, even if you think it is from hemorrhoids, or if home care does not help within a week. Get care right away for heavy bleeding, severe pain, or dizziness.",
       "procedures": [
         "hemorrhoid-treatment",
@@ -465,7 +505,7 @@
       "what": "Rectal bleeding is blood that passes from the anus. You may see bright red blood on toilet paper, in the toilet, or mixed with stool. It often comes from a problem in the lower colon or rectum. Rectal bleeding should always be checked by a doctor.",
       "causes": "Hemorrhoids\nAnal fissures, which are small tears in the lining of the anus\nDiverticulosis\nPolyps or colon cancer\nInflammatory bowel disease\nInfections of the colon",
       "symptoms": "Bright red blood on toilet paper or in the toilet bowl\nBlood mixed in with the stool\nDark red or maroon stools\nPain or itching around the anus\nChanges in bowel habits\nFeeling tired or dizzy if bleeding is heavy",
-      "treatment": "Dr. Vernon will ask about your symptoms and do an exam. Depending on your age and history, you may need a flexible sigmoidoscopy or a full colonoscopy to find the source of the bleeding. Many causes can be treated, and polyps can often be removed during colonoscopy. If hemorrhoids are the cause, the practice offers in-office banding with the CRH O'Regan System. Treatment depends on what is found.",
+      "treatment": "Dr. Vernon will ask about your symptoms and do an exam. Depending on your age and history, you may need a flexible sigmoidoscopy or a full colonoscopy to find the source of the bleeding. Many causes can be treated, and polyps can often be removed during colonoscopy. If hemorrhoids are the cause, the practice offers in-office hemorrhoid banding. Treatment depends on what is found.",
       "when": "Call the doctor for any rectal bleeding. Call 911 or go to the emergency room for heavy bleeding, large clots, or if you feel faint, dizzy, or have a fast heartbeat.",
       "procedures": [
         "colonoscopy",
@@ -485,7 +525,8 @@
       "when": "Call the doctor if constipation lasts more than a few weeks or is a new change for you. Get care sooner for blood in your stool, weight loss you can't explain, severe belly pain, vomiting, or being unable to pass gas.",
       "procedures": [
         "colonoscopy",
-        "consultations"
+        "consultations",
+        "anorectal-manometry"
       ]
     },
     {
@@ -499,7 +540,8 @@
       "treatment": "Hepatitis is diagnosed with blood tests that check liver function and look for viruses. Dr. Vernon may also order an ultrasound or other tests to check for liver scarring. Hepatitis C can often be cured with antiviral medicines, and hepatitis B can be controlled with medicine when needed. Other types are treated based on the cause, such as stopping alcohol or a medicine. Vaccines can prevent hepatitis A and B, so ask if you are protected.",
       "when": "Call the doctor if you have abnormal liver tests, have been exposed to hepatitis, or have yellow skin or eyes, dark urine, or ongoing tiredness. Ask about one-time hepatitis C testing for adults and about hepatitis B testing if you have risk factors.",
       "procedures": [
-        "consultations"
+        "consultations",
+        "liver-elastography"
       ]
     },
     {
@@ -555,8 +597,8 @@
       "a": "A colonoscopy examines the inside of your colon for polyps, abnormalities or signs of colon cancer. It is the only test that can both detect and prevent colon cancer, because polyps can be removed during the procedure."
     },
     {
-      "q": "Is Cologuard effective?",
-      "a": "In a study of 10,000 average-risk people, Cologuard found 92% of colon cancers. It is non-invasive and needs no prep, but it does not reliably find precancerous polyps, and a positive result needs a follow-up colonoscopy. [Read more about Cologuard](article.html?id=cologuard)."
+      "q": "Are at-home stool DNA tests effective?",
+      "a": "In a study of 10,000 average-risk people, a stool DNA test found 92% of colon cancers. It is non-invasive and needs no prep, but it does not reliably find precancerous polyps, and a positive result needs a follow-up colonoscopy. [Read more about stool DNA tests](article.html?id=stool-dna-test)."
     },
     {
       "q": "What should I expect during a flexible sigmoidoscopy?",
@@ -581,7 +623,7 @@
       "name": "Fuquay-Varina",
       "address": "1004 Procure St\nFuquay-Varina, NC 27526",
       "phone": "(919) 577-0085",
-      "fax": "",
+      "fax": "(910) 891-5323",
       "mapQuery": "1004 Procure St, Fuquay-Varina, NC 27526",
       "hidden": false,
       "hours": "",
@@ -623,13 +665,37 @@
       "file": "colonoscopy-prep.html",
       "anchor": "prep",
       "hidden": false
+    },
+    {
+      "id": "patient-rights",
+      "title": "Patient rights and responsibilities",
+      "text": "Your rights as our patient, and what we ask of you in return.",
+      "file": "policy.html?id=patient-rights",
+      "anchor": "patient-rights",
+      "hidden": false
+    },
+    {
+      "id": "privacy",
+      "title": "Privacy and protected health information",
+      "text": "How we protect your health information, and who to contact with a concern.",
+      "file": "policy.html?id=privacy",
+      "anchor": "privacy",
+      "hidden": false
+    },
+    {
+      "id": "financial-policy",
+      "title": "Financial policy",
+      "text": "How billing, payments, insurance and fees work at our practice.",
+      "file": "policy.html?id=financial-policy",
+      "anchor": "financial-policy",
+      "hidden": false
     }
   ],
   "organs": [
     {
       "name": "Esophagus",
       "text": "The muscular tube that carries food and liquid from your throat to your stomach. A ring of muscle at the bottom keeps stomach acid from coming back up. When it's weak, acid can splash back and cause heartburn.",
-      "related": "heartburn-acid-reflux, difficulty-swallowing, egd, esophageal-dilation"
+      "related": "heartburn-acid-reflux, difficulty-swallowing, egd, esophageal-dilation, motility-study"
     },
     {
       "name": "Stomach",
@@ -639,7 +705,7 @@
     {
       "name": "Liver",
       "text": "The largest internal organ. It stores vitamins, sugars and fats and releases them as needed; builds the proteins that clot blood and make new cells; filters waste from the blood; and breaks down harmful substances like alcohol.",
-      "related": "fatty-liver, liver-disease, hepatitis"
+      "related": "fatty-liver, liver-disease, hepatitis, liver-elastography"
     },
     {
       "name": "Gallbladder",
@@ -664,7 +730,7 @@
     {
       "name": "Rectum",
       "text": "The last 6–8 inches of the large intestine. It holds stool until it leaves the body.",
-      "related": "hemorrhoids, rectal-bleeding, flexible-sigmoidoscopy, hemorrhoid-treatment"
+      "related": "hemorrhoids, rectal-bleeding, flexible-sigmoidoscopy, hemorrhoid-treatment, anorectal-manometry"
     }
   ],
   "quiz": {
@@ -686,11 +752,11 @@
   },
   "articles": [
     {
-      "id": "cologuard",
-      "title": "Cologuard technology",
+      "id": "stool-dna-test",
+      "title": "At-home stool DNA tests",
       "date": "",
       "summary": "A no-prep, no-sedation screening option for colon cancer, and how it compares to colonoscopy.",
-      "body": "Testing for colon cancer just got easier. Cologuard is a colon cancer screening test that is simple to use. It involves no prep, no sedation, and most importantly, it's effective.\n\n## What exactly is Cologuard?\nCologuard tests for genetic changes in stool that are associated with colon cancer. It correctly identifies 92% of people who have colon cancer. It will not, however, lower your risk of developing cancer, because it cannot reliably detect precancerous polyps. If a Cologuard test comes back positive, a follow-up colonoscopy will be recommended.\n\n## How does it work?\nDNA is continuously shed from cells in the intestinal lining into stool. If cancer or precancer is present, abnormal cells are shed along with normal ones. Cologuard looks for altered DNA and/or blood in the stool that may signal cancer or precancer.\n\n## How effective is it?\nIn a study of 10,000 people at average risk for colon cancer, Cologuard found 92% of cancers. It was negative in 87% of people without the disease.\n\n## Should colonoscopy be used as well?\nCologuard is a screening test. Any positive result should be discussed with your doctor and followed by a diagnostic colonoscopy.\n\n## The bottom line\nColon cancer is common. Colonoscopy is the only test proven to both detect and prevent colon cancer, because precancerous polyps are removed during the procedure. About one in three patients has polyps removed during a colonoscopy. For people who don't want a colonoscopy, Cologuard is one alternative.\n\nRemember: any colon cancer screening test is better than none. Learn more at [cologuard.com](https://www.cologuard.com/).",
+      "body": "Testing for colon cancer just got easier. A stool DNA test is a colon cancer screening test you do at home. It involves no prep, no sedation, and most importantly, it's effective.\n\n## What exactly is a stool DNA test?\nIt tests for genetic changes in stool that are associated with colon cancer. It correctly identifies 92% of people who have colon cancer. It will not, however, lower your risk of developing cancer, because it cannot reliably detect precancerous polyps. If the test comes back positive, a follow-up colonoscopy will be recommended.\n\n## How does it work?\nDNA is continuously shed from cells in the intestinal lining into stool. If cancer or precancer is present, abnormal cells are shed along with normal ones. The test looks for altered DNA and/or blood in the stool that may signal cancer or precancer.\n\n## How effective is it?\nIn a study of 10,000 people at average risk for colon cancer, the stool DNA test found 92% of cancers. It was negative in 87% of people without the disease.\n\n## Should colonoscopy be used as well?\nA stool DNA test is a screening test. Any positive result should be discussed with your doctor and followed by a diagnostic colonoscopy.\n\n## The bottom line\nColon cancer is common. Colonoscopy is the only test proven to both detect and prevent colon cancer, because precancerous polyps are removed during the procedure. About one in three patients has polyps removed during a colonoscopy. For people who don't want a colonoscopy, a stool DNA test is one alternative.\n\nRemember: any colon cancer screening test is better than none. Ask Dr. Vernon which test is right for you.",
       "hidden": false
     },
     {
@@ -742,13 +808,13 @@
     "enabled": false,
     "navLabel": "Fast-Track",
     "eyebrow": "Fast-Track Colonoscopy",
-    "title": "Positive Cologuard® or stool test? Get your colonoscopy in 7–14 days.",
+    "title": "Positive stool test? Get your colonoscopy in 7–14 days.",
     "intro": "A positive stool test doesn't mean you have cancer, but the only way to know is a colonoscopy. In many places that means waiting months, and the waiting is the hardest part. With Fast-Track, we usually schedule your colonoscopy within 7–14 days of your phone screening.",
     "noVisit": "No office visit needed first. If you're generally healthy, we screen you by phone, send your prep instructions and schedule your procedure.",
     "steps": [
       {
         "title": "Call us",
-        "text": "Tell us you had a positive Cologuard®, FIT or other stool test. Have your result, insurance card and medication list handy."
+        "text": "Tell us you had a positive stool DNA, FIT or other stool test. Have your result, insurance card and medication list handy."
       },
       {
         "title": "Phone screening",
@@ -763,8 +829,8 @@
         "text": "Dr. Vernon performs your colonoscopy, usually within 7–14 days, and goes over the results with you."
       }
     ],
-    "fit": "You had a positive (abnormal) Cologuard®, FIT or other stool-based colon cancer test\nYou're generally healthy\nYou'd rather not wait months to find out",
-    "notFit": "Take blood thinners such as warfarin, Eliquis, Xarelto or Plavix\nHave serious heart, lung or kidney disease\nHave had problems with anesthesia or sedation\nHave symptoms like heavy bleeding or severe abdominal pain",
+    "fit": "You had a positive (abnormal) stool DNA, FIT or other stool-based colon cancer test\nYou're generally healthy\nYou'd rather not wait months to find out",
+    "notFit": "Take blood thinners such as warfarin, apixaban, rivaroxaban or clopidogrel\nHave serious heart, lung or kidney disease\nHave had problems with anesthesia or sedation\nHave symptoms like heavy bleeding or severe abdominal pain",
     "notFitNote": "That doesn't rule you out. It just means Dr. Vernon reviews your history first. Our staff will tell you on the call.",
     "bring": "Your positive test result (or the name of the doctor who ordered it)\nYour insurance card\nA list of your medications\nA driver for the day of your procedure",
     "insurance": "Many insurance plans, including Medicare, now treat a colonoscopy after a positive stool test as part of screening, which can mean little or no out-of-pocket cost. Coverage varies, so our staff will check your plan when you call.",
@@ -792,7 +858,7 @@
     ],
     "providersTitle": "For doctors and clinics",
     "providers": "If your patient has a positive stool test and is facing a long wait, send them our way. Fax the referral and the stool test result to (910) 891-5323, and we'll call your patient to complete the phone screening. We send the colonoscopy and pathology reports back to you.",
-    "homeBand": "**Positive Cologuard® or stool test?** Get your colonoscopy in 7–14 days. No office visit needed first."
+    "homeBand": "**Positive stool test?** Get your colonoscopy in 7–14 days. No office visit needed first."
   },
   "videos": [
     {
@@ -895,19 +961,19 @@
       "hidden": false
     },
     {
-      "id": "zepbound",
-      "title": "The Truth About Zepbound",
+      "id": "tirzepatide",
+      "title": "The Truth About Tirzepatide",
       "youtube": "https://www.youtube.com/watch?v=gzNwn8C3Fj4",
-      "text": "What to know about the weight-loss medicine Zepbound and your digestive system.",
+      "text": "What to know about the weight-loss medicine tirzepatide and your digestive system.",
       "service": "",
       "channel": true,
       "hidden": false
     },
     {
-      "id": "zepbound-short",
-      "title": "Don't Take Zepbound Until You See This",
+      "id": "tirzepatide-short",
+      "title": "Before You Start Tirzepatide",
       "youtube": "https://www.youtube.com/watch?v=vRldHliSlTM",
-      "text": "A one-minute short on Zepbound.",
+      "text": "A one-minute short on the weight-loss medicine tirzepatide.",
       "service": "",
       "channel": true,
       "hidden": false
@@ -933,22 +999,100 @@
   ],
   "prepPage": {
     "title": "Colonoscopy Prep",
-    "intro": "Exactly what to do and when for your magnesium citrate prep. Add your procedure date to see the actual dates, then print it or save it as a PDF.",
-    "clearLiquids": "Water\nClear broth or bouillon\nApple juice or white grape juice\nSports drinks such as Gatorade (not red or purple)\nPlain gelatin such as Jell-O (not red or purple)\nPopsicles (not red or purple)\nBlack coffee or tea (no milk or creamer)\nClear sodas such as ginger ale or Sprite",
-    "help": "Questions about your prep? Call Fuquay-Varina at (919) 577-0085 or Dunn at (910) 891-5808, Monday – Thursday 8:30 am – 5:00 pm, Friday 9:00 am – 12:00 pm."
+    "intro": "Choose the prep Dr. Vernon prescribed to see exactly what to do and when. Add your procedure date to see the actual dates, then print it or save it as a PDF.",
+    "clearLiquids": "Water\nSoft drinks, including colas\nCoffee or tea, without milk, cream or creamer\nSports drinks (green or yellow)\nGelatin (green or yellow)\nIce pops (green or yellow)\nHard candy\nChicken or beef broth or bouillon (no vegetables)\nApple juice, white grape juice or other strained fruit juice",
+    "help": "Questions about your prep? Call Fuquay-Varina at (919) 577-0085 or Dunn at (910) 891-5808, Monday – Thursday, 8:30 am – 5:00 pm.",
+    "liquidsNote": "No milk or milk products (including non-dairy creamer), and nothing red, blue or purple."
   },
   "preps": [
     {
+      "id": "sulfate-liquid",
+      "name": "Sulfate Liquid Prep + Bisacodyl",
+      "summary": "Two 6-ounce bottles of sodium, potassium and magnesium sulfate solution (prescription) and 6 bisacodyl tablets, split between the afternoon and the evening before your procedure.",
+      "buy": "Sulfate liquid bowel prep kit from your pharmacy (prescription needed). It has two 6-ounce bottles of liquid prep and a 16-ounce mixing container.\nBisacodyl 5 mg tablets: you need 6",
+      "weekBefore": "7 days before{-7}: stop phentermine.\n5 days before{-5}: stop aspirin 325 mg. Keep taking aspirin 81 mg.\nIf you take any other blood thinner, call the office for instructions.\nFor pain or a headache before your procedure, acetaminophen is fine.\n2 days before{-2}: stop cannabis (48 hours before your procedure).",
+      "dayBefore": "Clear liquids only, all day. No solid food. Drink plenty of clear liquids so you stay hydrated.\nIf you have diabetes, take half your usual dose of diabetes medicine today and check your blood sugar during the day. If you take insulin, bring it to your appointment.\n**4:00 pm, first dose:** take 3 bisacodyl 5 mg tablets. Pour one 6-ounce bottle of liquid prep into the mixing container, add cool drinking water to the 16-ounce line, mix and drink it all. Then drink two more 16-ounce containers of clear liquid over the next hour.\n**6:00 pm:** take 3 more bisacodyl 5 mg tablets.\n**10:00 pm, second dose:** pour the second bottle of liquid prep into the container, add cool water to the 16-ounce line, mix and drink it all. Then drink two more 16-ounce containers of clear liquid over the next hour.\nNothing by mouth after midnight, including gum, hard candy or lozenges. No smoking, chewing tobacco, e-cigarettes or vaping.",
+      "dayOf": "Nothing to eat or drink. Eating or drinking anything may get your procedure canceled.\nThe only medicines you may take this morning are pain, anti-anxiety, seizure, heart or blood pressure medicines, with a sip of water. Hold all other medicines until after your procedure, unless the office tells you otherwise.\nIf you use a prescription inhaler, bring it with you.\nSomeone must come with you and drive you home, because you will be sedated. Plan for someone to stay with you the rest of the day, since you may be drowsy or dizzy.\nLeave jewelry and valuables at home. We can't be responsible for them.\nYour colonoscopy is at our Fuquay-Varina Endoscopy Center.",
+      "notes": "You must finish the whole prep. A completely clean colon lets Dr. Vernon see everything, including polyps.\n\nCan't make it? Call at least 48 hours ahead to reschedule. There is a $75 fee for a no-show, or for canceling with less than 48 hours' notice.",
+      "pdf": "files/colonoscopy-prep-sulfate-liquid.pdf",
+      "hidden": false
+    },
+    {
+      "id": "sulfate-tablet",
+      "name": "Sulfate Tablet Prep + Bisacodyl",
+      "summary": "Two doses of 12 sulfate tablets (prescription) and 6 bisacodyl tablets, split between the afternoon and the evening before your procedure.",
+      "buy": "Sulfate tablet bowel prep kit from your pharmacy (prescription needed). It has two bottles of 12 tablets and a 16-ounce container.\nBisacodyl 5 mg tablets: you need 6. We'll send a prescription, or you can buy them over the counter.",
+      "weekBefore": "5 days before{-5}: stop aspirin 325 mg. Keep taking aspirin 81 mg.\nIf you take any other blood thinner, call the office for instructions.\nFor pain or a headache before your procedure, acetaminophen is fine.",
+      "dayBefore": "Clear liquids only, all day. No solid food. Drink plenty of clear liquids so you stay hydrated.\nIf you have diabetes, take half your usual dose of diabetes medicine today and check your blood sugar during the day. If you take insulin, bring it to your appointment.\n**4:00 pm, first dose:** take 3 bisacodyl 5 mg tablets and all 12 prep tablets from the first bottle. Drink 32 ounces of water or another clear liquid.\n**6:00 pm:** take 3 more bisacodyl 5 mg tablets.\n**10:00 pm, second dose:** take all 12 prep tablets from the second bottle. Drink 32 ounces of water or another clear liquid.\nNothing by mouth after midnight, including gum, hard candy or lozenges. No smoking, chewing tobacco, e-cigarettes or vaping.",
+      "dayOf": "Nothing to eat or drink. Eating or drinking anything may get your procedure canceled.\nThe only medicines you may take this morning are pain, anti-anxiety, seizure, heart or blood pressure medicines, with a sip of water. Hold all other medicines until after your procedure, unless the office tells you otherwise.\nIf you use a prescription inhaler, bring it with you.\nSomeone must come with you and drive you home, because you will be sedated. Plan for someone to stay with you the rest of the day, since you may be drowsy or dizzy.\nLeave jewelry and valuables at home. We can't be responsible for them.\nYour colonoscopy is at our Fuquay-Varina Endoscopy Center.",
+      "notes": "You must finish the whole prep. A completely clean colon lets Dr. Vernon see everything, including polyps.\n\nCan't make it? Call at least 48 hours ahead to reschedule. There is a $75 fee for a no-show, or for canceling with less than 48 hours' notice.",
+      "pdf": "files/colonoscopy-prep-sulfate-tablet.pdf",
+      "hidden": false
+    },
+    {
+      "id": "peg-powder",
+      "name": "PEG Powder Prep (2 Bottles)",
+      "summary": "Two bottles of polyethylene glycol (PEG) prep you mix with water (prescription), one in the afternoon and one in the evening before your procedure. No bisacodyl needed.",
+      "buy": "PEG powder prep kit with 2 bottles and flavor packets. We send the prescription to your pharmacy. Tell the pharmacist that coupon savings information is attached in the \"Note to Pharmacist.\"",
+      "weekBefore": "2 weeks before{-14}: if you take a weekly GLP-1 shot (such as semaglutide or dulaglutide) **only for weight loss**, stop it now.\n1 week before{-7}: if you take a weekly GLP-1 shot **for diabetes**, stop it now. If you take a daily diabetes medicine of this kind (such as liraglutide, exenatide, oral semaglutide or dapagliflozin), take half your dose the day before your procedure.\n7 days before{-7}: stop phentermine.\n5 days before{-5}: stop aspirin 325 mg. Keep taking aspirin 81 mg.\nIf you take a blood thinner such as warfarin, enoxaparin, heparin, rivaroxaban or clopidogrel, call the office for instructions.\nFor pain or a headache before your procedure, acetaminophen is fine.",
+      "dayBefore": "Clear liquids only, all day. No solid food. Drink plenty of clear liquids so you stay hydrated.\nIf you have diabetes, take half your usual dose of diabetes medicine today and check your blood sugar during the day. If you take insulin, bring it to your appointment.\n**4:00 pm, first dose:** open one flavor-enhancing packet and pour it into one bottle. Fill the bottle with lukewarm water to the fill line, cap it and shake gently until all the powder dissolves. (For the best taste, refrigerate it for an hour first.) Drink it, then drink another 16 ounces of water. Keep drinking clear liquids.\n**10:00 pm, second dose:** do the same with the second packet and bottle, then drink another 16 ounces of water. Keep drinking clear liquids until midnight.\nNothing by mouth after midnight, including gum, hard candy or lozenges. No smoking, chewing tobacco, e-cigarettes or vaping.",
+      "dayOf": "Nothing to eat or drink. Eating or drinking anything may get your procedure canceled.\nThe only medicines you may take this morning are pain, anti-anxiety, seizure, heart or blood pressure medicines, with a sip of water. Hold all other medicines until after your procedure, unless the office tells you otherwise.\nIf you use a prescription inhaler, bring it with you.\nSomeone must come with you and drive you home, because you will be sedated. Plan for someone to stay with you the rest of the day, since you may be drowsy or dizzy.\nLeave jewelry and valuables at home. We can't be responsible for them.\nYour colonoscopy is at our Fuquay-Varina Endoscopy Center.",
+      "notes": "You must finish the whole prep. A completely clean colon lets Dr. Vernon see everything, including polyps.\n\nCan't make it? Call at least 48 hours ahead to reschedule. There is a $75 fee for a no-show, or for canceling with less than 48 hours' notice.",
+      "pdf": "files/colonoscopy-prep-peg-powder.pdf",
+      "hidden": false
+    },
+    {
+      "id": "peg-gallon",
+      "name": "PEG Gallon Prep + Bisacodyl",
+      "summary": "One gallon of polyethylene glycol (PEG) prep (prescription) and 6 bisacodyl tablets, split between the afternoon and the evening before your procedure.",
+      "buy": "PEG gallon prep from your pharmacy (prescription needed)\nBisacodyl 5 mg tablets: you need 6\nIf your prep is unflavored: a sugar-free yellow or green drink mix to flavor it",
+      "weekBefore": "Tell the office about any big changes in your health before your procedure, including urgent care or emergency room visits and hospital stays. If we don't know about them, your procedure may be canceled.\n7 days before{-7}: stop phentermine and any recreational drugs (for example, cocaine).\n5 days before{-5}: stop aspirin 325 mg. Keep taking aspirin 81 mg.\nIf you take any other blood thinner, call the office for instructions.\nFor pain or a headache before your procedure, acetaminophen is fine.\n2 days before{-2}: stop cannabis (48 hours before your procedure).",
+      "dayBefore": "Clear liquids only, all day. No solid food. Drink plenty of clear liquids so you stay hydrated.\nIf you have diabetes, take half your usual dose of diabetes medicine today and check your blood sugar during the day. If you take insulin, bring it to your appointment.\nIn the morning, mix the prep with 1 gallon of water and put it in the refrigerator.\n**4:00 pm, first dose:** drink half the prep (½ gallon) and take 3 bisacodyl 5 mg tablets.\n**6:00 pm:** take 3 more bisacodyl 5 mg tablets.\n**10:00 pm, second dose:** drink the rest of the prep (½ gallon).\nNothing by mouth after midnight, including gum, hard candy or lozenges. No smoking, chewing tobacco, e-cigarettes or vaping.",
+      "dayOf": "Nothing to eat or drink. Eating or drinking anything may get your procedure canceled.\nThe only medicines you may take this morning are pain, anti-anxiety, seizure, heart or blood pressure medicines, with a sip of water. Hold all other medicines until after your procedure, unless the office tells you otherwise.\nIf you use a prescription inhaler, bring it with you.\nSomeone must come with you and drive you home, because you will be sedated. Plan for someone to stay with you the rest of the day, since you may be drowsy or dizzy.\nLeave jewelry and valuables at home. We can't be responsible for them.\nYour colonoscopy is at our Fuquay-Varina Endoscopy Center.\nIf you have a co-pay, please bring it.",
+      "notes": "You must finish the whole prep. A completely clean colon lets Dr. Vernon see everything, including polyps.\n\nCan't make it? Call at least 48 hours ahead to reschedule. There is a $75 fee for a no-show, or for canceling with less than 48 hours' notice.",
+      "pdf": "files/colonoscopy-prep-peg-gallon.pdf",
+      "hidden": false
+    },
+    {
       "id": "magnesium-citrate",
-      "name": "Magnesium Citrate (split dose)",
-      "summary": "Two bottles of magnesium citrate and Dulcolax tablets, all available over the counter.",
-      "buy": "2 bottles of magnesium citrate (over the counter, about $8–10)\n1 bottle of Dulcolax 5 mg tablets, 10 count (over the counter, about $3–5)",
-      "weekBefore": "Tell your physician if you take blood-thinning medications such as Coumadin, Plavix, Eliquis, Pradaxa, Lovenox or aspirin. You may be asked to stop them 3 to 7 days before your procedure, if your family physician or cardiologist approves.",
-      "dayBefore": "No more solid food. Only clear liquids for the whole day.\nAt 5:00 pm, drink one bottle of magnesium citrate, followed by three 8 oz glasses (24 oz) of any clear liquid. Also take 5 Dulcolax tablets. This part of the prep takes about 1 hour.\nStay close to a bathroom.\nStay very well hydrated. Drink extra clear liquids before you go to bed.",
+      "name": "Magnesium Citrate + Bisacodyl",
+      "summary": "Two bottles of magnesium citrate and bisacodyl tablets, all available over the counter.",
+      "buy": "2 bottles of magnesium citrate (over the counter, about $8–10)\n1 bottle of bisacodyl 5 mg tablets, 10 count (over the counter, about $3–5)",
+      "weekBefore": "Tell your physician if you take blood-thinning medications such as warfarin, clopidogrel, apixaban, dabigatran, enoxaparin or aspirin. You may be asked to stop them 3 to 7 days before your procedure, if your family physician or cardiologist approves.",
+      "dayBefore": "No more solid food. Only clear liquids for the whole day.\nAt 5:00 pm, drink one bottle of magnesium citrate, followed by three 8 oz glasses (24 oz) of any clear liquid. Also take 5 bisacodyl tablets. This part of the prep takes about 1 hour.\nStay close to a bathroom.\nStay very well hydrated. Drink extra clear liquids before you go to bed.",
       "dayOf": "Beginning at 11:00 pm, drink the second bottle of magnesium citrate, followed by three 8 oz glasses (24 oz) of any clear liquid. This part of the prep takes about 1 hour.\nDo not eat anything.\nDo not drink anything for 3 hours before your procedure.\nIf you take medications, you may take essential medications (for blood pressure, heart or seizures) the morning of the procedure with a small sip of water.\nIf you are diabetic, do not take your oral diabetes medicines the morning of the procedure. If you take injectable insulin, take half of your morning dose. Procedures are canceled if your blood sugar is over 300.\nArrive at the facility at the time the office gave you.",
       "notes": "Take all of the medication and liquids so Dr. Vernon can see your entire colon clearly.\n\nA colonoscopy prep makes your body lose a lot of fluid, which can make you ill (dehydration). Drink extra clear liquids before the prep, stay hydrated with clear liquids during the prep as directed, and drink clear liquids after you get home.",
       "pdf": "files/colonoscopy-prep-magnesium-citrate.pdf",
       "hidden": false
+    }
+  ],
+  "policies": [
+    {
+      "id": "patient-rights",
+      "title": "Patient rights and responsibilities",
+      "summary": "Your rights as our patient, and what we ask of you in return.",
+      "effective": "Effective 2023",
+      "file": "files/patient-rights-and-responsibilities.pdf",
+      "hidden": false,
+      "body": "When you are well informed, take part in decisions about your treatment, and talk openly with your doctor and our staff, you help make your care more effective.\n\n## You have the right to:\n- Be treated with dignity, consideration and respect, and receive safe care at all times, free from all forms of abuse or harassment.\n- Be protected from discrimination or reprisal when you use your rights. Discrimination is against the law: in keeping with anti-discrimination laws and regulations, patients may not be discriminated against based on race, color, national origin, disability or age.\n- Have our health care professionals and staff make reasonable efforts to communicate in the language you primarily use.\n- Take part in discussions and be fully informed about your diagnosis, treatment or procedures and the expected outcomes. You have the right to take an active part in decisions about your medical care, and to consent to or refuse treatment to the extent permitted by law.\n- Receive as much information as you need about your treatment choices, in clear language you can understand. You may involve anyone you choose, including a health care proxy, family members or friends, to help you make decisions.\n- Personal privacy and confidentiality. Our office fully complies with HIPAA, and all of your health information and personal records will be kept confidential.\n- Respectful and effective pain management.\n- Know the names, credentials and roles of the people caring for you, and be informed of the services available at our facility.\n- Receive information about advance directives. Advance directives are not accepted by the facility; see the Advance Directives form.\n- Reasonable continuity of care, and to know in advance the time and location of your appointment and the doctor you will see.\n- Review your medical record and ask questions about it, unless restricted by law.\n- Know of any relationships with other parties that may influence your care.\n- Leave the facility, even against medical advice.\n- Know the rules and regulations that apply to your conduct as a patient, and how to get after-hours and emergency care.\n- Examine and receive an explanation of your bill, regardless of how it is paid; know the specific fees for services; and know our payment policies (cash, check, credit card and payment plans).\n- Know that this is a physician-owned facility.\n- Choose your own physician, including a physician outside our practice.\n- Voice concerns, complaints or problems about the care you received, out loud or in writing, by contacting our office manager or administrator. Grievance forms are available from any staff member, and we will respond in writing.\n\n## If we can't resolve your concern\n- NC Medical Board: [www.ncmedboard.org](https://www.ncmedboard.org) or 1-800-253-9653\n- Office of the Medicare Beneficiary Ombudsman: [www.medicare.gov](https://www.medicare.gov) or 1-800-633-4227\n- Carolina Center for Medical Excellence: 1-800-682-2650\n- NC Division of Health Service Regulation: 1-800-624-3004 or 919-855-4500\n- NC Ombudsman: 1-877-201-3750\n\n## As a patient, you agree to:\n- Give complete and accurate information about your symptoms, past medical history, allergies, medicines (including over-the-counter products and dietary supplements), use of chemical substances, and current health.\n- Give complete and accurate contact information, including your address, phone number and date of birth, and all of your insurance information.\n- Tell us whether you clearly understand your medical care and what is expected of you in your plan of care.\n- Follow your treatment plan and care instructions.\n- Keep your appointments, and let us know if you can't.\n- Accept responsibility for your actions if you refuse planned treatment or don't follow your doctor's orders.\n- Accept financial responsibility, and make sure the costs of your care are paid as promptly as possible.\n- Follow facility policies and procedures, and tell us about any advance directives.\n- Provide a responsible adult to drive you home and stay with you for 24 hours, if your physician requires it.\n- Be considerate of the rights of other patients and staff.\n- Respect your own personal property and that of others in the facility.\n- Tell the staff about any discomfort or pain, and any patient safety concerns.\n- Share your values, beliefs and traditions so the staff can provide appropriate care."
+    },
+    {
+      "id": "privacy",
+      "title": "Privacy and protected health information",
+      "summary": "How we protect your health information, and who to contact with a concern.",
+      "effective": "",
+      "file": "files/privacy-policy.pdf",
+      "hidden": false,
+      "body": "Kurt Vernon, MD, PA (The GI Guy) is committed to protecting your privacy in keeping with the Health Insurance Portability and Accountability Act (HIPAA), other federal regulations, North Carolina law, and our Notice of Privacy Practices.\n\n## How we protect your information\n- Our endoscopy center and clinical office protect the confidentiality, integrity and availability of your health information.\n- Your protected health information (PHI) is only accessed, used or shared when the law permits or requires it, and only by staff who need it for your care or for a legitimate business reason.\n- We keep reasonable administrative, physical and technical safeguards in place to prevent anyone from accessing, using or sharing your information without authorization.\n- Every staff member is responsible for keeping your information confidential, whether it is spoken, electronic, photographic or written.\n- Staff only access the information they need to do their jobs, and make reasonable efforts to use, share or request only the minimum necessary. (This minimum-necessary rule does not apply when information is shared with another health care provider for your treatment.)\n\n## When we may share information without a separate authorization\nHIPAA allows some uses and disclosures without a separate authorization from you, including those for treatment, payment and health care operations.\n\n## Your requests\nYou may ask us to limit certain uses and disclosures of your information, and we will accommodate reasonable requests to contact you in confidential ways. We handle all patient requests according to HIPAA and our office procedures.\n\n## Concerns or complaints\nKurt Vernon, MD, PA (The GI Guy)\nAttn: Privacy Officer\n1004 Procure St\nFuquay-Varina, NC 27526\n(919) 577-0085"
+    },
+    {
+      "id": "financial-policy",
+      "title": "Financial policy",
+      "summary": "How billing, payments, insurance and fees work at our practice.",
+      "effective": "Revised January 2025",
+      "file": "files/financial-policy.pdf",
+      "hidden": false,
+      "body": "This is an agreement between Kurt Vernon, MD, PA, a North Carolina professional corporation, as creditor, and the patient (debtor). In this agreement, \"you\" and \"your\" mean the patient. \"Account\" means the account in your name to which charges are made and payments are credited. \"We,\" \"us\" and \"our\" mean Kurt Vernon, MD, PA. You will sign this policy as part of your new patient forms.\n\n## Monthly statement\nIf you have a balance, we will send you a monthly statement, or a text message to pay through Klara. It shows your previous balance, any new charges, any finance charge, and any payments or credits applied during the month.\n\n## If you don't have insurance\n- You may pay by cash, check or credit card on the day of service.\n- For procedures, the cost must be paid before your procedure.\n- You may set up a payment plan with our office. Payments are based on your balance and set up to be paid off within about 7 months. There is a $50 fee to set up a payment plan, and payments are drafted monthly from a checking or savings account or a credit or debit card.\n- For extensive treatment or procedures, you may prefer to get financing for the full amount from a bank, credit union or other lender and make your payments to them.\n\n## If you have insurance\n- You must pay your deductible and any out-of-pocket costs at the time of service, by cash, check, credit card or a payment plan.\n- If you choose to pay for all of your treatment yourself, you will need to file the insurance forms for reimbursement.\n\n## Payments\nUnless we agree in writing to other arrangements, your statement balance is due when the statement is issued, and is past due if it is not paid by the end of the month.\n\n## Charges to your account\nWe may cancel your ability to charge to your account at any time. Future visits would then need to be paid at the time of service.\n\n## Contracted insurance\nIf we are contracted with your insurance company, we must follow that contract and its requirements. Any co-pay or deductible is due at the time of service. Your insurance company makes the final decision about your eligibility. If your plan requires a referral or preauthorization, you are responsible for getting it; without one, your insurance may pay less.\n\n## Non-contracted insurance\nInsurance is a contract between you and your insurance company; in most cases we are not part of that contract. As a courtesy, we will bill your primary insurance. We may estimate what your insurance will pay, but your insurance company makes the final decision about your eligibility, and you agree to pay any charges your insurance doesn't cover. If your plan requires a referral or preauthorization, you are responsible for getting it; without one, your insurance may pay less.\n\n## Credit history\nWe may report the status of your account to a credit reporting agency, such as a credit bureau.\n\n## Required co-payments\nAny co-payment your insurance company requires must be paid at the time of service. Because it is an insurance requirement, we cannot bill you for it.\n\n## Fees\n- **Returned checks:** $25 for any check returned by the bank.\n- **Re-filing:** $15 when a claim must be re-filed, for example because insurance information was missing or another insurance plan was not filed originally.\n- **Missed office appointments:** the second time you miss an office appointment, or cancel with less than 48 hours' notice, there is a $25 fee.\n- **Missed procedures:** there is a $75 fee for a no-show, or for canceling a procedure with less than 48 hours' notice.\n- These fees must be paid before a new appointment or procedure is scheduled. Patients who miss three appointments may be asked to transfer their records to another doctor.\n\n## Past-due accounts\nIf your account becomes past due, we will take the steps needed to collect the debt. If we refer your account to a collection agency, you agree to pay all collection costs. If we refer your account to a lawyer, you agree to pay all lawyers' fees and court costs. In case of a lawsuit, you agree the venue will be Harnett County or Wake County, North Carolina.\n\n## Waiver of confidentiality\nIf your account is sent to an attorney or collection agency, goes to court, or is reported as past due to a credit reporting agency, the fact that you received treatment at our office may become a matter of public record.\n\n## Divorce or separation\nThe person responsible for the account before a divorce or separation remains responsible for it. After a divorce or separation, the parent who authorizes a child's treatment is responsible for those charges. If a divorce decree requires the other parent to pay all or part of the cost, the authorizing parent is responsible for collecting it from the other parent.\n\n## Transferring records\nTo have copies of your records sent to another doctor or organization, you need to ask in writing and pay a reasonable copying fee, based on the number of pages. You authorize us to include all relevant information, including your payment history. If you ask another doctor or organization to send your records to us, you authorize us to receive all relevant information, including your payment history.\n\n## Workers' compensation\nWe need written approval from your employer and/or workers' compensation carrier before your first visit. If your claim is denied, you are responsible for paying in full.\n\n## Personal injury\nIf you are being treated as part of a personal injury lawsuit or claim, we need verification from your attorney before your first visit, and you must allow us to bill your health insurance. If you don't have insurance, other financial arrangements may be discussed. Payment remains your responsibility; we cannot bill your attorney for charges related to a personal injury case.\n\n## Co-signature\nIf another person co-signs this or another financial policy, their co-signature stays in effect until it is canceled in writing. A written cancellation applies to charges made after we receive it.\n\n## Effective date\nOnce you sign this agreement, you agree to all of its terms and conditions, and it is in full force and effect. By signing it, you agree to pay for all services you receive."
     }
   ]
 }

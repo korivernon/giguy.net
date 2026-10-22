@@ -181,23 +181,24 @@
       { row: [{ k: 'causesTitle', label: 'Causes heading (optional)', hint: 'blank = Common causes' }, { k: 'symptomsTitle', label: 'Symptoms heading (optional)', hint: 'blank = Symptoms' }] },
       { k: 'treatment', label: 'Detail page: Diagnosis & treatment', type: 'textarea', rows: 5 },
       { k: 'when', label: 'Detail page: When to call us', type: 'textarea', rows: 2 },
-      { k: 'procedures', label: 'Related procedures', type: 'list', hint: 'Comma-separated service ids: colonoscopy, egd, capsule-endoscopy, flexible-sigmoidoscopy, esophageal-dilation, hemorrhoid-treatment, cologuard, consultations' },
+      { k: 'procedures', label: 'Related procedures', type: 'list', hint: 'Comma-separated service ids: colonoscopy, egd, capsule-endoscopy, flexible-sigmoidoscopy, esophageal-dilation, hemorrhoid-treatment, motility-study, anorectal-manometry, liver-elastography, stool-dna-test, consultations' },
       { k: 'hidden', label: 'Hidden from the site', type: 'check' },
     ],
     preps: [
-      { k: 'name', label: 'Prep name (button)', req: true, hint: 'e.g. Magnesium Citrate (split dose)' },
+      { k: 'name', label: 'Prep name (button)', req: true, hint: 'e.g. Magnesium Citrate + Bisacodyl. Use generic names, not brand names.' },
       { k: 'summary', label: 'One-line description', hint: 'Shown under the name on the button.' },
       { k: 'buy', label: 'Buy at the pharmacy (one item per line)', type: 'textarea', rows: 3 },
-      { k: 'weekBefore', label: 'One week before (one step per line)', type: 'textarea', rows: 3 },
+      { k: 'weekBefore', label: 'Before your prep day (one step per line)', type: 'textarea', rows: 5, hint: 'Add {-5} where a date belongs: it shows the real date 5 days before the procedure once the patient picks a date.' },
       { k: 'dayBefore', label: 'The day before (one step per line)', type: 'textarea', rows: 5 },
       { k: 'dayOf', label: 'The day of the colonoscopy (one step per line)', type: 'textarea', rows: 6 },
       { k: 'notes', label: 'Notes at the end', type: 'textarea', rows: 3 },
-      { k: 'pdf', label: 'Original printed instructions (PDF, optional)', type: 'file', dir: 'files', accept: 'application/pdf', keepName: true },
+      { k: 'pdf', label: 'Printable instructions (PDF, optional)', type: 'file', dir: 'files', accept: 'application/pdf', keepName: true },
       { k: 'hidden', label: 'Hidden from the site', type: 'check' },
     ],
     prepPage: [
       { k: 'prepPage.title', label: 'Page title' },
       { k: 'prepPage.intro', label: 'Intro', type: 'textarea', rows: 3 },
+      { k: 'prepPage.liquidsNote', label: 'Note under the clear liquids list' },
       { k: 'prepPage.clearLiquids', label: 'Clear liquids (one per line, shown for every prep)', type: 'textarea', rows: 8 },
       { k: 'prepPage.help', label: 'Questions line at the bottom', type: 'textarea', rows: 2 },
     ],
@@ -205,7 +206,7 @@
       { k: 'title', label: 'Title', req: true },
       { k: 'youtube', label: 'YouTube link', req: true, hint: 'Paste the video address, e.g. https://www.youtube.com/watch?v=…' },
       { k: 'text', label: 'Short description', type: 'textarea', rows: 2 },
-      { k: 'service', label: 'Also show on this service page (optional)', type: 'select', opts: [['', 'None'], ['colonoscopy', 'Colonoscopy'], ['egd', 'EGD (upper endoscopy)'], ['capsule-endoscopy', 'Capsule endoscopy'], ['flexible-sigmoidoscopy', 'Flexible sigmoidoscopy'], ['esophageal-dilation', 'Esophageal dilation'], ['hemorrhoid-treatment', 'Hemorrhoid treatment'], ['cologuard', 'Cologuard'], ['consultations', 'GI consultations']] },
+      { k: 'service', label: 'Also show on this service page (optional)', type: 'select', opts: [['', 'None'], ['colonoscopy', 'Colonoscopy'], ['egd', 'EGD (upper endoscopy)'], ['capsule-endoscopy', 'Capsule endoscopy'], ['flexible-sigmoidoscopy', 'Flexible sigmoidoscopy'], ['esophageal-dilation', 'Esophageal dilation'], ['hemorrhoid-treatment', 'Hemorrhoid treatment'], ['motility-study', 'Motility study'], ['anorectal-manometry', 'Anorectal manometry'], ['liver-elastography', 'Liver elastography'], ['stool-dna-test', 'At-home stool DNA test'], ['consultations', 'GI consultations']] },
       { k: 'channel', label: 'From the Body Guy YouTube channel (shown in its own section)', type: 'check' },
       { k: 'hidden', label: 'Hidden from the site', type: 'check' },
     ],
@@ -232,6 +233,14 @@
       { k: 'title', label: 'Title', req: true },
       { k: 'summary', label: 'Summary (shown on the card)', type: 'textarea', rows: 2 },
       { k: 'body', label: 'Article', type: 'textarea', rows: 16, hint: 'Blank line = new paragraph. "## " starts a heading. Lines starting with "- " make a list. [link](https://…) works.' },
+      { k: 'hidden', label: 'Hidden from the site', type: 'check' },
+    ],
+    policies: [
+      { k: 'title', label: 'Title', req: true },
+      { k: 'summary', label: 'One-line summary', type: 'textarea', rows: 2 },
+      { k: 'body', label: 'Policy text', type: 'textarea', rows: 18, hint: 'Blank line = new paragraph. "## " starts a heading. Lines starting with "- " make a list.' },
+      { k: 'effective', label: 'Effective / revised line (optional)', hint: 'e.g. Revised January 2025' },
+      { k: 'file', label: 'PDF copy (optional)', type: 'file', dir: 'files', accept: 'application/pdf', keepName: true },
       { k: 'hidden', label: 'Hidden from the site', type: 'check' },
     ],
     fasttrack: [
@@ -284,13 +293,14 @@
     faqs: { label: 'FAQs', one: 'question', sym: () => 'FAQ', title: x => x.q, sub: x => short(x.a, 100), blank: () => ({ id: '', q: '', a: '' }), idFrom: x => slug(x.q) },
     locations: { label: 'Locations', one: 'location', sym: () => 'OFFICE', title: x => x.name, sub: x => (x.address || '').replace(/\n/g, ', ') + ' · ' + (x.phone || ''), blank: () => ({ id: '', name: '', address: '', phone: '', fax: '', mapQuery: '', hidden: false }), idFrom: x => slug(x.name) },
     forms: { label: 'Forms & PDFs', one: 'form', sym: () => 'PDF', title: x => x.title, sub: x => x.file || '', blank: () => ({ id: '', title: '', text: '', file: '', hidden: false }), idFrom: x => slug(x.title) },
+    policies: { label: 'Policies', one: 'policy', sym: () => 'DOC', title: x => x.title, sub: x => short(x.summary, 100), blank: () => ({ id: '', title: '', summary: '', body: '', effective: '', file: '', hidden: false }), idFrom: x => slug(x.title) },
     articles: { label: 'Articles', one: 'article', sym: () => 'POST', title: x => x.title, sub: x => short(x.summary, 100), blank: () => ({ id: '', title: '', date: '', summary: '', body: '', hidden: false }), idFrom: x => slug(x.title) },
   };
 
   const NAV = [
     ['suggestions', 'Suggested edits'], ['history', 'Change history'], ['oldsite', 'Old site'], ['banners', 'Banners'], ['practice', 'Practice info & hours'], ['locations', 'Locations'], ['home', 'Home page'], ['about', 'About & insurance'], ['conditions', 'Conditions'],
     ['fasttrack', 'Fast-Track colonoscopy'], ['doctor', 'Dr. Vernon'], ['team', 'Team'], ['services', 'Services'], ['faqs', 'FAQs'], ['forms', 'Forms & PDFs'], ['preps', 'Colonoscopy preps'], ['prepPage', 'Prep page text'], ['videos', 'Videos'],
-    ['articles', 'Articles'], ['learn', 'Quiz & digestive system'], ['raw', 'Raw JSON'],
+    ['articles', 'Articles'], ['policies', 'Policies'], ['learn', 'Quiz & digestive system'], ['raw', 'Raw JSON'],
   ];
 
   /* ---------------- form engine ---------------- */
@@ -903,7 +913,7 @@
       d[k].forEach(x => { if (!x.id) x.id = uniqueId(d[k], COLLECTIONS[k].idFrom(x) || 'item'); });
     });
     ['practice', 'home', 'about', 'doctor', 'quiz', 'fasttrack', 'prepPage'].forEach(k => { d[k] = d[k] || {}; });
-    d.social = d.social || [];  d.organs = d.organs || [];
+    d.social = d.social || [];  d.organs = d.organs || [];  d.policies = d.policies || [];
   }
 
   function offerDraftRestore() {

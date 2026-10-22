@@ -18,7 +18,7 @@
     ['contact', 'contact.html', 'Contact Us'],
   ];
   const PAGE = document.body.dataset.page;
-  const navKey = PAGE === 'article' || PAGE === 'quiz' ? 'learn' : PAGE === 'prep' ? 'patients' : PAGE === 'condition' ? 'conditions' : PAGE === 'procedure' ? 'services' : PAGE;
+  const navKey = PAGE === 'article' || PAGE === 'quiz' ? 'learn' : PAGE === 'prep' || PAGE === 'policy' ? 'patients' : PAGE === 'condition' ? 'conditions' : PAGE === 'procedure' ? 'services' : PAGE;
 
   const ICON = {
     play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
@@ -121,7 +121,7 @@
       '</div>' +
       (D.partners && D.partners.length ? '<div class="partners">' + D.partners.map(p => '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '" loading="lazy">').join('') + '</div>' : '') +
       '<p class="fine">' + esc(P.emergencyNote) + ' ' + esc(P.disclaimer) + '</p>' +
-      '<p class="fine">© ' + year + ' ' + esc(P.doctor) + ' · ' + esc(P.name) + '</p>' +
+      '<p class="fine">© ' + year + ' ' + esc(P.doctor) + ' · ' + esc(P.name) + shown(D.policies).map(x => ' · <a href="policy.html?id=' + encodeURIComponent(x.id) + '">' + esc(titleCase(x.title)) + '</a>').join('') + '</p>' +
     '</div></footer>';
   }
 
@@ -397,7 +397,7 @@
       (vids.some(v => v.channel) ? '<section class="section" id="health-videos"><div class="container"><div class="sec-head"><div><h2>Health videos from the Body Guy channel</h2><p class="muted">Short videos from Dr. Vernon on digestive health, procedures and the latest health news.</p></div>' +
         (P.youtubeChannel ? '<a class="btn btn-outline btn-sm" href="' + esc(safeUrl(P.youtubeChannel)) + '" target="_blank" rel="noopener">See the channel on YouTube ' + ICON.arrow + '</a>' : '') + '</div>' +
         videoCards(vids.filter(v => v.channel)) + '</div></section>' : '') +
-      '<section class="section alt"><div class="container"><h2>Forms & instructions</h2><div class="docs">' + shown(D.forms).map(f =>
+      '<section class="section alt"><div class="container"><h2>Forms, instructions & policies</h2><div class="docs">' + shown(D.forms).map(f =>
         '<a class="card doc" id="' + esc(f.anchor || f.id) + '" href="' + esc(safeUrl(f.file)) + '"' + (/\.pdf$/i.test(f.file) ? ' target="_blank" rel="noopener"' : '') + '>' + ICON.doc +
         '<span><b>' + esc(f.title) + '</b><small>' + esc(f.text) + '</small><em>' + (/\.pdf$/i.test(f.file) ? 'Open PDF' : 'View') + ' ' + ICON.arrow + '</em></span></a>').join('') + '</div></div></section>' +
       '<section class="section"><div class="container two-col">' +
@@ -559,6 +559,23 @@
       '<div class="card" style="margin-top:16px"><h3>Questions?</h3><p>Call us at <a href="' + tel(D.practice.phone) + '">' + esc(D.practice.phone) + '</a>.</p></div></aside></div></section>';
   };
 
+  // Practice policies (patient rights, privacy, financial): readable on the web, printable, with a PDF copy.
+  PAGES.policy = function () {
+    const id = new URLSearchParams(location.search).get('id');
+    const pols = shown(D.policies), x = pols.find(p => p.id === id);
+    if (!x) return pageHead('Policy not found', 'It may have moved. [See Patient Resources](patients.html#forms).', crumbLink('patients'));
+    document.title = x.title + ' · The GI Guy';
+    const others = pols.filter(p => p !== x);
+    return pageHead(x.title, x.summary, crumbLink('patients') + ' / ' + esc(x.title)) +
+      '<section class="section"><div class="container two-col wide-left"><article class="prose policy">' +
+        '<header class="print-only policy-print-head"><img src="img/logos/logo.png" alt="The GI Guy" width="110" height="44"><div><h1>' + esc(x.title) + '</h1><p>Kurt Vernon, MD, PA · The GI Guy</p></div></header>' +
+        md(x.body) + (x.effective ? '<p class="muted small policy-date">' + esc(x.effective) + '</p>' : '') + '</article>' +
+      '<aside class="no-print"><div class="card"><h3>Print or Save</h3><div class="policy-acts"><button class="btn btn-primary btn-sm" type="button" onclick="window.print()">' + ICON.doc + 'Print</button>' +
+        (x.file ? '<a class="btn btn-outline btn-sm" href="' + esc(safeUrl(x.file)) + '" target="_blank" rel="noopener">Download PDF</a>' : '') + '</div></div>' +
+        (others.length ? '<div class="card" style="margin-top:16px"><h3>Other Policies</h3><ul class="plain">' + others.map(o => '<li><a href="policy.html?id=' + encodeURIComponent(o.id) + '">' + esc(o.title) + '</a></li>').join('') + '</ul></div>' : '') +
+        '<div class="card" style="margin-top:16px"><h3>Questions?</h3><p>Call us at <a href="' + tel(D.practice.phone) + '">' + esc(D.practice.phone) + '</a>.</p></div></aside></div></section>';
+  };
+
   function quizSide() {
     const scr = shown(D.conditions).find(c => c.id === 'colon-cancer-screening');
     return '<aside class="quiz-side">' +
@@ -617,22 +634,27 @@
     const key = 'giguy:prep';
     let cur = preps[0].id;
     try { const saved = JSON.parse(localStorage.getItem(key) || '{}'); if (preps.some(x => x.id === saved.id)) cur = saved.id; if (saved.date) $('#prep-date').value = saved.date; } catch (e) { /* storage blocked */ }
+    // ?prep=<id> opens that prep directly (links from other pages, the generated PDFs).
+    const want = new URLSearchParams(location.search).get('prep');
+    if (want && preps.some(x => x.id === want)) cur = want;
     const fmt = (iso, delta) => { if (!iso) return ''; const d = new Date(iso + 'T12:00:00'); d.setDate(d.getDate() + delta); return d.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' }); };
-    const steps = t => '<ol class="prep-list">' + lines(t).map(l => '<li>' + inline(l) + '</li>').join('') + '</ol>';
     function draw() {
       const x = preps.find(p => p.id === cur) || preps[0], date = $('#prep-date').value;
+      // "{-5}" in a step = "5 days before the procedure": shows the real date once one is picked.
+      const when = l => l.replace(/\{(-?\d+)\}/g, (_, n) => date ? ' (' + fmt(date, Number(n)) + ')' : '');
+      const steps = t => '<ol class="prep-list">' + lines(t).map(l => '<li>' + inline(when(l)) + '</li>').join('') + '</ol>';
       document.querySelectorAll('[data-prep]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.prep === x.id)));
       const stage = (title, delta, body) => body ? '<section class="prep-stage"><h3>' + title + (date ? ' <span class="prep-when">' + esc(fmt(date, delta)) + '</span>' : '') + '</h3>' + steps(body) + '</section>' : '';
       sheet.innerHTML =
         '<header class="prep-head"><img src="img/logos/logo.png" alt="The GI Guy" width="110" height="44"><div><h2>' + esc(x.name) + '</h2>' +
           '<p class="muted">Colonoscopy prep · ' + esc(P.doctor || '') + (date ? ' · Procedure ' + esc(fmt(date, 0)) : '') + '</p></div></header>' +
         (x.buy ? '<section class="prep-stage"><h3>Buy at the pharmacy</h3><ul class="ticks">' + lines(x.buy).map(l => '<li>' + ICON.check + '<span>' + inline(l) + '</span></li>').join('') + '</ul></section>' : '') +
-        stage('One week before', -7, x.weekBefore) +
+        (x.weekBefore ? '<section class="prep-stage"><h3>Before your prep day</h3>' + steps(x.weekBefore) + '</section>' : '') +
         stage('The day before', -1, x.dayBefore) +
         stage('The day of your colonoscopy', 0, x.dayOf) +
-        (PP.clearLiquids ? '<section class="prep-stage"><h3>Clear liquids you can have</h3><p class="muted small">Anything you can see through. Avoid red and purple.</p><ul class="prep-liquids">' + lines(PP.clearLiquids).map(l => '<li>' + esc(l) + '</li>').join('') + '</ul></section>' : '') +
+        (PP.clearLiquids ? '<section class="prep-stage"><h3>Clear liquids you can have</h3>' + (PP.liquidsNote ? '<p class="muted small">' + esc(PP.liquidsNote) + '</p>' : '') + '<ul class="prep-liquids">' + lines(PP.clearLiquids).map(l => '<li>' + esc(l) + '</li>').join('') + '</ul></section>' : '') +
         (x.notes ? '<section class="prep-stage prep-notes">' + md(x.notes) + '</section>' : '') +
-        '<footer class="prep-foot">' + inline(PP.help || '') + (x.pdf ? ' <a class="no-print" href="' + esc(safeUrl(x.pdf)) + '" target="_blank" rel="noopener">Original printed instructions (PDF)</a>' : '') + '</footer>';
+        '<footer class="prep-foot">' + inline(PP.help || '') + (x.pdf ? ' <a class="no-print" href="' + esc(safeUrl(x.pdf)) + '" target="_blank" rel="noopener">Download these instructions (PDF)</a>' : '') + '</footer>';
       applyTitleCase(sheet);
       try { localStorage.setItem(key, JSON.stringify({ id: x.id, date })); } catch (e) { /* storage blocked */ }
     }
