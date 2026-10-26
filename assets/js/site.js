@@ -121,7 +121,7 @@
       '</div>' +
       (D.partners && D.partners.length ? '<div class="partners">' + D.partners.map(p => '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '" loading="lazy">').join('') + '</div>' : '') +
       '<p class="fine">' + esc(P.emergencyNote) + ' ' + esc(P.disclaimer) + '</p>' +
-      '<p class="fine">© ' + year + ' ' + esc(P.doctor) + ' · ' + esc(P.name) + shown(D.policies).map(x => ' · <a href="policy.html?id=' + encodeURIComponent(x.id) + '">' + esc(titleCase(x.title)) + '</a>').join('') + '</p>' +
+      '<p class="fine">© ' + year + ' ' + esc(P.doctor) + ' · ' + esc(P.name) + shown(D.policies).filter(x => x.kind !== 'guide').map(x => ' · <a href="policy.html?id=' + encodeURIComponent(x.id) + '">' + esc(titleCase(x.title)) + '</a>').join('') + '</p>' +
     '</div></footer>';
   }
 
@@ -564,20 +564,24 @@
       '<div class="card" style="margin-top:16px"><h3>Questions?</h3><p>Call us at <a href="' + tel(D.practice.phone) + '">' + esc(D.practice.phone) + '</a>.</p></div></aside></div></section>';
   };
 
-  // Practice policies (patient rights, privacy, financial): readable on the web, printable, with a PDF copy.
+  // Lines the office fills in by hand on the printed copy (procedure date, liquid cutoff, ...). Print only.
+  const fillInHtml = t => lines(t).length ? '<div class="fill-in print-only">' + lines(t).map(l => '<div><span>' + esc(l) + ':</span><i></i></div>').join('') + '</div>' : '';
+  // Practice policies (patient rights, privacy, financial) and patient guides: readable on the web, printable, with a PDF copy.
   PAGES.policy = function () {
     const id = new URLSearchParams(location.search).get('id');
     const pols = shown(D.policies), x = pols.find(p => p.id === id);
     if (!x) return pageHead('Policy not found', 'It may have moved. [See Patient Resources](patients.html#forms).', crumbLink('patients'));
     document.title = x.title + ' · The GI Guy';
-    const others = pols.filter(p => p !== x);
-    return pageHead(x.title, x.summary, crumbLink('patients') + ' / ' + esc(x.title)) +
+    const guide = x.kind === 'guide', others = pols.filter(p => p !== x && (p.kind === 'guide') === guide);
+    const crumb = crumbLink('patients') + (guide ? ' / <a href="colonoscopy-prep.html">Colonoscopy Prep</a>' : '') + ' / ' + esc(x.title);
+    return pageHead(x.title, x.summary, crumb) +
       '<section class="section"><div class="container two-col wide-left"><article class="prose policy">' +
         '<header class="print-only policy-print-head"><img src="img/logos/logo.png" alt="The GI Guy" width="110" height="44"><div><h1>' + esc(x.title) + '</h1><p>Kurt Vernon, MD, PA · The GI Guy</p></div></header>' +
-        md(x.body) + (x.effective ? '<p class="muted small policy-date">' + esc(x.effective) + '</p>' : '') + '</article>' +
+        fillInHtml(x.fillIn) + md(x.body) + (x.effective ? '<p class="muted small policy-date">' + esc(x.effective) + '</p>' : '') + '</article>' +
       '<aside class="no-print"><div class="card"><h3>Print or Save</h3><div class="policy-acts"><button class="btn btn-primary btn-sm" type="button" onclick="window.print()">' + ICON.doc + 'Print</button>' +
         (x.file ? '<a class="btn btn-outline btn-sm" href="' + esc(safeUrl(x.file)) + '" target="_blank" rel="noopener">Download PDF</a>' : '') + '</div></div>' +
-        (others.length ? '<div class="card" style="margin-top:16px"><h3>Other Policies</h3><ul class="plain">' + others.map(o => '<li><a href="policy.html?id=' + encodeURIComponent(o.id) + '">' + esc(o.title) + '</a></li>').join('') + '</ul></div>' : '') +
+        (guide ? '<div class="card" style="margin-top:16px"><h3>Your Prep</h3><p><a href="colonoscopy-prep.html">Step-by-step colonoscopy prep instructions</a></p></div>' : '') +
+        (others.length ? '<div class="card" style="margin-top:16px"><h3>' + (guide ? 'More Instructions' : 'Other Policies') + '</h3><ul class="plain">' + others.map(o => '<li><a href="policy.html?id=' + encodeURIComponent(o.id) + '">' + esc(o.title) + '</a></li>').join('') + '</ul></div>' : '') +
         '<div class="card" style="margin-top:16px"><h3>Questions?</h3><p>Call us at <a href="' + tel(D.practice.phone) + '">' + esc(D.practice.phone) + '</a>.</p></div></aside></div></section>';
   };
 
@@ -653,6 +657,7 @@
       sheet.innerHTML =
         '<header class="prep-head"><img src="img/logos/logo.png" alt="The GI Guy" width="110" height="44"><div><h2>' + esc(x.name) + '</h2>' +
           '<p class="muted">Colonoscopy prep · ' + esc(P.doctor || '') + (date ? ' · Procedure ' + esc(fmt(date, 0)) : '') + '</p></div></header>' +
+        fillInHtml((date ? '' : 'Procedure date\n') + 'Arrival time\nProcedure time\nStop all liquids at (office fills in)') +
         (x.buy ? '<section class="prep-stage"><h3>Buy at the pharmacy</h3><ul class="ticks">' + lines(x.buy).map(l => '<li>' + ICON.check + '<span>' + inline(l) + '</span></li>').join('') + '</ul></section>' : '') +
         (x.weekBefore ? '<section class="prep-stage"><h3>Before your prep day</h3>' + steps(x.weekBefore) + '</section>' : '') +
         stage('The day before', -1, x.dayBefore) +

@@ -239,6 +239,8 @@
       { k: 'title', label: 'Title', req: true },
       { k: 'summary', label: 'One-line summary', type: 'textarea', rows: 2 },
       { k: 'body', label: 'Policy text', type: 'textarea', rows: 18, hint: 'Blank line = new paragraph. "## " starts a heading. Lines starting with "- " make a list.' },
+      { k: 'kind', label: 'Type', type: 'select', opts: [['', 'Policy (linked in the footer)'], ['guide', 'Patient instructions (under Colonoscopy Prep)']] },
+      { k: 'fillIn', label: 'Fill-in lines on the printed copy (one per line, optional)', type: 'textarea', rows: 4, hint: 'e.g. Procedure date. Printed as blank lines for the office to fill in.' },
       { k: 'effective', label: 'Effective / revised line (optional)', hint: 'e.g. Revised January 2025' },
       { k: 'file', label: 'PDF copy (optional)', type: 'file', dir: 'files', accept: 'application/pdf', keepName: true },
       { k: 'hidden', label: 'Hidden from the site', type: 'check' },
