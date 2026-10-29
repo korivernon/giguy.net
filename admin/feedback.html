@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Patient Feedback · The GI Guy</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary: #1a5718; --deep: #0e3a0d; --accent: #F7A582; --bg: #FFF7F4; --alt: #fdebe3; --ink: #1d2a1c; --muted: #5d6a5b; --line: #ecdcd4; --star: #f2a93b; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Figtree, system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.5; }
+    header { background: var(--deep); color: #fff; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+    header .wrap { display: flex; align-items: center; gap: 14px; min-height: 64px; flex-wrap: wrap; }
+    header img { height: 34px; filter: brightness(0) invert(1); }
+    header h1 { font-size: 1.15rem; margin: 0; flex: 1; }
+    header button { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.4); border-radius: 999px; padding: 7px 14px; font: 700 .9rem Figtree, sans-serif; cursor: pointer; }
+    main { padding: 22px 0 60px; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 6px 20px -14px rgba(14,58,13,.35); }
+    .signin { max-width: 380px; margin: 60px auto; padding: 28px; text-align: center; }
+    .signin h2 { margin: 0 0 6px; color: var(--deep); }
+    input, select, textarea { font: 16px Figtree, sans-serif; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 12px; background: #fff; color: var(--ink); width: 100%; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: var(--primary); color: #fff; border: 0; border-radius: 999px; padding: 10px 18px; font: 700 .95rem Figtree, sans-serif; cursor: pointer; text-decoration: none; }
+    .btn.outline { background: #fff; color: var(--primary); border: 1.5px solid var(--primary); }
+    .btn.sm { padding: 6px 12px; font-size: .85rem; }
+    .err { color: #a1260d; font-weight: 700; min-height: 1.4em; }
+    .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 18px; }
+    .tile { padding: 14px 16px; }
+    .tile b { display: block; font-size: 1.8rem; color: var(--primary); line-height: 1.1; }
+    .tile span { color: var(--muted); font-size: .9rem; }
+    .layout { display: grid; gap: 18px; }
+    @media (min-width: 960px) { .layout { grid-template-columns: 1fr 320px; align-items: start; } }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+    .filters select { width: auto; padding: 7px 10px; font-size: .9rem; }
+    .chip { border: 1.5px solid var(--line); background: #fff; border-radius: 999px; padding: 6px 12px; font: 700 .85rem Figtree, sans-serif; cursor: pointer; color: var(--deep); }
+    .chip[aria-pressed=true] { background: var(--primary); border-color: var(--primary); color: #fff; }
+    .resp { padding: 16px 18px; margin-bottom: 12px; border-left: 5px solid var(--line); }
+    .resp.st-new { border-left-color: var(--accent); }
+    .resp.st-in_progress { border-left-color: #e0b84a; }
+    .resp.st-done { border-left-color: #a9cba1; opacity: .9; }
+    .resp-top { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; justify-content: space-between; }
+    .stars { color: var(--star); letter-spacing: 1px; font-size: 1.1rem; }
+    .stars i { color: #d9d3cf; font-style: normal; }
+    .meta { color: var(--muted); font-size: .88rem; }
+    .tag { display: inline-block; font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; padding: 2px 8px; border-radius: 999px; background: var(--alt); color: var(--deep); }
+    .tag.reply { background: #fde6dc; color: #a1260d; }
+    .answers { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; }
+    .answers span { font-size: .85rem; background: #f4f6f3; border-radius: 8px; padding: 3px 8px; }
+    .answers span.low { background: #fde6dc; }
+    blockquote { margin: 10px 0; padding: 4px 0 4px 12px; border-left: 3px solid var(--line); color: #333; white-space: pre-wrap; }
+    .shout { background: var(--alt); border-radius: 12px; padding: 10px 12px; margin: 10px 0; }
+    .contact { margin: 10px 0; padding: 10px 12px; border: 1.5px dashed #e3b9a8; border-radius: 12px; }
+    .acts { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+    .acts select { width: auto; padding: 6px 10px; font-size: .9rem; }
+    .note { margin-top: 8px; }
+    .note textarea { font-size: .95rem; min-height: 44px; }
+    .side h3 { margin: 0 0 8px; color: var(--deep); font-size: 1.05rem; }
+    .side .card { padding: 16px; margin-bottom: 14px; }
+    .side ol { margin: 0; padding-left: 20px; }
+    .side li { margin: 6px 0; }
+    .side li small { display: block; color: var(--muted); }
+    .empty { padding: 30px; text-align: center; color: var(--muted); }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <header><div class="wrap"><img src="../img/logos/logo.png" alt="The GI Guy"><h1>Patient Feedback</h1><button type="button" id="refresh" hidden>Refresh</button><button type="button" id="signout" hidden>Sign out</button></div></header>
+  <main class="wrap">
+    <form class="card signin" id="signin">
+      <h2>Staff sign-in</h2>
+      <p class="meta">Enter the office feedback passcode.</p>
+      <input type="password" id="code" autocomplete="current-password" placeholder="Passcode" required>
+      <p class="err" id="signin-err"></p>
+      <button class="btn" type="submit">Sign in</button>
+    </form>
+    <div id="app" hidden>
+      <div class="tiles" id="tiles"></div>
+      <div class="layout">
+        <section>
+          <div class="filters" id="filters">
+            <button class="chip" data-st="open" aria-pressed="true">Open</button>
+            <button class="chip" data-st="reply" aria-pressed="false">Wants a reply</button>
+            <button class="chip" data-st="done" aria-pressed="false">Done</button>
+            <button class="chip" data-st="all" aria-pressed="false">All</button>
+            <select id="office"><option value="">Both offices</option><option>Fuquay-Varina</option><option>Dunn</option><option>Not sure</option></select>
+            <select id="range"><option value="30">Last 30 days</option><option value="90">Last 90 days</option><option value="365">Last 12 months</option><option value="0">All time</option></select>
+            <button class="btn outline sm" type="button" id="csv">Download CSV</button>
+          </div>
+          <div id="list"></div>
+        </section>
+        <aside class="side">
+          <div class="card"><h3>Shout-outs by team member</h3><ol id="shouts"></ol></div>
+          <div class="card"><h3>Quick ratings</h3><div id="quick"></div></div>
+          <div class="card"><h3>About this page</h3><p class="meta">Responses come from the QR posters in each office. Patients' contact details only appear when they ask for a follow-up. Please don't reply with medical details by email or text; call the patient instead.</p></div>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <script>
+  (function () {
+    'use strict';
+    const LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+    let API = LOCAL ? 'http://localhost:8790' : '';
+    const KEY = 'giguy:feedback-session';
+    const $ = s => document.querySelector(s);
+    const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    let token = '', rows = [], filt = { st: 'open', office: '', range: 30 };
+    try { const s = JSON.parse(sessionStorage.getItem(KEY) || 'null'); if (s && s.expires * 1000 > Date.now()) token = s.token; } catch (e) { /* storage blocked */ }
+
+    async function call(path, opts) {
+      const r = await fetch(API + path, Object.assign({ headers: Object.assign({ 'content-type': 'application/json' }, token ? { authorization: 'Bearer ' + token } : {}) }, opts || {}));
+      const j = await r.json().catch(() => ({}));
+      if (r.status === 401 && path !== '/api/login') { signOut(); throw new Error('Signed out. Please sign in again.'); }
+      if (!r.ok) throw new Error(j.error || 'Something went wrong.');
+      return j;
+    }
+    function signOut() { token = ''; try { sessionStorage.removeItem(KEY); } catch (e) {} $('#app').hidden = true; $('#signin').hidden = false; $('#signout').hidden = $('#refresh').hidden = true; }
+    async function load() {
+      $('#signin').hidden = true; $('#app').hidden = false; $('#signout').hidden = $('#refresh').hidden = false;
+      try { rows = (await call('/api/responses')).responses || []; draw(); }
+      catch (e) { $('#list').innerHTML = '<div class="card empty">' + esc(e.message) + '</div>'; }
+    }
+
+    const when = iso => new Date(iso).toLocaleString([], { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+    const stars = n => n ? '★'.repeat(n) + '<i>' + '★'.repeat(5 - n) + '</i>' : '<span class="meta">No star rating</span>';
+    const inRange = r => !filt.range || (Date.now() - Date.parse(r.created_at)) <= filt.range * 864e5;
+    function visible() {
+      return rows.filter(r => inRange(r) && (!filt.office || r.office === filt.office) &&
+        (filt.st === 'all' || (filt.st === 'done' ? r.status === 'done' : filt.st === 'reply' ? (r.wants_reply && !r.replied_at && r.status !== 'done') : r.status !== 'done')));
+    }
+    function draw() {
+      const base = rows.filter(r => inRange(r) && (!filt.office || r.office === filt.office));
+      const rated = base.filter(r => r.rating), avg = rated.length ? rated.reduce((a, r) => a + r.rating, 0) / rated.length : 0;
+      const rec = base.filter(r => r.recommend), yes = rec.filter(r => r.recommend === 'yes').length;
+      const waiting = base.filter(r => r.wants_reply && !r.replied_at && r.status !== 'done').length;
+      $('#tiles').innerHTML = [
+        [base.length, 'Responses'], [avg ? avg.toFixed(1) + ' ★' : '–', 'Average rating'],
+        [rec.length ? Math.round(100 * yes / rec.length) + '%' : '–', 'Would recommend'],
+        [base.filter(r => r.status === 'new').length, 'New'], [waiting, 'Waiting for a reply'],
+      ].map(([b, s]) => '<div class="card tile"><b>' + b + '</b><span>' + s + '</span></div>').join('');
+      // shout-outs grouped by person
+      const by = {};
+      base.filter(r => r.shoutout_person || r.shoutout_text).forEach(r => { const k = r.shoutout_person || 'Not named'; (by[k] = by[k] || []).push(r); });
+      const people = Object.entries(by).sort((a, b) => b[1].length - a[1].length);
+      $('#shouts').innerHTML = people.length ? people.map(([p, list]) => '<li><b>' + esc(p) + '</b> · ' + list.length + '<small>' + esc((list[0].shoutout_text || '').slice(0, 90)) + (list[0].shoutout_text && list[0].shoutout_text.length > 90 ? '…' : '') + '</small></li>').join('') : '<p class="meta">None yet.</p>';
+      // quick-rating breakdown
+      const qs = {};
+      base.forEach(r => Object.entries(r.answers || {}).forEach(([q, a]) => { qs[q] = qs[q] || {}; qs[q][a] = (qs[q][a] || 0) + 1; }));
+      const score = { Excellent: 4, Good: 3, Fair: 2, Poor: 1 };
+      $('#quick').innerHTML = Object.keys(qs).length ? Object.entries(qs).map(([q, c]) => {
+        const n = Object.values(c).reduce((a, b) => a + b, 0), good = (c.Excellent || 0) + (c.Good || 0);
+        return '<p style="margin:0 0 8px"><b>' + esc(q) + '</b><br><span class="meta">' + Math.round(100 * good / n) + '% excellent or good · ' + n + ' answers</span></p>';
+      }).join('') : '<p class="meta">None yet.</p>';
+      const list = visible();
+      $('#list').innerHTML = list.length ? list.map(card).join('') : '<div class="card empty">Nothing here.</div>';
+    }
+    function card(r) {
+      const ans = Object.entries(r.answers || {}).map(([q, a]) => '<span class="' + (a === 'Poor' || a === 'Fair' ? 'low' : '') + '">' + esc(q) + ': <b>' + esc(a) + '</b></span>').join('');
+      const name = r.contact_name || 'there';
+      const msg = 'Hi ' + name + ', thank you for your feedback about your visit to The GI Guy (' + r.office + ' office). ';
+      const mail = r.contact_email ? 'mailto:' + encodeURIComponent(r.contact_email) + '?subject=' + encodeURIComponent('Your feedback for The GI Guy') + '&body=' + encodeURIComponent(msg + '\n\n') : '';
+      const sms = r.contact_phone ? 'sms:' + r.contact_phone.replace(/[^\d+]/g, '') + '?&body=' + encodeURIComponent(msg) : '';
+      const tel = r.contact_phone ? 'tel:' + r.contact_phone.replace(/[^\d+]/g, '') : '';
+      return '<article class="card resp st-' + esc(r.status) + '" data-id="' + r.id + '">' +
+        '<div class="resp-top"><div><span class="stars">' + stars(r.rating) + '</span> ' + (r.recommend ? '<span class="tag">Recommend: ' + esc(r.recommend) + '</span> ' : '') +
+          (r.wants_reply && !r.replied_at ? '<span class="tag reply">Wants a reply</span>' : '') + (r.replied_at ? '<span class="tag">Replied ' + esc(when(r.replied_at)) + '</span>' : '') + '</div>' +
+          '<div class="meta">' + esc(r.office) + ' · ' + esc(when(r.created_at)) + ' · #' + r.id + '</div></div>' +
+        (ans ? '<div class="answers">' + ans + '</div>' : '') +
+        (r.comments ? '<blockquote>' + esc(r.comments) + '</blockquote>' : '') +
+        (r.shoutout_person || r.shoutout_text ? '<div class="shout"><b>Shout-out' + (r.shoutout_person ? ': ' + esc(r.shoutout_person) : '') + '</b>' + (r.shoutout_text ? '<br>' + esc(r.shoutout_text) : '') + '</div>' : '') +
+        (r.wants_reply ? '<div class="contact"><b>Follow up with ' + esc(r.contact_name || 'this patient') + '</b><br>' + [r.contact_phone, r.contact_email].filter(Boolean).map(esc).join(' · ') +
+          '<div class="acts">' + (tel ? '<a class="btn sm" href="' + esc(tel) + '">Call</a>' : '') + (sms ? '<a class="btn outline sm" href="' + esc(sms) + '">Text</a>' : '') + (mail ? '<a class="btn outline sm" href="' + esc(mail) + '">Email</a>' : '') +
+          '<button class="btn outline sm" type="button" data-act="replied">' + (r.replied_at ? 'Undo replied' : 'Mark replied') + '</button></div></div>' : '') +
+        '<div class="acts"><select data-act="status"><option value="new"' + (r.status === 'new' ? ' selected' : '') + '>New</option><option value="in_progress"' + (r.status === 'in_progress' ? ' selected' : '') + '>In progress</option><option value="done"' + (r.status === 'done' ? ' selected' : '') + '>Done</option></select></div>' +
+        '<div class="note"><textarea data-act="note" placeholder="Staff note (only staff see this)">' + esc(r.staff_note || '') + '</textarea></div>' +
+      '</article>';
+    }
+    async function patch(id, body) {
+      const j = await call('/api/responses/' + id, { method: 'PATCH', body: JSON.stringify(body) });
+      rows = rows.map(r => r.id === j.response.id ? j.response : r); draw();
+    }
+    $('#list').addEventListener('change', e => {
+      const a = e.target.closest('[data-id]'); if (!a) return;
+      if (e.target.dataset.act === 'status') patch(+a.dataset.id, { status: e.target.value }).catch(x => alert(x.message));
+      if (e.target.dataset.act === 'note') patch(+a.dataset.id, { staffNote: e.target.value }).catch(x => alert(x.message));
+    });
+    $('#list').addEventListener('click', e => {
+      const b = e.target.closest('[data-act="replied"]'); if (!b) return;
+      const a = b.closest('[data-id]'), r = rows.find(x => x.id === +a.dataset.id);
+      patch(r.id, r.replied_at ? { replied: false } : { replied: true, status: r.status === 'new' ? 'in_progress' : r.status }).catch(x => alert(x.message));
+    });
+    $('#filters').addEventListener('click', e => {
+      const c = e.target.closest('[data-st]'); if (!c) return;
+      filt.st = c.dataset.st; document.querySelectorAll('[data-st]').forEach(x => x.setAttribute('aria-pressed', String(x === c))); draw();
+    });
+    $('#office').onchange = e => { filt.office = e.target.value; draw(); };
+    $('#range').onchange = e => { filt.range = +e.target.value; draw(); };
+    $('#refresh').onclick = load;
+    $('#signout').onclick = signOut;
+    $('#csv').onclick = () => {
+      const qs = [...new Set(rows.flatMap(r => Object.keys(r.answers || {})))];
+      const head = ['id', 'date', 'office', 'rating', 'recommend', ...qs, 'comments', 'shout-out person', 'shout-out', 'wants reply', 'name', 'phone', 'email', 'status', 'replied', 'staff note'];
+      const cell = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+      const out = [head.map(cell).join(',')].concat(visible().map(r => [r.id, r.created_at, r.office, r.rating, r.recommend, ...qs.map(q => (r.answers || {})[q]), r.comments, r.shoutout_person, r.shoutout_text, r.wants_reply ? 'yes' : '', r.contact_name, r.contact_phone, r.contact_email, r.status, r.replied_at, r.staff_note].map(cell).join(',')));
+      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([out.join('\n')], { type: 'text/csv' }));
+      a.download = 'giguy-feedback-' + new Date().toISOString().slice(0, 10) + '.csv'; a.click();
+    };
+    $('#signin').addEventListener('submit', async e => {
+      e.preventDefault(); $('#signin-err').textContent = '';
+      try {
+        const j = await call('/api/login', { method: 'POST', body: JSON.stringify({ passcode: $('#code').value }) });
+        token = j.token; try { sessionStorage.setItem(KEY, JSON.stringify(j)); } catch (x) {}
+        $('#code').value = ''; load();
+      } catch (x) { $('#signin-err').textContent = x.message; }
+    });
+    // The API address lives in site.json (feedback.api) so it can change without editing this page.
+    fetch('../data/site.json?t=' + Date.now()).then(r => r.json()).then(d => { if (d.feedback && d.feedback.api) API = d.feedback.api; })
+      .catch(() => {}).finally(() => { if (token) load(); });
+  })();
+  </script>
+</body>
+</html>

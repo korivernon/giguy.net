@@ -235,6 +235,15 @@
       { k: 'body', label: 'Article', type: 'textarea', rows: 16, hint: 'Blank line = new paragraph. "## " starts a heading. Lines starting with "- " make a list. [link](https://…) works.' },
       { k: 'hidden', label: 'Hidden from the site', type: 'check' },
     ],
+    feedback: [
+      { k: 'feedback.api', label: 'Feedback service address', hint: 'Set once by the developer. Blank = the survey shows "not set up yet".' },
+      { k: 'feedback.title', label: 'Survey headline' },
+      { k: 'feedback.intro', label: 'Intro', type: 'textarea', rows: 2 },
+      { k: 'feedback.ratingItems', label: 'Quick-rating questions (one per line)', type: 'textarea', rows: 4, hint: 'Each gets Excellent / Good / Fair / Poor buttons.' },
+      { k: 'feedback.staff', label: 'Team members patients can thank (one per line)', type: 'textarea', rows: 8 },
+      { k: 'feedback.privacy', label: 'Privacy note', type: 'textarea', rows: 2 },
+      { k: 'feedback.thanks', label: 'Thank-you message', type: 'textarea', rows: 2 },
+    ],
     policies: [
       { k: 'title', label: 'Title', req: true },
       { k: 'summary', label: 'One-line summary', type: 'textarea', rows: 2 },
@@ -302,7 +311,7 @@
   const NAV = [
     ['suggestions', 'Suggested edits'], ['history', 'Change history'], ['oldsite', 'Old site'], ['banners', 'Banners'], ['practice', 'Practice info & hours'], ['locations', 'Locations'], ['home', 'Home page'], ['about', 'About & insurance'], ['conditions', 'Conditions'],
     ['fasttrack', 'Fast-Track colonoscopy'], ['doctor', 'Dr. Vernon'], ['team', 'Team'], ['services', 'Services'], ['faqs', 'FAQs'], ['forms', 'Forms & PDFs'], ['preps', 'Colonoscopy preps'], ['prepPage', 'Prep page text'], ['videos', 'Videos'],
-    ['articles', 'Articles'], ['policies', 'Policies'], ['learn', 'Quiz & digestive system'], ['raw', 'Raw JSON'],
+    ['articles', 'Articles'], ['policies', 'Policies'], ['feedback', 'Patient feedback survey'], ['learn', 'Quiz & digestive system'], ['raw', 'Raw JSON'],
   ];
 
   /* ---------------- form engine ---------------- */
@@ -454,6 +463,7 @@
       (d ? '<span class="dirty">● unpublished changes</span>' : '<span class="clean">✓ in sync</span>') +
       '<span class="sp"></span>' +
       '<a class="btn sm" href="../" target="_blank" rel="noopener">View site ↗</a>' +
+      '<a class="btn sm" href="feedback.html" target="_blank" rel="noopener">Patient feedback ↗</a>' +
       '<button class="btn sm" type="button" id="preview">Preview</button>' +
       '<button class="btn sm danger" type="button" id="discard"' + (d ? '' : ' disabled') + '>Discard</button>' +
       '<button class="btn sm primary" type="button" id="publish"' + (d ? '' : ' disabled') + '>' + (S.mode === 'github' ? 'Publish' : 'Download JSON') + '</button>';
@@ -491,6 +501,7 @@
       about: 'The About page: practice story, values, insurance and wellness.',
       doctor: 'Dr. Vernon\'s section on the Our Team page and the home page.',
       fasttrack: '<b>Off by default until counsel signs off.</b> While the box below is unticked, nothing about Fast-Track shows on the site and its page redirects to the home page. Use Preview to see it before turning it on. The Fast-Track Colonoscopy page (fast-track-colonoscopy.html) for patients with a positive stool test, plus the band on the home page.',
+      feedback: 'The survey patients reach from the QR posters (feedback.html). Responses are on the Patient feedback page (button at the top), which uses its own staff passcode.',
       learn: 'The colon cancer risk quiz and the digestive system guide on the Learn page.',
     };
     v.innerHTML = '<p class="hint">' + (hints[S.view] || '') + '</p><div class="formcard" id="form">' + formHtml(SCHEMA[S.view], S.data) + '</div>';

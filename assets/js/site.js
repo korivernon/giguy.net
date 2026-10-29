@@ -18,7 +18,7 @@
     ['contact', 'contact.html', 'Contact Us'],
   ];
   const PAGE = document.body.dataset.page;
-  const navKey = PAGE === 'article' || PAGE === 'quiz' ? 'learn' : PAGE === 'prep' || PAGE === 'policy' ? 'patients' : PAGE === 'condition' ? 'conditions' : PAGE === 'procedure' ? 'services' : PAGE;
+  const navKey = PAGE === 'article' || PAGE === 'quiz' ? 'learn' : PAGE === 'prep' || PAGE === 'policy' || PAGE === 'feedback' ? 'patients' : PAGE === 'condition' ? 'conditions' : PAGE === 'procedure' ? 'services' : PAGE;
 
   const ICON = {
     play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
@@ -116,7 +116,7 @@
         '<div class="foot-visit"><h4>Visit</h4><div class="foot-locs">' + shown(D.locations).map(l =>
           '<p><b>' + esc(l.name) + '</b><a class="foot-addr" href="' + mapUrl(l) + '" target="_blank" rel="noopener">' + esc(l.address).replace(/\n/g, '<br>') + '</a><a href="' + tel(l.phone) + '">Phone ' + esc(l.phone) + '</a>' + (l.fax ? '<span>Fax ' + esc(l.fax) + '</span>' : '') + '</p>').join('') + '</div></div>' +
         '<div class="foot-hours">' + hoursHtml(P, 'h4') + '</div>' +
-        '<div class="foot-patients"><h4>Patients</h4><ul><li><a href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + esc(P.portalLabel || 'Patient Portal') + '</a></li>' + (P.payUrl ? '<li><a href="' + esc(safeUrl(P.payUrl)) + '" target="_blank" rel="noopener">' + esc(P.payLabel || 'Pay Your Bill') + '</a></li>' : '') + (P.klaraUrl ? '<li><a href="' + esc(safeUrl(P.klaraUrl)) + '" target="_blank" rel="noopener">' + esc(P.klaraLabel || 'Message us on Klara') + '</a></li>' : '') + (shown(D.videos).length ? '<li><a href="patients.html#videos">Instruction Videos</a></li>' : '') + '<li><a href="patients.html#forms">Patient Forms</a></li><li><a href="colonoscopy-prep.html">Colonoscopy Prep</a></li><li><a href="risk-quiz.html">Colon Cancer Risk Quiz</a></li></ul></div>' +
+        '<div class="foot-patients"><h4>Patients</h4><ul><li><a href="' + esc(safeUrl(P.portalUrl)) + '" target="_blank" rel="noopener">' + esc(P.portalLabel || 'Patient Portal') + '</a></li>' + (P.payUrl ? '<li><a href="' + esc(safeUrl(P.payUrl)) + '" target="_blank" rel="noopener">' + esc(P.payLabel || 'Pay Your Bill') + '</a></li>' : '') + (P.klaraUrl ? '<li><a href="' + esc(safeUrl(P.klaraUrl)) + '" target="_blank" rel="noopener">' + esc(P.klaraLabel || 'Message us on Klara') + '</a></li>' : '') + (shown(D.videos).length ? '<li><a href="patients.html#videos">Instruction Videos</a></li>' : '') + '<li><a href="patients.html#forms">Patient Forms</a></li><li><a href="colonoscopy-prep.html">Colonoscopy Prep</a></li><li><a href="risk-quiz.html">Colon Cancer Risk Quiz</a></li>' + ((D.feedback || {}).api ? '<li><a href="feedback.html">Share Your Feedback</a></li>' : '') + '</ul></div>' +
         '<div class="foot-explore"><h4>Explore</h4><ul>' + navItems().slice(1).map(n => '<li><a href="' + n[1] + '">' + n[2] + '</a></li>').join('') + '</ul></div>' +
       '</div>' +
       (D.partners && D.partners.length ? '<div class="partners">' + D.partners.map(p => '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '" loading="lazy">').join('') + '</div>' : '') +
@@ -585,6 +585,81 @@
         '<div class="card" style="margin-top:16px"><h3>Questions?</h3><p>Call us at <a href="' + tel(D.practice.phone) + '">' + esc(D.practice.phone) + '</a>.</p></div></aside></div></section>';
   };
 
+  /* ---------------- patient feedback survey (QR posters in each office) ---------------- */
+  const OFFICE_CODES = { fv: 'Fuquay-Varina', dunn: 'Dunn' };
+  const feedbackApi = () => (D.feedback || {}).api || (/^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'http://localhost:8790' : '');
+  PAGES.feedback = function () {
+    const F = D.feedback || {};
+    document.title = 'Share Your Feedback · The GI Guy';
+    const office = OFFICE_CODES[new URLSearchParams(location.search).get('o')] || '';
+    const scale = ['Excellent', 'Good', 'Fair', 'Poor'];
+    const radio = (name, val, label) => '<label class="fb-pill"><input type="radio" name="' + esc(name) + '" value="' + esc(val) + '"><span>' + esc(label) + '</span></label>';
+    return pageHead(F.title || 'How Was Your Visit?', F.intro || '') +
+      '<section class="section"><div class="container narrow">' +
+      '<form class="fb card" id="fb" novalidate>' +
+        '<fieldset class="fb-q"><legend>Which office did you visit?</legend><div class="fb-pills">' +
+          ['Fuquay-Varina', 'Dunn'].map(o => '<label class="fb-pill"><input type="radio" name="office" value="' + o + '"' + (o === office ? ' checked' : '') + '><span>' + o + '</span></label>').join('') + '</div></fieldset>' +
+        '<fieldset class="fb-q"><legend>Overall, how was your visit?</legend><div class="fb-stars" role="radiogroup" aria-label="Overall rating">' +
+          [5, 4, 3, 2, 1].map(n => '<label><input type="radio" name="rating" value="' + n + '"><span aria-hidden="true">★</span><b class="sr">' + n + ' star' + (n > 1 ? 's' : '') + '</b></label>').join('') +
+          '</div><p class="fb-starword muted small" id="fb-starword"></p></fieldset>' +
+        '<fieldset class="fb-q"><legend>How did we do with…</legend>' + lines(F.ratingItems).map((q, i) =>
+          '<div class="fb-row"><span>' + esc(q) + '</span><div class="fb-pills small">' + scale.map(v => radio('q' + i, v, v)).join('') + '</div></div>').join('') + '</fieldset>' +
+        '<fieldset class="fb-q"><legend>Would you recommend us to a friend or family member?</legend><div class="fb-pills">' +
+          radio('recommend', 'yes', 'Yes') + radio('recommend', 'maybe', 'Maybe') + radio('recommend', 'no', 'No') + '</div></fieldset>' +
+        '<div class="fb-q"><label class="fb-label" for="fb-comments">Anything we did well, or could do better?</label><textarea id="fb-comments" name="comments" rows="4" maxlength="3000"></textarea></div>' +
+        '<div class="fb-q fb-shout"><p class="fb-label">' + ICON.check + 'Did someone on our team go above and beyond?</p>' +
+          '<label class="fb-sub" for="fb-person">Who?</label><select id="fb-person" name="shoutoutPerson"><option value="">Choose a person (optional)</option>' +
+          lines(F.staff).map(s => '<option>' + esc(s) + '</option>').join('') + '<option value="other">Someone else</option></select>' +
+          '<input id="fb-person-other" name="shoutoutOther" type="text" maxlength="120" placeholder="Their name or role" hidden>' +
+          '<label class="fb-sub" for="fb-shout">What did they do?</label><textarea id="fb-shout" name="shoutoutText" rows="3" maxlength="2000"></textarea></div>' +
+        '<div class="fb-q"><label class="fb-check"><input type="checkbox" id="fb-wants" name="wantsReply"><span>I\'d like someone to follow up with me</span></label>' +
+          '<div class="fb-contact" id="fb-contact" hidden><input name="name" type="text" maxlength="120" placeholder="Your name" autocomplete="name">' +
+          '<input name="phone" type="tel" maxlength="40" placeholder="Phone" autocomplete="tel"><input name="email" type="email" maxlength="160" placeholder="Email" autocomplete="email"></div></div>' +
+        '<input class="fb-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+        '<p class="muted small fb-privacy">' + esc(F.privacy || '') + '</p>' +
+        '<p class="fb-error" id="fb-error" role="alert" hidden></p>' +
+        '<button class="btn btn-primary" type="submit" id="fb-send">Send feedback</button>' +
+      '</form>' +
+      '<div class="card fb-done" id="fb-done" hidden><span class="hl-ico">' + ICON.check + '</span><h2>Thank You</h2><p>' + esc(F.thanks || '') + '</p><a class="btn btn-outline btn-sm" href="index.html">Back to the home page</a></div>' +
+      '</div></section>';
+  };
+  function afterFeedback() {
+    const f = $('#fb'); if (!f) return;
+    const words = ['', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent'];
+    f.addEventListener('change', e => {
+      if (e.target.name === 'rating') $('#fb-starword').textContent = words[e.target.value];
+      if (e.target.id === 'fb-person') $('#fb-person-other').hidden = e.target.value !== 'other';
+      if (e.target.id === 'fb-wants') $('#fb-contact').hidden = !e.target.checked;
+    });
+    f.addEventListener('submit', async e => {
+      e.preventDefault();
+      const v = n => (f.elements[n] && f.elements[n].value || '').trim();
+      const picked = n => { const x = f.querySelector('input[name="' + n + '"]:checked'); return x ? x.value : ''; };
+      const err = $('#fb-error'), btn = $('#fb-send');
+      const answers = {};
+      lines((D.feedback || {}).ratingItems).forEach((q, i) => { const a = picked('q' + i); if (a) answers[q] = a; });
+      const person = v('shoutoutPerson') === 'other' ? v('shoutoutOther') : v('shoutoutPerson');
+      const body = { office: picked('office') || 'Not sure', rating: Number(picked('rating')) || null, recommend: picked('recommend'), answers,
+        comments: v('comments'), shoutoutPerson: person, shoutoutText: v('shoutoutText'), wantsReply: f.elements.wantsReply.checked,
+        contact: { name: v('name'), phone: v('phone'), email: v('email') }, website: v('website') };
+      err.hidden = true;
+      if (!body.rating && !body.comments && !body.shoutoutText && !Object.keys(answers).length) { err.textContent = 'Please answer at least one question.'; err.hidden = false; return; }
+      if (body.wantsReply && !body.contact.phone && !body.contact.email) { err.textContent = 'Add a phone number or email so we can follow up.'; err.hidden = false; return; }
+      const api = feedbackApi();
+      if (!api) { err.textContent = 'Feedback is not set up yet. Please call the office.'; err.hidden = false; return; }
+      btn.disabled = true; btn.textContent = 'Sending…';
+      try {
+        const r = await fetch(api + '/api/feedback', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) throw new Error(j.error || 'Something went wrong.');
+        f.hidden = true; $('#fb-done').hidden = false; window.scrollTo(0, 0);
+      } catch (x) {
+        err.textContent = (x && x.message) || 'Something went wrong. Please try again.'; err.hidden = false;
+        btn.disabled = false; btn.textContent = 'Send feedback';
+      }
+    });
+  }
+
   function quizSide() {
     const scr = shown(D.conditions).find(c => c.id === 'colon-cancer-screening');
     return '<aside class="quiz-side">' +
@@ -748,6 +823,7 @@
     document.querySelectorAll('[data-expand]').forEach(b => b.onclick = () => { document.getElementById(b.dataset.expand).classList.add('open'); b.remove(); });
     if (PAGE === 'learn') afterLearn();
     if (PAGE === 'prep') afterPrep();
+    if (PAGE === 'feedback') afterFeedback();
     if (PAGE === 'quiz') afterQuiz();
     if (location.hash) { const t = document.getElementById(location.hash.slice(1)); if (t) setTimeout(() => t.scrollIntoView(), 0); }
   }
